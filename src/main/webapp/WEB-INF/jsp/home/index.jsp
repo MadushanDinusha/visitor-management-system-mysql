@@ -12,17 +12,16 @@
 <body>
 <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/login?logout">
+        <form id="logoutForm" method="POST" action="<c:out value="${pageContext.request.contextPath}"/>/doLogout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration">register</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRegistor">register visitor</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/guard/parking">parking</a>
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <a href="<c:out value="${pageContext.request.contextPath}"/>/logout">Logout</a>
     </c:if>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
 

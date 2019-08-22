@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception{
             http.authorizeRequests()
-                    .antMatchers("/").permitAll()
+                    .antMatchers("/","/logout").permitAll()
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
@@ -53,9 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/home/index")
                     .usernameParameter("username")
                     .passwordParameter("password")
-                    .and().logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login?logout")
+                    .and().logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout").permitAll()
                     .and().rememberMe()
                     .tokenRepository(persistentTokenRepository())
                     .tokenValiditySeconds(60*60)

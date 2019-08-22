@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -36,6 +37,14 @@ public class ApplicationController {
         models.setViewName("home/login");
         return models;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(SessionStatus session) {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        session.setComplete();
+        return "redirect:/login";
+    }
+
 
     @GetMapping("/admin/registration")
     public String registration(Model model) {
