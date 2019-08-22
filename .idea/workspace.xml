@@ -2,34 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2cce0d6-b7fd-45e1-a6c8-9ac5d4a4962c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/visitor_management_system_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/visitor_management_system_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/service_status_inquiry_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/service_status_inquiry_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRegistor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-status-inquiry.iml" beforeDir="false" afterPath="$PROJECT_DIR$/visitor-management-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/ServiceStatusInquiryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/ServiceStatusInquiryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/config/WebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/domain/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Note.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/domain/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/repository/NoteRepsitory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/NoteRepsitory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/service/CustomUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/CustomUserDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/service/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hms/tap/servicestatusinquiry/validator/UserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/validator/UserValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/registration.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/403.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/hello.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/login.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +24,8 @@
         <option value="JavaScript File" />
         <option value="spring-beans.schema" />
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -67,16 +48,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\resources" />
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\js" />
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\home" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\user" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\errors" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\resources" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\js" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -124,7 +105,7 @@
       <workItem from="1566438900386" duration="2974000" />
       <workItem from="1566442404022" duration="1973000" />
       <workItem from="1566445266075" duration="1185000" />
-      <workItem from="1566447056529" duration="1608000" />
+      <workItem from="1566447056529" duration="3423000" />
     </task>
     <servers />
   </component>

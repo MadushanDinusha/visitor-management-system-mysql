@@ -33,7 +33,7 @@ public class ApplicationController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        models.setViewName("user/login");
+        models.setViewName("home/login");
         return models;
     }
 
@@ -49,15 +49,20 @@ public class ApplicationController {
         return "redirect:/admin/home";
     }
 
+    @GetMapping("/user/visitorRegistor")
+    public String visitor(Model model) {
+        return "/user/visitorRegistor";
+    }
 
-    @RequestMapping(value= {"/admin/home"}, method=RequestMethod.GET)
+
+    @RequestMapping(value= {"/home/index"}, method=RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUsersByUsername(auth.getName());
 
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
-        model.setViewName("admin/home");
+        model.setViewName("home/index");
         return model;
     }
 
