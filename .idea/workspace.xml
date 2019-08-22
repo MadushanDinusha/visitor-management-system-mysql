@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2cce0d6-b7fd-45e1-a6c8-9ac5d4a4962c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/parking.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/images/download1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/login.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,19 +42,21 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/resources/css" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\resources" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\js" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\home" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\user" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
       <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\errors" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\css" />
+      <recent name="D:\projects\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\images" />
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\resources" />
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\js" />
+      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -100,7 +104,8 @@
       <workItem from="1566438900386" duration="2974000" />
       <workItem from="1566442404022" duration="1973000" />
       <workItem from="1566445266075" duration="1185000" />
-      <workItem from="1566447056529" duration="4985000" />
+      <workItem from="1566447056529" duration="5866000" />
+      <workItem from="1566457926573" duration="2970000" />
     </task>
     <servers />
   </component>
