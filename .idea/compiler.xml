@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="service-status-inquiry" />
+        <module name="visitor-management-system" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="service-status-inquiry" target="1.8" />
+      <module name="visitor-management-system" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="service-status-inquiry" options="-parameters" />
+      <module name="visitor-management-system" options="-parameters" />
     </option>
   </component>
 </project>

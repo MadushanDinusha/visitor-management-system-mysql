@@ -1,13 +1,9 @@
-package hms.tap.servicestatusinquiry;
+package com.visitor;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
 
 
 @SpringBootApplication

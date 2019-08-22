@@ -1,9 +1,9 @@
-package hms.tap.servicestatusinquiry.service;
+package com.visitor.service;
 
-import hms.tap.servicestatusinquiry.domain.Role;
-import hms.tap.servicestatusinquiry.domain.User;
-import hms.tap.servicestatusinquiry.repository.RoleRepository;
-import hms.tap.servicestatusinquiry.repository.UserRepository;
+import com.visitor.domain.Role;
+import com.visitor.domain.User;
+import com.visitor.repository.RoleRepository;
+import com.visitor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,18 +27,16 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User getUsersByUsername(String username) {
+        return userRepository.getUsersByUsername(username);
     }
 
     @Override
     public void saveUser(User user) {
-        String pwd = user.getPassword();
-        String encryptPwd = bCryptPasswordEncoder.encode(pwd);
-        user.setPassword(encryptPwd);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
 //        Role userRole = roleRespository.findByRole("ADMIN");
-//        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+//        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
 

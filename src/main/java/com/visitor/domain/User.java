@@ -1,7 +1,4 @@
-package hms.tap.servicestatusinquiry.domain;
-
-import lombok.Getter;
-import lombok.Setter;
+package com.visitor.domain;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,8 +11,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "email")
+    @Column(name = "username")
+    private String username;
+
+    @Column(name="email")
     private String email;
+
+    @Column(name = "active")
+    private int active;
 
     @Column(name = "firstname")
     private String firstname;
@@ -25,9 +28,6 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "active")
-    private int active;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
@@ -41,12 +41,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstname() {
@@ -73,6 +73,21 @@ public class User {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getActive() {
         return active;
     }
@@ -81,11 +96,16 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

@@ -1,5 +1,5 @@
 
-package hms.tap.servicestatusinquiry.domain;
+package com.visitor.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;

@@ -1,7 +1,7 @@
-package hms.tap.servicestatusinquiry.repository;
+package com.visitor.repository;
 
 
-import hms.tap.servicestatusinquiry.domain.User;
+import com.visitor.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByEmail(String email);
+    User getUsersByUsername(String username);
 }

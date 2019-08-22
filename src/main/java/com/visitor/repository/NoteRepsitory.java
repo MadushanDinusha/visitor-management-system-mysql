@@ -1,6 +1,6 @@
-package hms.tap.servicestatusinquiry.repository;
+package com.visitor.repository;
 
-import hms.tap.servicestatusinquiry.domain.Note;
+import com.visitor.domain.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

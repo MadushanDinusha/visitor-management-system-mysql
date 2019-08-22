@@ -1,9 +1,10 @@
-package hms.tap.servicestatusinquiry.service;
+package com.visitor.service;
 
-import hms.tap.servicestatusinquiry.domain.User;
+import com.visitor.domain.User;
 
 public interface UserService {
-    public User findUserByEmail(String email);
 
-    void saveUser(User user);
+    public User getUsersByUsername(String username);
+
+    public void saveUser(User user);
 }

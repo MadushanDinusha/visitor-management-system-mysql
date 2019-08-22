@@ -1,4 +1,4 @@
-package hms.tap.servicestatusinquiry.config;
+package com.visitor.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,17 +1,15 @@
 function getAll() {
-    var userName = "hello";
-    var data = 'fname='+encodeURIComponent(userName);
+    var inputText = "hello";
     $.ajax({
-        url: 'getRoll',
-        type : 'POST',
-        // contentType: "application/json",
-        dataType : 'json',
-        data:data,
-        success: function (result) {
-            alert("s")
+        url: 'getUserName/'+inputText,
+        dataType: 'html',
+        type: 'get',
+        contentType: 'application/json',
+        success: function (data) {
+            alert("suc");
         },
-        error: function (e) {
-            alert("e")
+        error: function (err) {
+            alert("er" +err.responseText);
         }
     });
 }

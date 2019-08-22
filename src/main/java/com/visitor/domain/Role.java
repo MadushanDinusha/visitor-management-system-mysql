@@ -1,4 +1,4 @@
-package hms.tap.servicestatusinquiry.domain;
+package com.visitor.domain;
 
 import lombok.NoArgsConstructor;
 
