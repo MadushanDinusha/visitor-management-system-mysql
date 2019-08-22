@@ -54,6 +54,10 @@ public class ApplicationController {
         return "/user/visitorRegistor";
     }
 
+    @GetMapping("/guard/parking")
+    public String parking(Model model) {
+        return "/guard/parking";
+    }
 
     @RequestMapping(value= {"/home/index"}, method=RequestMethod.GET)
     public ModelAndView home() {

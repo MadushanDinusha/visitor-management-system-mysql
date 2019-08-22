@@ -17,6 +17,7 @@
         </form>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration">register</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRegistor">register visitor</a>
+        <a href="<c:out value="${pageContext.request.contextPath}"/>/guard/parking">parking</a>
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
     </c:if>
 </div>
