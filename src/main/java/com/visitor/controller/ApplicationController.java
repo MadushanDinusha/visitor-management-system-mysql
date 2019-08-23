@@ -100,7 +100,7 @@ public class ApplicationController {
 
     @RequestMapping(value = "/admin/registerUser", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> getSubscriberList(@RequestBody Map<String, String> request) {
+    public ResponseEntity<?> registerUser(@RequestBody Map<String, String> request) {
         try {
             User existingUsers = userService.getUsersByUsername(request.get("userName"));
             if (existingUsers == null) {
@@ -111,7 +111,19 @@ public class ApplicationController {
             }
         } catch (Throwable t) {
             LOGGER.error("Error occurred while saving user", t);
-            return new ResponseEntity<>("internal error",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("internal error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<?> deleteUser(@RequestBody Map<String,String> request) {
+        try {
+            LOGGER.info("username {}",request.get("userName"));
+            userService.deleteUser(request.get("userName"));
+            return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

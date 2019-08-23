@@ -38,3 +38,22 @@ function registerUser() {
     });
 }
 
+function deleteUser() {
+    $.ajax({
+        url: 'deleteUser',
+        dataType: 'text',
+        type: 'delete',
+        contentType: 'application/json',
+        data:JSON.stringify({
+            "userName":"madushanws"
+        }),
+        processData: false,
+        success: function () {
+            alert("successfully deleted")
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}
+

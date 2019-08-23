@@ -12,4 +12,6 @@ public interface UserService {
     void saveUser(Map<String,String> user);
 
     List<User> getAllUsers();
+
+    void deleteUser(String userName);
 }

@@ -1,9 +1,12 @@
 package com.visitor.service;
 
+import com.visitor.controller.ApplicationController;
 import com.visitor.domain.Role;
 import com.visitor.domain.User;
 import com.visitor.repository.RoleRepository;
 import com.visitor.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,13 +20,11 @@ import java.util.Map;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+    private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
+
     @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
-
-    @Qualifier("roleRepository")
-    @Autowired
-    private RoleRepository roleRespository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(Map<String,String> request) {
+    public void saveUser(Map<String, String> request) {
         User user = new User();
         user.setFirstname(request.get("firstName"));
         user.setUsername(request.get("userName"));
@@ -50,7 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void deleteUser(String userName) {
+            userRepository.delete(getUsersByUsername(userName));
+            LOGGER.info("User successfully deleted");
     }
 }

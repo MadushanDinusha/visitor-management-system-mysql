@@ -33,6 +33,7 @@
 
 </form>
 <button onclick="registerUser()" >submit</button>
+<button onclick="deleteUser()">delete</button>
 </body>
 <script>
 
