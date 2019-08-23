@@ -1,12 +1,15 @@
 package com.visitor.controller;
 
+import com.visitor.domain.Role;
 import com.visitor.domain.User;
 import com.visitor.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
+import java.util.*;
 
 
 @Controller
@@ -25,7 +32,7 @@ public class ApplicationController {
     @Qualifier("userService")
     private UserService userService;
 
-    @RequestMapping(value= {"/", "/login"}, method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(Model model, String error, String logout) {
         ModelAndView models = new ModelAndView();
         if (error != null)
@@ -45,17 +52,10 @@ public class ApplicationController {
         return "redirect:/login";
     }
 
-
     @GetMapping("/admin/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
         return "/admin/registration";
-    }
-
-    @PostMapping("/admin/registration")
-    public String registration(@ModelAttribute("userForm") User userForm) {
-        userService.saveUser(userForm);
-        return "redirect:/admin/home";
     }
 
     @GetMapping("/user/visitorRegistor")
@@ -68,7 +68,7 @@ public class ApplicationController {
         return "/guard/parking";
     }
 
-    @RequestMapping(value= {"/home/index"}, method=RequestMethod.GET)
+    @RequestMapping(value = {"/home/index"}, method = RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -79,7 +79,7 @@ public class ApplicationController {
         return model;
     }
 
-    @RequestMapping(value= {"/access_denied"}, method=RequestMethod.GET)
+    @RequestMapping(value = {"/access_denied"}, method = RequestMethod.GET)
     public ModelAndView accessDenied() {
         ModelAndView model = new ModelAndView();
         model.setViewName("errors/access_denied");
@@ -90,11 +90,28 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> sendMessage(@PathVariable("userName") String userName) {
         try {
-            LOGGER.info("Sending message {}",userName);
-            return new ResponseEntity<>( HttpStatus.OK);
+            LOGGER.info("Sending message {}", userName);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Throwable t) {
             LOGGER.error("Error occurred while sending message", t);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/registerUser", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> getSubscriberList(@RequestBody Map<String, String> request) {
+        try {
+            User existingUsers = userService.getUsersByUsername(request.get("userName"));
+            if (existingUsers == null) {
+                userService.saveUser(request);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Throwable t) {
+            LOGGER.error("Error occurred while saving user", t);
+            return new ResponseEntity<>("internal error",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -1,65 +1,40 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: Madushan
+  Date: 8/23/2019
+  Time: 11:56 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Create an account</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+    <title>Register</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
 </head>
-
 <body>
+<form id="registerForm">
 
-<div class="container">
+    <input type="text" id="userName">
+    <input type="password" id="password">
+    <input type="email" id="email">
+    <input type="text" id="firstName">
+    <input type="text" id="lastName">
+    <select id="role">
+        <option id="admin" value="ADMIN">ADMIN</option>
+        <option id="user" value="USER">USER</option>
+        <option id="guard" value="GUARD">GUARD</option>
+    </select>
 
-    <form:form method="POST" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
-        <spring:bind path="email">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="username" class="form-control" placeholder="Email"
-                            autofocus="true"></form:input>
-                <form:errors path="username"></form:errors>
-            </div>
-        </spring:bind>
-        <spring:bind path="firstname">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="firstname" class="form-control" placeholder="First name"
-                            autofocus="true"></form:input>
-                <form:errors path="firstname"></form:errors>
-            </div>
-        </spring:bind>
-        <spring:bind path="lastname">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="lastname" class="form-control" placeholder="Last name"
-                            autofocus="true"></form:input>
-                <form:errors path="lastname"></form:errors>
-            </div>
-        </spring:bind>
-
-        <spring:bind path="password">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
-                <form:errors path="password"></form:errors>
-            </div>
-        </spring:bind>
-
-        <spring:bind path="active">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="active" class="form-control" placeholder="active"></form:input>
-                <form:errors path="active"></form:errors>
-            </div>
-        </spring:bind>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form:form>
-
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+</form>
+<button onclick="registerUser()" >submit</button>
 </body>
+<script>
+
+</script>
 </html>

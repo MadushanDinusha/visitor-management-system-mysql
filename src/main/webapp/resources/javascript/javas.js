@@ -13,3 +13,28 @@ function getAll() {
         }
     });
 }
+
+function registerUser() {
+    $.ajax({
+        url: 'registerUser',
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/json',
+        data:JSON.stringify({
+            "userName":$("#userName").val(),
+            "firstName":$("#firstName").val(),
+            "lastName":$("#lastName").val(),
+            "password":$("#password").val(),
+            "email":$("#email").val(),
+            "role":$("#role").val()
+        }),
+        processData: false,
+        success: function () {
+            alert("successfully saved")
+        },
+        error: function (err) {
+          alert(err.responseText);
+        }
+    });
+}
+

@@ -2,9 +2,14 @@ package com.visitor.service;
 
 import com.visitor.domain.User;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserService {
 
-    public User getUsersByUsername(String username);
+    User getUsersByUsername(String username);
 
-    public void saveUser(User user);
+    void saveUser(Map<String,String> user);
+
+    List<User> getAllUsers();
 }
