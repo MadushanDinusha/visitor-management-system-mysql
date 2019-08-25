@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<c:url value="/resources/javascript/javas.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/javascript/javas.js"/>" type="te xt/javascript"></script>
     <style type="text/css">
         body {
             color: #fff;
