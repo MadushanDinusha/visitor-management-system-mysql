@@ -20,14 +20,22 @@ public class User {
     @Column(name = "active")
     private int active;
 
-    @Column(name = "firstname")
-    private String firstname;
-
-    @Column(name = "lastname")
-    private String lastname;
-
     @Column(name = "password")
     private String password;
+
+    @Column(name="hod_mail")
+    private String hodMail;
+
+    public String getHodMail() {
+        return hodMail;
+    }
+
+    public void setHodMail(String hodMail) {
+        this.hodMail = hodMail;
+    }
+
+    @Column(name="department")
+    private String department;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
@@ -49,22 +57,6 @@ public class User {
         this.username = username;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -75,6 +67,14 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public void setRoles(Set<Role> roles) {
@@ -102,9 +102,10 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", active=" + active +
                 ", password='" + password + '\'' +
+                ", hodMail='" + hodMail + '\'' +
+                ", department='" + department + '\'' +
                 ", roles=" + roles +
                 '}';
     }

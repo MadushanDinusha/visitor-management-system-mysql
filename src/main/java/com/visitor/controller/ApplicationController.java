@@ -92,7 +92,6 @@ public class ApplicationController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUsersByUsername(auth.getName());
 
-        model.addObject("userName", user.getFirstname() + " " + user.getLastname());
         model.setViewName("index");
         return model;
     }
