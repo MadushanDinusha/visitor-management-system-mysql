@@ -22,10 +22,10 @@ function registerUser() {
         contentType: 'application/json',
         data: JSON.stringify({
             "userName": $("#userName").val(),
-            "firstName": $("#firstName").val(),
-            "lastName": $("#lastName").val(),
             "password": $("#password").val(),
             "email": $("#email").val(),
+            "department":$("#department").val(),
+            "hodEmail":$("#HODEmail").val(),
             "role": $("#role").val()
         }),
         processData: false,

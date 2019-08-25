@@ -37,11 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(Map<String, String> request) {
         User user = new User();
-        user.setFirstname(request.get("firstName"));
         user.setUsername(request.get("userName"));
-        user.setLastname(request.get("lastName"));
         user.setEmail(request.get("email"));
         user.setPassword(request.get("password"));
+        user.setHodMail(request.get("HODEmail"));
+        user.setDepartment(request.get("department"));
         Role role = new Role();
         role.setRole(request.get("role"));
         user.setRoles(new HashSet<>(Arrays.asList(role)));
