@@ -40,17 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception{
-            http.authorizeRequests()
-                    .antMatchers("/","/logout").permitAll()
+            http
+                    .csrf().disable().authorizeRequests()
                     .antMatchers("/resources/**").permitAll()
-                    .antMatchers("/login").permitAll()
+                    .antMatchers("/").permitAll()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                     .antMatchers("/guard/**").hasAnyAuthority("ADMIN","GUARD")
-                    .anyRequest()
-                    .authenticated().and().csrf().disable()
-                    .formLogin().loginPage("/login").failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/home/index")
+                    .anyRequest().authenticated().and().csrf().disable()
+                    .formLogin().loginPage("/login").permitAll()
+                    .failureUrl("/login?error=true")
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .and().logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout").permitAll()
@@ -58,8 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenRepository(persistentTokenRepository())
                     .tokenValiditySeconds(60*60)
                     .and().exceptionHandling().accessDeniedPage("/access_denied");
-
-
+            ;
         }
 
         @Bean
