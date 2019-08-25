@@ -37,6 +37,11 @@ public class ApplicationController {
         return "/user/visitorRegistor";
     }
 
+    @GetMapping("/")
+    public String loadIndex(){
+        return "index";
+    }
+
     @GetMapping("/guard/parking")
     public String parking(Model model) {
         return "/guard/parking";
@@ -65,7 +70,7 @@ public class ApplicationController {
         return "/admin/registration";
     }
 
-    @RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(Model model, String error, String logout) {
         ModelAndView models = new ModelAndView();
         if (error != null)
@@ -88,7 +93,7 @@ public class ApplicationController {
         User user = userService.getUsersByUsername(auth.getName());
 
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
-        model.setViewName("home/index");
+        model.setViewName("index");
         return model;
     }
 
