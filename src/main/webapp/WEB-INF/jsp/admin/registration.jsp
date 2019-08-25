@@ -16,24 +16,85 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
+    <style rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>"></style>
 </head>
 <body>
-<form id="registerForm">
+<div class="signup-form">
+    <form action="/examples/actions/confirmation.php" method="post">
+        <h2>Sign Up</h2>
+        <p>Please fill in this form to create an account!</p>
+        <hr>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+				<span class="input-group-addon">
+					<i class="fa fa-lock"></i>
+					<i class="fa fa-check"></i>
+				</span>
+                <input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
+                <input type="email" class="form-control" name="email" placeholder="HOD Mail" required="required">
+            </div>
+        </div>
 
-    <input type="text" id="userName">
-    <input type="password" id="password">
-    <input type="email" id="email">
-    <input type="text" id="firstName">
-    <input type="text" id="lastName">
-    <select id="role">
-        <option id="admin" value="ADMIN">ADMIN</option>
-        <option id="user" value="USER">USER</option>
-        <option id="guard" value="GUARD">GUARD</option>
-    </select>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
 
-</form>
-<button onclick="registerUser()" >submit</button>
-<button onclick="deleteUser()">delete</button>
+                <select class="mdb-select md-form" required="required">
+                    <option value="" disabled selected>Choose Account type</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Normal User</option>
+                    <option value="3">Guard Room</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+                <select class="mdb-select md-form" required="required">
+                    <option value="" disabled selected>Choose Department</option>
+                    <option value="1">Administration</option>
+                    <option value="2">Compliance</option>
+                    <option value="2">Finance</option>
+                    <option value="4">Central-IT</option>
+                    <option value="5">EAG</option>
+                    <option value="6">Stores</option>
+                    <option value="7">Other</option>
+
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        </div>
+    </form>
+
+</div>
 </body>
 <script>
 
