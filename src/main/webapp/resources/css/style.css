@@ -1,4 +1,4 @@
-body,html{
+#login{
 		margin: 0;
 		padding: 0;
 		height: 100%;
@@ -68,7 +68,7 @@ a {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
-body {
+#signup {
 	color: #fff;
 	background:#c8c3c3;
 	font-family: 'Roboto', sans-serif;

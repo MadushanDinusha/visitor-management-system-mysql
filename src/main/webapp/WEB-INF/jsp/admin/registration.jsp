@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
     <style rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>"></style>
 </head>
-<body>
+<body id="signup">
 <div class="signup-form">
     <form action="/examples/actions/confirmation.php" method="post">
         <h2>Sign Up</h2>
