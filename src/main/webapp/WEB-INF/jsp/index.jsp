@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <title>Bootstrap Sign up Form with Icons</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -95,7 +95,7 @@
     </div>
 </div>
 <div class="container center">
-    <a href="#">
+    <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">
         <div class="col-sm-6" id="first">
             <img class="vsm" src="<c:url value="/resources/images/visitor.png"/>">
             <span>VMS</span>

@@ -57,11 +57,16 @@ public class ApplicationController {
         return "/admin/allUsers";
     }
 
+    @GetMapping("/user/visitorHome")
+    public String getVisitorHome(){
+        return "/user/visitorHome";
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(SessionStatus session) {
         SecurityContextHolder.getContext().setAuthentication(null);
         session.setComplete();
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/admin/registration")

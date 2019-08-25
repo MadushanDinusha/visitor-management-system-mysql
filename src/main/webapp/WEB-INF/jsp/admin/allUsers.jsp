@@ -30,10 +30,10 @@
                 <thead>
                 <th>User Id</th>
                 <th>User Name</th>
-                <th>First Name</th>
-                <th>Last Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>HOD mail</th>
+                <th>Department</th>
                 <th>Delete</th>
                 </thead>
                 <tbody id="tableBody">

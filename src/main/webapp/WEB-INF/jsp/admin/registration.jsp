@@ -7,11 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <title>Bootstrap Sign up Form with Icons</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <title>Bootstrap Sign up Form with Icons</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<c:url value="/resources/javascript/javas.js"/>" type="te xt/javascript"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
     <style type="text/css">
         body {
             color: #fff;
@@ -125,8 +128,6 @@
             font-size: 7px;
             position: absolute;
         }
-
-
     </style>
 </head>
 <body id="signup">
@@ -180,9 +181,9 @@
 
                 <select class="mdb-select md-form" id="role" required="required">
                     <option value="" disabled selected>Choose Account type</option>
-                    <option value="1">ADMIN</option>
-                    <option value="2">USER</option>
-                    <option value="3">GUARD</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="USER">USER</option>
+                    <option value="GUARD">GUARD</option>
                 </select>
 
             </div>
@@ -193,13 +194,13 @@
                 <span class="input-group-addon"><i class="fa fa-institution"></i></span>
                 <select class="mdb-select md-form" id="department" required="required">
                     <option value="" disabled selected>Choose Department</option>
-                    <option value="1">Administration</option>
-                    <option value="2">Compliance</option>
-                    <option value="2">Finance</option>
-                    <option value="4">Central-IT</option>
-                    <option value="5">EAG</option>
-                    <option value="6">Stores</option>
-                    <option value="7">Other</option>
+                    <option value="Administration">Administration</option>
+                    <option value="Compliance">Compliance</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Central-IT">Central-IT</option>
+                    <option value="EAG">EAG</option>
+                    <option value="Stores">Stores</option>
+                    <option value="Other">Other</option>
 
                 </select>
 
@@ -207,9 +208,7 @@
         </div>
 
     </form>
-    <div class="form-group">
         <button onclick="registerUser()" class="btn btn-primary btn-lg">Sign Up</button>
-    </div>
 </div>
 </body>
 <script>

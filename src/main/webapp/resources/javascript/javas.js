@@ -72,8 +72,8 @@ function getAllUsers() {
             $("#tableBody").html("");
             for (var i = 0; i < numberOfUsers; i++) {
                 $("#tableBody").append('<tr><td>' + userList[i].id + '</td><td>' + userList[i].username + '</td>' +
-                    '<td>' + userList[i].firstname + '</td><td>' + userList[i].lastname + '</td><td>'+userList[i].email+'</td>' +
-                    '<td>' + userList[i].roles[0].role + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
+                    '<td>'+userList[i].email+'</td><td>' + userList[i].roles[0].role + '</td><td>'+userList[i].hodEmail+'</td>' +
+                    '<td>'+userList[i].department+'</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
                     '<span class="glyphicon glyphicon-trash"></span></button></p></td>');
             }

@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(request.get("userName"));
         user.setEmail(request.get("email"));
         user.setPassword(request.get("password"));
-        user.setHodMail(request.get("HODEmail"));
+        user.setHodMail(request.get("hodEmail"));
         user.setDepartment(request.get("department"));
         Role role = new Role();
         role.setRole(request.get("role"));
