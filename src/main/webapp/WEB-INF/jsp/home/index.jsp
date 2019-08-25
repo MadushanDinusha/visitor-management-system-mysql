@@ -15,9 +15,9 @@
         <form id="logoutForm" method="POST" action="<c:out value="${pageContext.request.contextPath}"/>/doLogout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration">register</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRegistor">register visitor</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/guard/parking">parking</a>
+        <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/adminHome">admin</a>
         <a href="<c:out value="${pageContext.request.contextPath}"/>/logout">Logout</a>
     </c:if>
 </div>

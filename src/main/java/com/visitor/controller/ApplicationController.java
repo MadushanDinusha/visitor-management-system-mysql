@@ -1,11 +1,10 @@
 package com.visitor.controller;
 
-import com.visitor.domain.Role;
 import com.visitor.domain.User;
+import com.visitor.service.RoleService;
 import com.visitor.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -17,10 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.*;
 
 
@@ -32,17 +29,27 @@ public class ApplicationController {
     @Qualifier("userService")
     private UserService userService;
 
-    @RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView login(Model model, String error, String logout) {
-        ModelAndView models = new ModelAndView();
-        if (error != null)
-            model.addAttribute("error", "Your username or password is invalid.");
+    @Autowired
+    private RoleService roleService;
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+    @GetMapping("/user/visitorRegistor")
+    public String visitor(Model model) {
+        return "/user/visitorRegistor";
+    }
 
-        models.setViewName("home/login");
-        return models;
+    @GetMapping("/guard/parking")
+    public String parking(Model model) {
+        return "/guard/parking";
+    }
+
+    @GetMapping("/admin/adminHome")
+    public String adminHome() {
+        return "/admin/adminHome";
+    }
+
+    @GetMapping("/admin/allUsers")
+    public String getUsers() {
+        return "/admin/allUsers";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -58,15 +65,21 @@ public class ApplicationController {
         return "/admin/registration";
     }
 
-    @GetMapping("/user/visitorRegistor")
-    public String visitor(Model model) {
-        return "/user/visitorRegistor";
+    @RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView login(Model model, String error, String logout) {
+        ModelAndView models = new ModelAndView();
+        if (error != null)
+            model.addAttribute("error", "Your username or password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        models.setViewName("home/login");
+        return models;
     }
 
-    @GetMapping("/guard/parking")
-    public String parking(Model model) {
-        return "/guard/parking";
-    }
+
+
 
     @RequestMapping(value = {"/home/index"}, method = RequestMethod.GET)
     public ModelAndView home() {
@@ -117,13 +130,26 @@ public class ApplicationController {
 
     @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<?> deleteUser(@RequestBody Map<String,String> request) {
+    public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info("username {}",request.get("userName"));
+            LOGGER.info("username {}", request.get("userName"));
             userService.deleteUser(request.get("userName"));
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<?>> getGroupList() {
+        try {
+            List<User> groupsList = userService.getAllUsers();
+            LOGGER.info("Getting all users lists {}",groupsList);
+            return new ResponseEntity<>(groupsList, HttpStatus.OK);
+        } catch (Throwable t) {
+            LOGGER.error("Error occurred while getting group list", t);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
