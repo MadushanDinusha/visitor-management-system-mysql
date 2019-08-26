@@ -8,16 +8,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
         .col-sm-6 {
-            background-color: lemonchiffon;
-            border: 1px solid black;
-            padding: 20px;
-            margin-top: 20px;
+
         }
 
         #home {
@@ -35,14 +31,18 @@
 
         #first {
             margin-right: 5%;
-            float: left;
+            background-color: lemonchiffon;
+            border: 1px solid black;
+            padding: 20px;
+            margin-top: 20px;
             width: 45%;
-            margin-left: 3%;
-
         }
 
         #second {
-            float: left;
+            background-color: lemonchiffon;
+            border: 1px solid black;
+            padding: 20px;
+            margin-top: 20px;
             width: 45%;
         }
 
@@ -58,12 +58,11 @@
 <body id="home">
 
 <div class="row" style="background-color: #4A4A4A; height:75px;overflow:hidden;width:100%;margin-left:.01%">
-
     <img src="<c:url value="/resources/images/brandixx.jpg"/>" style="height: 75px">
 </div>
 
 
-<div class="card">
+<div class="container">
     <div id="demo" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
@@ -76,13 +75,13 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="<c:url value="/resources/images/la.jpg"/>" alt="Los Angeles" width="1650px" height="475px">
+                <img src="<c:url value="/resources/images/la.jpg"/>" alt="Los Angeles" width="100%" height="475px">
             </div>
             <div class="carousel-item">
                 <img src="<c:url value="/resources/images/chicago.jpg"/>" alt="Chicago" width="100%" height="475px">
             </div>
             <div class="carousel-item">
-                <img src="<c:url value="/resources/images/ny.jpg"/>" alt="New York" width="1550px" height="475px">
+                <img src="<c:url value="/resources/images/ny.jpg"/>" alt="New York" width="100%" height="475px">
             </div>
         </div>
         <!-- Left and right controls -->
@@ -93,21 +92,19 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-</div>
-<div class="container center">
+
     <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">
-        <div class="col-sm-6" id="first">
+        <div class="float-left" id="first">
             <img class="vsm" src="<c:url value="/resources/images/visitor.png"/>">
             <span>VMS</span>
-        </div>"
+        </div>
     </a>
     <a href="#">
-        <div class="col-sm-6" id="second">
+        <div class="float-right" id="second">
             <img class="vsm" src="<c:url value="/resources/images/park.png"/>">
             <span>PSM</span>
         </div>
     </a>
-</div>
 </div>
 </body>
 </html>
