@@ -37,14 +37,19 @@ public class ApplicationController {
     @Autowired
     private VisitorService visitorService;
 
-    @GetMapping("/user/visitorRegistor")
+    @GetMapping("/")
+    public String loadIndex(){
+        return "index";
+    }
+
+    @GetMapping("/user/visitorRequest")
     public String visitor(Model model) {
         return "user/visitorRequest";
     }
 
-    @GetMapping("/")
-    public String loadIndex(){
-        return "index";
+    @GetMapping("/user/visitorHome")
+    public String getVisitorHome(){
+        return "/user/visitorHome";
     }
 
     @GetMapping("/guard/parking")
@@ -60,11 +65,6 @@ public class ApplicationController {
     @GetMapping("/admin/allUsers")
     public String getUsers() {
         return "/admin/allUsers";
-    }
-
-    @GetMapping("/user/visitorHome")
-    public String getVisitorHome(){
-        return "/user/visitorHome";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -92,9 +92,6 @@ public class ApplicationController {
         models.setViewName("home/login");
         return models;
     }
-
-
-
 
     @RequestMapping(value = {"/home/index"}, method = RequestMethod.GET)
     public ModelAndView home() {
@@ -167,7 +164,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/user/addVisitor",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/addVisitor",method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor){
         try {

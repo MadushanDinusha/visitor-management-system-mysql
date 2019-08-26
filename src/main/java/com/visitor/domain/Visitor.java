@@ -1,8 +1,9 @@
 package com.visitor.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="visitor_details")
@@ -12,7 +13,7 @@ public class Visitor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name="nic")
+    @Column(name="NIC")
     private String NIC;
 
     @Column(name = "name")
@@ -28,10 +29,8 @@ public class Visitor {
     private String vehicleNumber;
 
     @Column(name = "date")
-    private Date date;
-
-    @Column(name = "time")
-    private Time time;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Timestamp date;
 
     @Column(name = "responded_emp")
     private String userName;
@@ -42,6 +41,14 @@ public class Visitor {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 
     public String getNIC() {
@@ -82,14 +89,6 @@ public class Visitor {
 
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getUserName() {
