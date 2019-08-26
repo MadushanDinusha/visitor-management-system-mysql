@@ -1,8 +1,10 @@
 package com.visitor.controller;
 
 import com.visitor.domain.User;
+import com.visitor.domain.Visitor;
 import com.visitor.service.RoleService;
 import com.visitor.service.UserService;
+import com.visitor.service.VisitorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class ApplicationController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private VisitorService visitorService;
 
     @GetMapping("/user/visitorRegistor")
     public String visitor(Model model) {
@@ -158,6 +163,20 @@ public class ApplicationController {
             return new ResponseEntity<>(groupsList, HttpStatus.OK);
         } catch (Throwable t) {
             LOGGER.error("Error occurred while getting group list", t);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/user/addVisitor",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor){
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            visitor.setUserName(authentication.getName());
+            LOGGER.info("visitor {}",visitor);
+            visitorService.saveVisitor(visitor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

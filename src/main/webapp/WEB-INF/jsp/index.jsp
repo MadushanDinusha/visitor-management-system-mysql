@@ -12,23 +12,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        .col-sm-6 {
-
-        }
-
         #home {
             background-color: black;
         }
-
         .vsm {
             width: 140px;
         }
-
         span {
             color: black;
             font-size: 25px;
         }
-
         #first {
             margin-right: 5%;
             background-color: lemonchiffon;
@@ -37,7 +30,6 @@
             margin-top: 20px;
             width: 45%;
         }
-
         #second {
             background-color: lemonchiffon;
             border: 1px solid black;
@@ -45,11 +37,9 @@
             margin-top: 20px;
             width: 45%;
         }
-
         #second:hover {
             background-color: chocolate;
         }
-
         #first:hover {
             background-color: chocolate;
         }
@@ -57,21 +47,19 @@
 </head>
 <body id="home">
 
-<div class="row" style="background-color: #4A4A4A; height:75px;overflow:hidden;width:100%;margin-left:.01%">
+
+<div class="navbar" style="background-color: #4A4A4A;">
     <img src="<c:url value="/resources/images/brandixx.jpg"/>" style="height: 75px">
 </div>
 
-
-<div class="container">
+<div class="container" style="margin-top:1%">
     <div id="demo" class="carousel slide" data-ride="carousel">
-
         <!-- Indicators -->
         <ul class="carousel-indicators">
             <li data-target="#demo" data-slide-to="0" class="active"></li>
             <li data-target="#demo" data-slide-to="1"></li>
             <li data-target="#demo" data-slide-to="2"></li>
         </ul>
-
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -92,7 +80,6 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-
     <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">
         <div class="float-left" id="first">
             <img class="vsm" src="<c:url value="/resources/images/visitor.png"/>">

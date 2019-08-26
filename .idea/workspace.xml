@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1852f31-eec5-46f6-a2a5-dabff00dae8a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorHome.jsp" afterDir="false" />
+    <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Visitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VisitorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRegistor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
-        <option value="spring-beans.schema" />
+        <option value="Jsp File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -35,29 +35,13 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1Pdp0ezjVsLCQAFZrg9B8QHjhUx" />
+  <component name="ProjectId" id="1PvNhK0r9qapykHjORVNMQUzHg3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\home" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\user" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp\errors" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\css" />
-      <recent name="D:\projects\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\images" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\resources" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\resources\js" />
-      <recent name="C:\Users\Madushan\Desktop\Document-processing-status-app-master\service-status-inquiry\src\main\webapp\WEB-INF\jsp" />
-    </key>
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,53 +55,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="ServiceStatusInquiryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="visitor-management-system" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="hms.tap.servicestatusinquiry.ServiceStatusInquiryApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c2cce0d6-b7fd-45e1-a6c8-9ac5d4a4962c" name="Default Changelist" comment="" />
-      <created>1566213605854</created>
+      <changelist id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="" />
+      <created>1566750729841</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1566213605854</updated>
-      <workItem from="1566213608974" duration="16387000" />
-      <workItem from="1566263843769" duration="17121000" />
-      <workItem from="1566281907361" duration="15244000" />
-      <workItem from="1566298716392" duration="8873000" />
-      <workItem from="1566308785834" duration="10524000" />
-      <workItem from="1566352961662" duration="15666000" />
-      <workItem from="1566369318701" duration="6954000" />
-      <workItem from="1566388521359" duration="2304000" />
-      <workItem from="1566392902946" duration="11843000" />
-      <workItem from="1566407846782" duration="488000" />
-      <workItem from="1566408716162" duration="2150000" />
-      <workItem from="1566438900386" duration="2974000" />
-      <workItem from="1566442404022" duration="1973000" />
-      <workItem from="1566445266075" duration="1185000" />
-      <workItem from="1566447056529" duration="5866000" />
-      <workItem from="1566457926573" duration="3545000" />
-      <workItem from="1566470730306" duration="259000" />
-      <workItem from="1566478831601" duration="2870000" />
-      <workItem from="1566487914612" duration="457000" />
-      <workItem from="1566541515496" duration="16066000" />
-      <workItem from="1566570329695" duration="5404000" />
-      <workItem from="1566629787780" duration="102000" />
-      <workItem from="1566630146189" duration="1507000" />
-      <workItem from="1566643107013" duration="2338000" />
-      <workItem from="1566660172158" duration="9157000" />
-      <workItem from="1566669658542" duration="1232000" />
-      <workItem from="1566703214145" duration="4411000" />
-      <workItem from="1566709823924" duration="5868000" />
+      <updated>1566750729841</updated>
+      <workItem from="1566750736101" duration="4209000" />
+      <workItem from="1566793504602" duration="2202000" />
+      <workItem from="1566802081231" duration="293000" />
     </task>
     <servers />
   </component>
