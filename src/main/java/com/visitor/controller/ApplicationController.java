@@ -34,7 +34,7 @@ public class ApplicationController {
 
     @GetMapping("/user/visitorRegistor")
     public String visitor(Model model) {
-        return "/user/visitorRegistor";
+        return "user/visitorRequest";
     }
 
     @GetMapping("/")
