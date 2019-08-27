@@ -9,12 +9,13 @@ import java.sql.Timestamp;
 @Table(name="visitor_details")
 public class Visitor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
 
-    @Column(name="NIC")
-    private String NIC;
+    @Id
+    @Column(name="id")
+    private long id;
+
+    @Column(name="group_id")
+    private String groupId;
 
     @Column(name = "name")
     private String name;
@@ -29,34 +30,18 @@ public class Visitor {
     private String vehicleNumber;
 
     @Column(name = "date")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp date;
 
     @Column(name = "responded_emp")
     private String userName;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public String getNIC() {
-        return NIC;
-    }
-
-    public void setNIC(String NIC) {
-        this.NIC = NIC;
     }
 
     public String getName() {
@@ -91,6 +76,14 @@ public class Visitor {
         this.vehicleNumber = vehicleNumber;
     }
 
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -99,11 +92,18 @@ public class Visitor {
         this.userName = userName;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public String toString() {
         return "Visitor{" +
-                "id=" + id +
-                ", NIC='" + NIC + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", purpose='" + purpose + '\'' +
                 ", company='" + company + '\'' +

@@ -1,5 +1,6 @@
 package com.visitor.service;
 
+import com.visitor.domain.Request;
 import com.visitor.domain.User;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface UserService {
     List<User> getAllUsers();
 
     void deleteUser(String userName);
+
+    User getAdmin(String hodEmail);
+
+    List<Request> getRequest();
 }

@@ -1,0 +1,7 @@
+package com.visitor.service;
+
+import com.visitor.domain.Request;
+
+public interface RequestService {
+    void saveRequest(Request request);
+}

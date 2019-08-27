@@ -1,8 +1,10 @@
 package com.visitor.service;
 
 import com.visitor.controller.ApplicationController;
+import com.visitor.domain.Request;
 import com.visitor.domain.Role;
 import com.visitor.domain.User;
+import com.visitor.repository.RequestRepository;
 import com.visitor.repository.RoleRepository;
 import com.visitor.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +27,10 @@ public class UserServiceImpl implements UserService {
     @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
+
+    @Qualifier("requestRepository")
+    @Autowired
+    private RequestRepository requestRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -59,5 +65,15 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String userName) {
             userRepository.delete(getUsersByUsername(userName));
             LOGGER.info("User successfully deleted");
+    }
+
+    @Override
+    public User getAdmin(String hodEmail){
+        return userRepository.getUserByEmail(hodEmail);
+    }
+
+    @Override
+    public List<Request> getRequest() {
+        return (List<Request>) requestRepository.findAll();
     }
 }

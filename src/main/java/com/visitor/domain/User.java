@@ -26,6 +26,13 @@ public class User {
     @Column(name="hod_mail")
     private String hodMail;
 
+    @Column(name="department")
+    private String department;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+    private Set<Role> roles;
+
     public String getHodMail() {
         return hodMail;
     }
@@ -33,13 +40,6 @@ public class User {
     public void setHodMail(String hodMail) {
         this.hodMail = hodMail;
     }
-
-    @Column(name="department")
-    private String department;
-
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
-    private Set<Role> roles;
 
     public int getId() {
         return id;

@@ -1,8 +1,9 @@
 package com.visitor.controller;
 
+import com.visitor.domain.Request;
 import com.visitor.domain.User;
 import com.visitor.domain.Visitor;
-import com.visitor.service.RoleService;
+import com.visitor.service.RequestService;
 import com.visitor.service.UserService;
 import com.visitor.service.VisitorService;
 import org.apache.logging.log4j.LogManager;
@@ -31,14 +32,15 @@ public class ApplicationController {
     @Qualifier("userService")
     private UserService userService;
 
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private VisitorService visitorService;
 
+    @Autowired
+    RequestService requestService;
+
     @GetMapping("/")
-    public String loadIndex(){
+    public String loadIndex() {
         return "index";
     }
 
@@ -48,7 +50,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/user/visitorHome")
-    public String getVisitorHome(){
+    public String getVisitorHome() {
         return "/user/visitorHome";
     }
 
@@ -67,6 +69,12 @@ public class ApplicationController {
         return "/admin/allUsers";
     }
 
+    @GetMapping("/admin/registration")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "/admin/registration";
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(SessionStatus session) {
         SecurityContextHolder.getContext().setAuthentication(null);
@@ -74,10 +82,73 @@ public class ApplicationController {
         return "redirect:/";
     }
 
-    @GetMapping("/admin/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-        return "/admin/registration";
+    @RequestMapping(value = {"/home/index"}, method = RequestMethod.GET)
+    public ModelAndView home() {
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUsersByUsername(auth.getName());
+        model.setViewName("index");
+        return model;
+    }
+
+    @RequestMapping(value = {"/access_denied"}, method = RequestMethod.GET)
+    public ModelAndView accessDenied() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("errors/access_denied");
+        return model;
+    }
+
+    @RequestMapping(value = {"/admin/getRequests"}, method = RequestMethod.GET)
+    public ModelAndView getRequest() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/admin/getRequests");
+        return model;
+    }
+
+    @RequestMapping(value = {"/admin/requestDetails"}, method = RequestMethod.GET)
+    public ModelAndView getRequestDetails() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/admin/requestDetails");
+        return model;
+    }
+
+    @RequestMapping(value = "/admin/newRequest/{group_id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<Visitor>> sendMessage(@PathVariable("group_id") String group_id) {
+        try {
+            LOGGER.info("request id {}", group_id);
+            List<Visitor> visitors = visitorService.findVisitorByGroupId(group_id);
+            LOGGER.info("visitor details {}", visitors);
+            return new ResponseEntity<>(visitors,HttpStatus.OK);
+        } catch (Throwable t) {
+            LOGGER.error("Error occurred while sending message", t);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<?>> getGroupList() {
+        try {
+            List<User> groupsList = userService.getAllUsers();
+            LOGGER.info("Getting all users lists {}", groupsList);
+            return new ResponseEntity<>(groupsList, HttpStatus.OK);
+        } catch (Throwable t) {
+            LOGGER.error("Error occurred while getting group list", t);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/newRequest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<?>> getRequests() {
+        try {
+            List<Request> requests = userService.getRequest();
+            LOGGER.info("All requests {}", userService.getRequest());
+            return new ResponseEntity<>(requests,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
@@ -91,35 +162,6 @@ public class ApplicationController {
 
         models.setViewName("home/login");
         return models;
-    }
-
-    @RequestMapping(value = {"/home/index"}, method = RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView model = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.getUsersByUsername(auth.getName());
-
-        model.setViewName("index");
-        return model;
-    }
-
-    @RequestMapping(value = {"/access_denied"}, method = RequestMethod.GET)
-    public ModelAndView accessDenied() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("errors/access_denied");
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/getUserName/{userName}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<?> sendMessage(@PathVariable("userName") String userName) {
-        try {
-            LOGGER.info("Sending message {}", userName);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Throwable t) {
-            LOGGER.error("Error occurred while sending message", t);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @RequestMapping(value = "/admin/registerUser", method = RequestMethod.POST)
@@ -139,6 +181,17 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping(value = "/user/addVisitor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
+        try {
+            visitorService.saveVisitor(visitor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
@@ -148,33 +201,6 @@ public class ApplicationController {
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/admin/getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<?>> getGroupList() {
-        try {
-            List<User> groupsList = userService.getAllUsers();
-            LOGGER.info("Getting all users lists {}",groupsList);
-            return new ResponseEntity<>(groupsList, HttpStatus.OK);
-        } catch (Throwable t) {
-            LOGGER.error("Error occurred while getting group list", t);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/user/addVisitor",method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor){
-        try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            visitor.setUserName(authentication.getName());
-            LOGGER.info("visitor {}",visitor);
-            visitorService.saveVisitor(visitor);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
