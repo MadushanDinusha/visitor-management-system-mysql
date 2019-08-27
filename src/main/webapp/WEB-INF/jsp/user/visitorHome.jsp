@@ -15,5 +15,6 @@
 </head>
 <body>
 <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">add visitor</a>
+<a href="<c:out value="${pageContext.request.contextPath}"/>/admin/adminHome">admin</a>
 </body>
 </html>

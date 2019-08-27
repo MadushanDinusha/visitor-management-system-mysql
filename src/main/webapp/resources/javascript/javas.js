@@ -1,3 +1,5 @@
+var group_ids = '';
+
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
 }
@@ -147,8 +149,11 @@ function getAllRequest() {
             $("#tableBodyRequests").html("");
             var groupIds = [];
             for (var i = 0; i < numberOfRequests; i++) {
-                if (!groupIds.includes(requestList[i].group_id)) {
-                    $("#tableBodyRequests").append('<tr><td><a onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td></tr>');
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Pending") {
+
+                    $("#tableBodyRequests").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                        'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
+                        requestList[i].group_id + '</a></td></tr>');
                 }
                 groupIds.push(requestList[i].group_id);
             }
@@ -160,6 +165,7 @@ function getAllRequest() {
 }
 
 function getRequest(group_id) {
+    group_ids = group_id;
     $.ajax({
         url: 'newRequest/' + group_id,
         dataType: 'json',
@@ -167,20 +173,40 @@ function getRequest(group_id) {
         contentType: 'application/json',
         processData: false,
         success: function (data) {
-            var contextPath = sessionStorage.getItem("contextPath");
-            window.location.href = contextPath + "/admin/requestDetails";
             var visitorList = data;
             console.log("user details " + Object.values(visitorList));
             var numberOfVisitors = visitorList.length;
             $("#visitorTable").html("");
             for (var i = 0; i < numberOfVisitors; i++) {
-                $("#tableBody").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].company + '</td>' +
+                $("#visitorTable").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].company + '</td>' +
                     '<td>' + visitorList[i].date + '</td><td>' + visitorList[i].name + '</td><td>' + visitorList[i].purpose + '</td>' +
                     '<td>' + visitorList[i].responded_emp + '</td><td>' + visitorList[i].vehicle_number + '</td></tr>');
             }
         },
         error: function (err) {
             alert("er" + err.responseText);
+        }
+    });
+}
+
+
+function updateVisitorState(state) {
+
+    $.ajax({
+        url: 'updateState',
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "group_id": group_ids,
+            "state": state
+        }),
+        processData: false,
+        success: function () {
+            alert("successful");
+        },
+        error: function (err) {
+            alert(err.responseText);
         }
     });
 }

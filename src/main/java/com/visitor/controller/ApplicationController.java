@@ -192,6 +192,19 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping(value = "/admin/updateState", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> updateVisitorState(@RequestBody Map<String,String> request) {
+        try {
+            LOGGER.info("request {}",request);
+            visitorService.updateVisitor(request.get("group_id"),request.get("state"));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            LOGGER.info("Error occurred while updating 'request' table",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {

@@ -4,6 +4,7 @@ import com.visitor.controller.ApplicationController;
 import com.visitor.domain.Request;
 import com.visitor.domain.User;
 import com.visitor.domain.Visitor;
+import com.visitor.repository.RequestRepository;
 import com.visitor.repository.VisitorRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +29,10 @@ public class VisitorServiceImpl implements VisitorService {
     @Autowired
     RequestService requestService;
 
+    @Qualifier("requestRepository")
+    @Autowired
+    RequestRepository requestRepository;
+
     @Override
     public void saveVisitor(Visitor visitor) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,11 +49,16 @@ public class VisitorServiceImpl implements VisitorService {
         visitorRepository.save(visitor);
     }
 
-    public Visitor findVisitorById(long id){
+    public Visitor findVisitorById(long id) {
         return visitorRepository.findVisitorById(id);
     }
 
-    public List<Visitor> findVisitorByGroupId(String id){
+    public List<Visitor> findVisitorByGroupId(String id) {
         return visitorRepository.findVisitorByGroupId(id);
+    }
+
+    public void updateVisitor(String groupId,String state) {
+        LOGGER.info("updating state group_id {}, state {}",groupId,state);
+        requestRepository.updateVisitorState(groupId,state);
     }
 }

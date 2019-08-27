@@ -33,6 +33,46 @@
         </div>
     </div>
 </div>
+<%-- Modal--%>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+                    <div class="card-body">
+                        <div id="tables" class="table-editable">
+                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>nic</th>
+                                <th>name</th>
+                                <th>company</th>
+                                <th>date</th>
+                                <th>purpose</th>
+                                <th>responded_emp</th>
+                                <th>vehicle_number</th>
+                                </thead>
+                                <tbody id="visitorTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="reject" class="btn btn-danger" onclick="updateVisitorState('Rejected')">Reject</button>
+                <button type="button" id="modify" class="btn btn-danger" onclick="updateVisitorState('Modify')">Reject</button>
+                <button type="button" id="approve" class="btn btn-primary" onclick="updateVisitorState('Approved')">Approve</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 <script type="text/javascript">
     var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";

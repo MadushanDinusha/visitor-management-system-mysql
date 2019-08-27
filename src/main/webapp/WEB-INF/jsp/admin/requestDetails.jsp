@@ -17,25 +17,6 @@
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
 </head>
 <body>
-<div class="container">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
-    <div class="card-body">
-        <div id="table" class="table-editable">
-            <table class="table table-bordered table-responsive-md table-striped text-center">
-                <thead>
-                <th>nic</th>
-                <th>name</th>
-                <th>company</th>
-                <th>date</th>
-                <th>purpose</th>
-                <th>responded_emp</th>
-                <th>vehicle_number</th>
-                </thead>
-                <tbody id="visitorTable">
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
 </body>
 </html>

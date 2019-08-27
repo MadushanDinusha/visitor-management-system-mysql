@@ -19,7 +19,7 @@
 <body>
 <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration">register</a>
 <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers">all users</a>
-<a href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">all users</a>
+<a href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Requests</a>
 </body>
 <script>
 

@@ -10,4 +10,6 @@ public interface VisitorService {
     Visitor findVisitorById(long id);
 
     List<Visitor> findVisitorByGroupId(String id);
+
+    void updateVisitor(String groupId,String state);
 }
