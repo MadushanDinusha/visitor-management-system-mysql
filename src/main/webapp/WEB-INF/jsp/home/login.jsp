@@ -10,18 +10,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
-<body id="login">
+<body id="login" background="<c:url value="/resources/images/back.jpg"/>">
 <div class="container h-100">
     <div class="d-flex justify-content-center h-100">
         <div class="user_card">
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
-                    <img src="<c:url value="/resources/images/download1.jpg"/>" class="brand_logo" alt="Logo">
+                    <img src="<c:url value="/resources/images/download1.png"/>" class="brand_logo" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
                 <form method="POST" action="<c:out value="${pageContext.request.contextPath}"/>/login" class="form-signin">
-                    <h2 class="form-heading">Log in</h2>
+
 
                     <div class="form-group ${error != null ? 'has-error' : ''}">
                         <span>${message}</span>
