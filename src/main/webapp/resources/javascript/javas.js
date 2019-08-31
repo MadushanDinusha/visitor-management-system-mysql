@@ -1,4 +1,5 @@
 var group_ids = '';
+var buttonState = '';
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
@@ -203,7 +204,6 @@ function updateVisitorState(state) {
         }),
         processData: false,
         success: function () {
-            alert("successful");
         },
         error: function (err) {
             alert(err.responseText);
@@ -267,3 +267,38 @@ function getAllRequestForUser() {
         }
     });
 }
+
+function approve() {
+    buttonState ="approve";
+    $("#mi-modal").modal('show');
+    $("#request").html("Approve")
+}
+function rejects() {
+    buttonState ="reject";
+    $("#mi-modal").modal('show');
+    $("#request").html("Reject")
+}
+function modifies() {
+    buttonState ="modify";
+    $("#mi-modal").modal('show');
+    $("#request").html("Modify")
+}
+function ModalYes() {
+    if(buttonState==="approve"){
+        updateVisitorState('Approved');
+    }else if(buttonState==="reject"){
+        updateVisitorState('Rejected');
+    }else {
+        updateVisitorState('Modify')
+    }
+    $("#mi-modal").modal('hide');
+    $("#myModal").modal('hide');
+}
+function ModalNo() {
+    $("#mi-modal").modal('hide');
+}
+
+
+
+
+

@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Requests</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
 
 </head>
@@ -65,13 +65,28 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="reject" class="btn btn-danger" onclick="updateVisitorState('Rejected')">Reject</button>
-                <button type="button" id="modify" class="btn btn-success" onclick="updateVisitorState('Modify')">Modify</button>
-                <button type="button" id="approve" class="btn btn-primary" onclick="updateVisitorState('Approved')">Approve</button>
+                <button type="button" id="rejectBtn" class="btn btn-danger" onclick="rejects()">Reject</button>
+                <button type="button" id="modifyBtn" class="btn btn-success" onclick="modifies()" >Modify</button>
+                <button type="button" id="approveBtn" class="btn btn-primary" onclick="approve()">Approve</button>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Do you want to </h4><b><p id="request"></p></b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-si" onclick="ModalYes()">Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no" onclick="ModalNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script type="text/javascript">
     var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";
