@@ -15,8 +15,8 @@ public class Request {
     @Column(name="group_id")
     private String group_id;
 
-    @Column(name = "employee_id")
-    private int employee_id;
+    @Column(name = "user_id")
+    private int user_id;
 
     @Column(name = "state")
     private String state;
@@ -29,12 +29,12 @@ public class Request {
         this.request_id = request_id;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getState() {
@@ -57,7 +57,7 @@ public class Request {
     public String toString() {
         return "Request{" +
                 "request_id='" + request_id + '\'' +
-                ", employee_id=" + employee_id +
+                ", employee_id=" + user_id +
                 ", state='" + state + '\'' +
                 '}';
     }

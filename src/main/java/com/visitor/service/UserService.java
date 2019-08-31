@@ -19,4 +19,8 @@ public interface UserService {
     User getAdmin(String hodEmail);
 
     List<Request> getRequest();
+
+    List<Request> getRequestByUserName(int employee_id);
+
+    int getIdByUserName(String userName);
 }

@@ -76,4 +76,14 @@ public class UserServiceImpl implements UserService {
     public List<Request> getRequest() {
         return (List<Request>) requestRepository.findAll();
     }
+
+    @Override
+    public List<Request> getRequestByUserName(int employee_id) {
+        return requestRepository.findRequestsByUser_id(employee_id);
+    }
+
+    @Override
+    public int getIdByUserName(String userName){
+        return userRepository.getUserByUsername(userName).getId();
+    }
 }

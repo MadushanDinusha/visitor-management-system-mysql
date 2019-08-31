@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Min;
 import java.util.List;
 
 @Service
@@ -41,7 +40,7 @@ public class VisitorServiceImpl implements VisitorService {
         User employee = userService.getUsersByUsername(authentication.getName());
         Request request = new Request();
         request.setRequest_id(visitor.getId());
-        request.setEmployee_id(employee.getId());
+        request.setUser_id(employee.getId());
         request.setGroup_id(visitor.getGroupId());
         request.setState("Pending");
         LOGGER.info("request details {}", request);

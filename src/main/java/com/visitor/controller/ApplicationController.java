@@ -112,7 +112,14 @@ public class ApplicationController {
         return model;
     }
 
-    @RequestMapping(value = "/admin/newRequest/{group_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/userRequests", method = RequestMethod.GET)
+    public String getUserRequests(){
+        return "/user/userRequests";
+    }
+
+
+
+    @RequestMapping(value = {"/admin/newRequest/{group_id}","/user/newRequest/{group_id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Visitor>> sendMessage(@PathVariable("group_id") String group_id) {
         try {
@@ -162,6 +169,21 @@ public class ApplicationController {
 
         models.setViewName("home/login");
         return models;
+    }
+
+    @RequestMapping(value = "/user/allRequests", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<?>> getAllRequests() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            int employee_id = userService.getIdByUserName(authentication.getName());
+            List<Request> requests = userService.getRequestByUserName(employee_id);
+            Collections.reverse(requests);
+            LOGGER.info("request by visitor {}",requests);
+            return new ResponseEntity<>(requests,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/admin/registerUser", method = RequestMethod.POST)

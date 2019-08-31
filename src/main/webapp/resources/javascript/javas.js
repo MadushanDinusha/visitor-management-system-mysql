@@ -149,7 +149,7 @@ function getAllRequest() {
             $("#tableBodyRequests").html("");
             var groupIds = [];
             for (var i = 0; i < numberOfRequests; i++) {
-                if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Pending") {
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
 
                     $("#tableBodyRequests").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
                         'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
@@ -207,6 +207,63 @@ function updateVisitorState(state) {
         },
         error: function (err) {
             alert(err.responseText);
+        }
+    });
+}
+
+function getAllRequestForUser() {
+    $.ajax({
+        url: 'allRequests',
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        processData: false,
+        success: function (data) {
+            var requestList = data;
+            console.log("request details " + Object.values(requestList));
+            var numberOfVisitors = requestList.length;
+            var groupIds = [];
+            $("#userTable").html("");
+            for (var i = 0; i < numberOfVisitors; i++) {
+                if($("#approve").prop("checked")==true){
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Approved") {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '</td></tr>');
+                    }
+                }if($("#reject").prop("checked")==true){
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Rejected") {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '</td></tr>');
+                    }
+                }
+                if($("#modify").prop("checked")==true){
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Modify") {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '</td></tr>');
+                    }
+                }
+                if($("#pending").prop("checked")==true){
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Pending") {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '</td></tr>');
+                    }
+                }if($("#pending").prop("checked")==false && $("#modify").prop("checked")==false&&
+                    $("#reject").prop("checked")==false&&$("#approve").prop("checked")==false){
+                    if (!groupIds.includes(requestList[i].group_id)) {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '</td></tr>');
+                    }
+                }
+                groupIds.push(requestList[i].group_id);
+            }
+        },
+        error: function (err) {
+            alert("er" + err.responseText);
         }
     });
 }

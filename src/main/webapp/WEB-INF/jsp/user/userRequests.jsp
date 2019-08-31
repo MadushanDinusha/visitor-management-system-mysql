@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: Madushan
   Date: 8/27/2019
-  Time: 1:26 PM
+  Time: 9:12 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,19 +15,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
-
 </head>
 <body>
-<a onclick="getAllRequest()">requests</a>
 <div class="container">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
     <div class="card-body">
-        <div id="table" class="table-editable">
+        <input type="checkbox" onclick="getAllRequestForUser()" value="Approved" id="approve"> Approved<br>
+        <input type="checkbox" onclick="getAllRequestForUser()" value="Rejected" id="reject"> Rejected<br>
+        <input type="checkbox" onclick="getAllRequestForUser()" value="Modify" id="modify"> Modify<br>
+        <input type="checkbox" onclick="getAllRequestForUser()" value="Pending" id="pending"> Pending<br>
+        <div id="tables1" class="table-editable">
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <thead>
-                <th>Request Id</th>
+                <th>Request Number</th>
+                <th>State</th>
                 </thead>
-                <tbody id="tableBodyRequests">
+                <tbody id="userTable">
                 </tbody>
             </table>
         </div>
@@ -65,16 +68,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="reject" class="btn btn-danger" onclick="updateVisitorState('Rejected')">Reject</button>
-                <button type="button" id="modify" class="btn btn-success" onclick="updateVisitorState('Modify')">Modify</button>
-                <button type="button" id="approve" class="btn btn-primary" onclick="updateVisitorState('Approved')">Approve</button>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script type="text/javascript">
-    var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";
-    sessionStorage.setItem('contextPath', contextPath);
+<script>
+    $(document).ready(function () {
+        getAllRequestForUser();
+        $('#approve').click(function(){
+            getAllRequestForUser();
+        });
+    });
 </script>
 </html>
