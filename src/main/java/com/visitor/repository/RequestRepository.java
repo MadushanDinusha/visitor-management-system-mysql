@@ -22,4 +22,9 @@ public interface RequestRepository extends CrudRepository<Request,Long> {
 
     @Query("FROM Request WHERE user_id = ?1")
     List<Request> findRequestsByUser_id(int user_id);
+
+    @Modifying
+    @Query("UPDATE Request SET comment = :comment WHERE group_id = :group_id")
+    @Transactional
+    void updateComment(@Param("group_id") String group_id, @Param("comment") String comment);
 }

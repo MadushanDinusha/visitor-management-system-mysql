@@ -86,10 +86,27 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modify-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabels">Do you want to </h4><b><p id="requests"></p></b>
+                Any comment : <input type="text" id="message">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-sis" onclick="ModalYes()">Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-nos" onclick="ModalNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script type="text/javascript">
     var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";
     sessionStorage.setItem('contextPath', contextPath);
+    $(document).ready(function () {
+        getAllRequest();
+    });
 </script>
 </html>

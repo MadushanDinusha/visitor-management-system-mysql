@@ -21,6 +21,17 @@ public class Request {
     @Column(name = "state")
     private String state;
 
+    @Column(name = "comment")
+    private String comment;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public long getRequest_id() {
         return request_id;
     }
@@ -56,9 +67,11 @@ public class Request {
     @Override
     public String toString() {
         return "Request{" +
-                "request_id='" + request_id + '\'' +
-                ", employee_id=" + user_id +
+                "request_id=" + request_id +
+                ", group_id='" + group_id + '\'' +
+                ", user_id=" + user_id +
                 ", state='" + state + '\'' +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }

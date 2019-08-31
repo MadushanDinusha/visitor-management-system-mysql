@@ -16,4 +16,9 @@ public class RequestServiceImpl implements RequestService{
     public void saveRequest(Request request){
         requestRepository.save(request);
     }
+
+    @Override
+    public void updateComment(String group_id, String comment) {
+        requestRepository.updateComment(group_id,comment);
+    }
 }

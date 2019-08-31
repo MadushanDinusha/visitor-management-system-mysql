@@ -220,6 +220,7 @@ public class ApplicationController {
         try {
             LOGGER.info("request {}",request);
             visitorService.updateVisitor(request.get("group_id"),request.get("state"));
+            requestService.updateComment(request.get("group_id"),request.get("message"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.info("Error occurred while updating 'request' table",e);

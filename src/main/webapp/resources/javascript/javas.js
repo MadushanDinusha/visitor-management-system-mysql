@@ -13,7 +13,6 @@ function getAll() {
         type: 'get',
         contentType: 'application/json',
         success: function () {
-            alert("successful");
         },
         error: function (err) {
             alert("er" + err.responseText);
@@ -200,10 +199,12 @@ function updateVisitorState(state) {
         contentType: 'application/json',
         data: JSON.stringify({
             "group_id": group_ids,
-            "state": state
+            "state": state,
+            "message": $("#message").val()
         }),
         processData: false,
         success: function () {
+            $("#message").html("")
         },
         error: function (err) {
             alert(err.responseText);
@@ -225,38 +226,40 @@ function getAllRequestForUser() {
             var groupIds = [];
             $("#userTable").html("");
             for (var i = 0; i < numberOfVisitors; i++) {
-                if($("#approve").prop("checked")==true){
-                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Approved") {
-                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
-                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>' + requestList[i].state + '</td></tr>');
-                    }
-                }if($("#reject").prop("checked")==true){
-                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Rejected") {
+                if ($("#approve").prop("checked") == true) {
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Approved") {
                         $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
                             '<td>' + requestList[i].state + '</td></tr>');
                     }
                 }
-                if($("#modify").prop("checked")==true){
-                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Modify") {
+                if ($("#reject").prop("checked") == true) {
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Rejected") {
                         $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
                             '<td>' + requestList[i].state + '</td></tr>');
                     }
                 }
-                if($("#pending").prop("checked")==true){
-                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state==="Pending") {
+                if ($("#modify").prop("checked") == true) {
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Modify") {
+                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>' + requestList[i].state + '<br>' + requestList[i].comment + '</td></tr>');
+                    }
+                }
+                if ($("#pending").prop("checked") == true) {
+                    if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
                         $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
                             '<td>' + requestList[i].state + '</td></tr>');
                     }
-                }if($("#pending").prop("checked")==false && $("#modify").prop("checked")==false&&
-                    $("#reject").prop("checked")==false&&$("#approve").prop("checked")==false){
+                }
+                if ($("#pending").prop("checked") == false && $("#modify").prop("checked") == false &&
+                    $("#reject").prop("checked") == false && $("#approve").prop("checked") == false) {
                     if (!groupIds.includes(requestList[i].group_id)) {
                         $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>' + requestList[i].state + '</td></tr>');
+                            '<td>' + requestList[i].state + ' <br>' +requestList[i].comment + '</td></tr>');
                     }
                 }
                 groupIds.push(requestList[i].group_id);
@@ -269,33 +272,40 @@ function getAllRequestForUser() {
 }
 
 function approve() {
-    buttonState ="approve";
+    buttonState = "approve";
     $("#mi-modal").modal('show');
     $("#request").html("Approve")
 }
+
 function rejects() {
-    buttonState ="reject";
+    buttonState = "reject";
     $("#mi-modal").modal('show');
     $("#request").html("Reject")
 }
+
 function modifies() {
-    buttonState ="modify";
-    $("#mi-modal").modal('show');
+    buttonState = "modify";
+    $("#modify-modal").modal('show');
     $("#request").html("Modify")
 }
+
 function ModalYes() {
-    if(buttonState==="approve"){
+    if (buttonState === "approve") {
         updateVisitorState('Approved');
-    }else if(buttonState==="reject"){
+    } else if (buttonState === "reject") {
         updateVisitorState('Rejected');
-    }else {
+    } else {
         updateVisitorState('Modify')
     }
     $("#mi-modal").modal('hide');
     $("#myModal").modal('hide');
+    $("#modify-modal").modal('hide');
+    getAllRequest();
 }
+
 function ModalNo() {
     $("#mi-modal").modal('hide');
+    $("#modify-modal").modal('hide');
 }
 
 
