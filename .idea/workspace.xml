@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
+    <list default="true" id="fab7a531-60d0-480a-9350-9e51eaa4fde5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/repository/RequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/RequestRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/stylevisitor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/styleVisitor.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,9 +34,10 @@
   <component name="ProjectId" id="1PvNhK0r9qapykHjORVNMQUzHg3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../broadcast" />
+    <property name="last_opened_file_path" value="D:/broadcast" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">

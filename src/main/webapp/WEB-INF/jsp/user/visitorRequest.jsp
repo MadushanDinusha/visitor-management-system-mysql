@@ -17,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="css/bootstrap-switch/bootstrap-switch.css" rel="stylesheet">
-    <link rel="stylesheet" href="stylevisitor.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/styleVisitor.css"/>">
 </head>
 <body id="visitorReg">
 <div class="container">
