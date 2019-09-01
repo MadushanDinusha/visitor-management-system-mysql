@@ -36,17 +36,6 @@ public class Visitor {
     @Column(name = "responded_emp")
     private String userName;
 
-    @Column(name = "state")
-    private String state;
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public long getId() {
         return id;
     }

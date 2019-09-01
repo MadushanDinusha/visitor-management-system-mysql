@@ -33,14 +33,6 @@ public class User {
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
     private Set<Role> roles;
 
-    public String getHodMail() {
-        return hodMail;
-    }
-
-    public void setHodMail(String hodMail) {
-        this.hodMail = hodMail;
-    }
-
     public int getId() {
         return id;
     }
@@ -57,29 +49,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
     public String getEmail() {
         return email;
     }
@@ -94,6 +63,38 @@ public class User {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHodMail() {
+        return hodMail;
+    }
+
+    public void setHodMail(String hodMail) {
+        this.hodMail = hodMail;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

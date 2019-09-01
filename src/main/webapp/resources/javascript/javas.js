@@ -93,7 +93,6 @@ function getAllUsers() {
 function addVisitor() {
     var numberOfTables = $("#tableNumber").val();
     var group_id = makeUniqueId();
-    alert(group_id);
     for (var j = 0; j < numberOfTables; j++) {
         var visitor = new Object();
         var nicId = $("#" + '' + j + '' + "nic").val();

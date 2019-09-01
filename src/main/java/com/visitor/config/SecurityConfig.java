@@ -53,9 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .and().logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout").permitAll()
-                    .and().rememberMe()
-                    .tokenRepository(persistentTokenRepository())
-                    .tokenValiditySeconds(60*60)
                     .and().exceptionHandling().accessDeniedPage("/access_denied");
         }
 
@@ -63,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         public PersistentTokenRepository persistentTokenRepository() {
             JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
             db.setDataSource(dataSource);
-
             return db;
         }
 }

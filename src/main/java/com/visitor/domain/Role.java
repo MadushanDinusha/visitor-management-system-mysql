@@ -1,6 +1,5 @@
 package com.visitor.domain;
 
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
