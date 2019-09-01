@@ -205,9 +205,10 @@ public class ApplicationController {
 
     @RequestMapping(value = "/user/addVisitor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
+    public ResponseEntity<?> saveVisitor(@RequestBody Map<String, String> request) {
         try {
-            visitorService.saveVisitor(visitor);
+            LOGGER.info("request to add visitor {}",request);
+//            visitorService.saveVisitor(visitor);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
