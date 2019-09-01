@@ -73,3 +73,8 @@ input[type="text"]
 
 
 }
+a.dropdown-item:active
+{
+    color: white;
+    background-color: white;
+}
