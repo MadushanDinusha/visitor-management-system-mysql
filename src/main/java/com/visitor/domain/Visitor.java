@@ -26,9 +26,6 @@ public class Visitor {
     @Column(name="company")
     private String company;
 
-    @Column(name="vehicle_number")
-    private String vehicleNumber;
-
     @Column(name = "date")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp date;
@@ -68,14 +65,6 @@ public class Visitor {
         this.company = company;
     }
 
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
-    }
-
     public Timestamp getDate() {
         return date;
     }
@@ -107,7 +96,6 @@ public class Visitor {
                 ", name='" + name + '\'' +
                 ", purpose='" + purpose + '\'' +
                 ", company='" + company + '\'' +
-                ", vehicleNumber='" + vehicleNumber + '\'' +
                 ", date=" + date +
                 ", userName='" + userName + '\'' +
                 '}';

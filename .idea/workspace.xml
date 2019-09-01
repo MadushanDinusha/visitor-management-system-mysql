@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Vehicle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" afterDir="false" />
@@ -23,6 +24,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -72,7 +74,12 @@
       <workItem from="1566831108348" duration="6415000" />
       <workItem from="1566841067776" duration="2378000" />
       <workItem from="1566872718732" duration="9572000" />
-      <workItem from="1566886657705" duration="27477000" />
+      <workItem from="1566886657705" duration="28288000" />
+      <workItem from="1567006145758" duration="7165000" />
+      <workItem from="1567227169563" duration="599000" />
+      <workItem from="1567244893312" duration="4441000" />
+      <workItem from="1567260399467" duration="9283000" />
+      <workItem from="1567270645891" duration="5698000" />
     </task>
     <servers />
   </component>
