@@ -1,80 +1,27 @@
-#visitorReg
-{
-    background-color: gainsboro;
-
-}
-.container
-{
+nav {
     background-color: gray;
-    border: 1px double black;
-    border-radius: 7px;
-}
-hr
-{
-    border-top: 1px solid black;
-    width: 100%;
-}
-label
-{
     color: white;
 }
-#btn
-{
-    background-color:black;
-    color: white;
-    border-radius: 7px;
-    width: 40px;
-}
-.quantity
-{
-    background-color: gainsboro;
-    width: 80px;
-    height: 30px;
+
+.dropdown-menu {
+    background-color: gray;
 
 }
-.row
-{
-    margin: 20px;
-    padding: 10px;
-}
-input[type="text"]
-{
 
-    background-color: gainsboro;
+a:hover {
+    color: black;
+}
 
+.dropdown-menu {
+    border: none;
 }
-.btn
-{
-    width: 80px;
-    border-radius: 7px;
-    color: white;
-    margin-left: 20px;
-    background-color: black;
-}
-#tb1
-{
-    color:white;
-    border: 1px solid white;
-}
-#tb1 th,td
-{
-    border-left: 1.5px solid white;
-}
-.btn-info
-{
-    width: 40px;
-    padding:7%;
-    border:none;
-}
-.btn-info:hover
-{
-    color: gainsboro;
-    background-color: black;
 
-
-}
-a.dropdown-item:active
-{
-    color: white;
+a.dropdown-item:active {
     background-color: white;
+}
+
+li, a {
+
+    text-decoration: none;
+    color: white;
 }

@@ -15,32 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="stylevisitor.css">
     <link rel="stylesheet" href="<c:url value="/resources/css/styleVisitor.css"/>">
     <style type="text/css">
-        nav {
-            background-color: gray;
-            color: white;
-        }
 
-        .dropdown-menu {
-            background-color: gray;
-
-        }
-
-        a:hover {
-            color: black;
-        }
-
-        .dropdown-menu {
-            border: none;
-        }
-
-        li, a {
-
-            text-decoration: none;
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -52,13 +29,13 @@
                 <a class="nav-link" href="#">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Approval<span> <i class="fa fa-legal"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Status<span> <i class="fa fa-bell"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -69,8 +46,8 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
             </li>
@@ -79,7 +56,7 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
@@ -119,7 +96,7 @@
             <label class="control-label col-sm-2">No of Vehicles:</label>
             <div class="col-sm-1">
                 <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                    <input id="tableNumber" class="quantity" min="0" name="quantity" value="1" type="number">
                 </div>
             </div>
             <div class="col-sm-1"><a href="#" id="btnok" class="btn btn-info">Ok</a></div>
