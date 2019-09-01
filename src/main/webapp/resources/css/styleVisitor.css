@@ -1,7 +1,7 @@
 #visitorReg
 {
     background-color: gainsboro;
-    
+
 }
 .container
 {
@@ -11,8 +11,12 @@
 }
 hr
 {
-   border-top: 1px solid black;
+    border-top: 1px solid black;
     width: 100%;
+}
+label
+{
+    color: white;
 }
 #btn
 {
@@ -26,17 +30,18 @@ hr
     background-color: gainsboro;
     width: 80px;
     height: 30px;
-    
+
 }
 .row
 {
     margin: 20px;
     padding: 10px;
 }
- input[type="text"]
+input[type="text"]
 {
-    
+
     background-color: gainsboro;
+
 }
 .btn
 {
@@ -48,9 +53,8 @@ hr
 }
 #tb1
 {
-    background-color: black;
     color:white;
-    border: 1px solid black;
+    border: 1px solid white;
 }
 #tb1 th,td
 {
@@ -58,13 +62,14 @@ hr
 }
 .btn-info
 {
-    width: 55px;
+    width: 40px;
+    padding:7%;
     border:none;
 }
-.btn-info:hover 
+.btn-info:hover
 {
     color: gainsboro;
     background-color: black;
-    
-    
+
+
 }

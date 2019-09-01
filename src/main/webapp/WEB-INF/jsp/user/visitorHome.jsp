@@ -17,5 +17,6 @@
 <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">add visitor</a>
 <a href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">My requests</a>
 <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/adminHome">admin</a>
+<a href="<c:out value="${pageContext.request.contextPath}"/>/logout">Logout</a>
 </body>
 </html>
