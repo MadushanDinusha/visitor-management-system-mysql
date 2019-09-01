@@ -2,9 +2,11 @@ package com.visitor.controller;
 
 import com.visitor.domain.Request;
 import com.visitor.domain.User;
+import com.visitor.domain.Vehicle;
 import com.visitor.domain.Visitor;
 import com.visitor.service.RequestService;
 import com.visitor.service.UserService;
+import com.visitor.service.VehicleService;
 import com.visitor.service.VisitorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -32,12 +35,14 @@ public class ApplicationController {
     @Qualifier("userService")
     private UserService userService;
 
-
     @Autowired
     private VisitorService visitorService;
 
     @Autowired
     RequestService requestService;
+
+    @Autowired
+    VehicleService vehicleService;
 
     @GetMapping("/")
     public String loadIndex() {
@@ -205,10 +210,26 @@ public class ApplicationController {
 
     @RequestMapping(value = "/user/addVisitor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> saveVisitor(@RequestBody Map<String, String> request) {
+    public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
         try {
-            LOGGER.info("request to add visitor {}",request);
-//            visitorService.saveVisitor(visitor);
+            LOGGER.info("request to add visitor {}",visitor);
+            visitorService.saveVisitor(visitor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @RequestMapping(value = "/user/addVehicle", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> saveVehicle(@RequestBody Map<String,String> vehicle) {
+        try {
+            LOGGER.info("request to add vehicle {}",vehicle);
+            String groupId= vehicle.get("group_id");
+            String vehicleNumber = vehicle.get("vehicle_number");
+            Vehicle vehicleObj = new Vehicle();
+            vehicleObj.setVehicleNumber(vehicleNumber);
+            vehicleObj.setGroupId(groupId);
+            vehicleService.save(vehicleObj);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

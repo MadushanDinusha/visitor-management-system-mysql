@@ -93,31 +93,57 @@ function getAllUsers() {
 function addVisitor() {
     var numberOfTables = $("#tableNumber").val();
     var group_id = makeUniqueId();
-    for (var j = 0; j < numberOfTables; j++) {
-        var visitor = new Object();
-        var nicId = $("#" + '' + j + '' + "nic").val();
-        visitor.id = parseFloat(nicId);
-        visitor.groupId = group_id;
-        visitor.name = $("#" + '' + j + '' + "name").val();
-        visitor.company = $("#" + '' + j + '' + "company").val();
-        visitor.purpose = $("#" + '' + j + '' + "purpose").val();
-        visitor.date = $("#" + '' + j + '' + "date").val();
-        visitor.vehicleNumber = $("#vehicle").val();
-        console.log("visitor " + visitor);
-        $.ajax({
-            url: "addVisitor",
-            dataType: 'text',
-            type: 'post',
-            contentType: 'application/json',
-            data: JSON.stringify(visitor),
-            processData: false,
-            success: function () {
-                console.log("saved items " + j);
-            },
-            error: function (err) {
-                console.log(err.responseText);
-            }
-        });
+    if($("#0nic").val()!=undefined){
+        for (var j = 0; j < numberOfTables; j++) {
+            var visitor = new Object();
+            var nicId = $("#" + '' + j + '' + "nic").val();
+            visitor.id = parseFloat(nicId);
+            visitor.groupId = group_id;
+            visitor.name = $("#" + '' + j + '' + "name").val();
+            visitor.company = $("#" + '' + j + '' + "company").val();
+            visitor.purpose = $("#" + '' + j + '' + "purpose").val();
+            visitor.date = $("#" + '' + j + '' + "date").val();
+            visitor.vehicleNumber = $("#vehicle").val();
+            console.log("visitor " + visitor);
+            $.ajax({
+                url: "addVisitor",
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(visitor),
+                processData: false,
+                success: function () {
+                    console.log("saved items " + j);
+                },
+                error: function (err) {
+                    console.log(err.responseText);
+                }
+            });
+        }
+    }
+    var numberOfVehicles = $("#numberOfVehicles").val();
+    var firstVehicle = $("#0vehicle").val();
+    if (numberOfVehicles > 0 && firstVehicle != undefined) {
+        for (var v = 0; v < numberOfVehicles; v++){
+            var vehicleNumber = $("#" + '' + v + '' + "vehicle").val();
+            $.ajax({
+                url: "addVehicle",
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "group_id":group_id,
+                    "vehicle_number":vehicleNumber
+                }),
+                processData: false,
+                success: function () {
+
+                },
+                error: function (err) {
+                    console.log(err.responseText);
+                }
+            });
+        }
     }
 }
 
@@ -131,6 +157,14 @@ function makeTable() {
             '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
             '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
             '<td><input type="text" class="form-control" id="' + i + 'date"></td></tr>');
+    }
+}
+
+function makeVehicleInputs() {
+    $("#inputVehicle").html("");
+    var numberOfVehicles = $("#numberOfVehicles").val();
+    for (var i = 0; i < numberOfVehicles; i++) {
+        $("#inputVehicle").append(' <label class="control-label col-sm-2">Vehicle No : </label> <input id ="' + i + 'vehicle"type="text">')
     }
 }
 
@@ -274,7 +308,8 @@ function getAllRequestForUser() {
                                 '<a  data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%" type="button" class="btn btn-outline-info">Edit</a></td>' +
                                 '<td><i class="glyphicon glyphicon-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
-                        }if(requestList[i].state==="Pending"){
+                        }
+                        if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a  data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
@@ -341,7 +376,7 @@ function modifyRequest(groupsId) {
             var visitorList = data
             var listSize = visitorList.length;
             $("#visitorTables").html("");
-            for (var i = 0; i < listSize; i++){
+            for (var i = 0; i < listSize; i++) {
                 $("#visitorTables").append('<tr><td><input id="' + i + 'nic"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
@@ -353,13 +388,13 @@ function modifyRequest(groupsId) {
                 $("#" + '' + i + '' + "company").val(visitorList[i].company);
                 $("#" + '' + i + '' + "purpose").val(visitorList[i].purpose);
                 $("#" + '' + i + '' + "date").val(visitorList[i].date);
-                if(visitorList[i].vehicle_number!=null||visitorList[i].vehicle_number!=""){
-                    $('#vehicles').append('<input type="text" value="'+visitorList[i].vehicle_number+'">');
+                if (visitorList[i].vehicle_number != null || visitorList[i].vehicle_number != "") {
+                    $('#vehicles').append('<input type="text" value="' + visitorList[i].vehicle_number + '">');
                 }
 
 
             }
-                },
+        },
         error: function (err) {
             alert(err.responseText)
         }

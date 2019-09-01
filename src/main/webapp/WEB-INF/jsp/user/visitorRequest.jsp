@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 4 Navbar with Search Form</title>
+    <title>Request</title>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
@@ -74,10 +74,10 @@
             <label class="control-label col-sm-2">No of Visitors:</label>
             <div class="col-sm-1">
                 <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                    <input class="quantity" min="0"id="tableNumber" name="quantity" value="1" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a href="#" class="btn btn-info">Ok</a></div>
+            <div class="col-sm-1"><a onclick="makeTable()" class="btn btn-info">Ok</a></div>
         </div>
         <table class="table table-dark table-hover" id="tb1">
             <thead>
@@ -98,16 +98,16 @@
             <label class="control-label col-sm-2">No of Vehicles:</label>
             <div class="col-sm-1">
                 <div class="def-number-input number-input safari_only">
-                    <input id="tableNumber" class="quantity" min="0" name="quantity" value="1" type="number">
+                    <input id="numberOfVehicles" class="quantity" min="0" name="quantity" value="1" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a href="#" id="btnok" class="btn btn-info">Ok</a></div>
+            <div class="col-sm-1"><a onclick="makeVehicleInputs()" id="btnok" class="btn btn-info">Ok</a></div>
         </div>
-        <div class="row" id="rw">
+        <div class="row">
 
-            <label class="control-label col-sm-2">Vehicle No : </label>
 
-            <div class="col-sm-3">
+
+            <div class="col-sm-3" id="inputVehicle">
 
             </div>
         </div>
@@ -115,7 +115,7 @@
 
         <div class="row">
             <button type="reset" class="btn">Clear</button>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" onclick="addVisitor()" class="btn">Submit</button>
         </div>
     </form>
 </div>
