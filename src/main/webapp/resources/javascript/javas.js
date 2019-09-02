@@ -81,7 +81,7 @@ function getAllUsers() {
                     '<td>' + userList[i].email + '</td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
                     '<td>' + userList[i].department + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
-                    '<span class="glyphicon glyphicon-trash"></span></button></p></td>');
+                    '<span class="fa fa-trash"></span></button></p></td>');
             }
         },
         error: function (err) {
@@ -93,7 +93,7 @@ function getAllUsers() {
 function addVisitor() {
     var numberOfTables = $("#tableNumber").val();
     var group_id = makeUniqueId();
-    if($("#0nic").val()!=undefined){
+    if ($("#0nic").val() != undefined) {
         for (var j = 0; j < numberOfTables; j++) {
             var visitor = new Object();
             var nicId = $("#" + '' + j + '' + "nic").val();
@@ -124,7 +124,7 @@ function addVisitor() {
     var numberOfVehicles = $("#numberOfVehicles").val();
     var firstVehicle = $("#0vehicle").val();
     if (numberOfVehicles > 0 && firstVehicle != undefined) {
-        for (var v = 0; v < numberOfVehicles; v++){
+        for (var v = 0; v < numberOfVehicles; v++) {
             var vehicleNumber = $("#" + '' + v + '' + "vehicle").val();
             $.ajax({
                 url: "addVehicle",
@@ -132,8 +132,8 @@ function addVisitor() {
                 type: 'post',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "group_id":group_id,
-                    "vehicle_number":vehicleNumber
+                    "group_id": group_id,
+                    "vehicle_number": vehicleNumber
                 }),
                 processData: false,
                 success: function () {
@@ -164,7 +164,8 @@ function makeVehicleInputs() {
     $("#inputVehicle").html("");
     var numberOfVehicles = $("#numberOfVehicles").val();
     for (var i = 0; i < numberOfVehicles; i++) {
-        $("#inputVehicle").append(' <label class="control-label col-sm-2">Vehicle No : </label> <input id ="' + i + 'vehicle"type="text">')
+        $("#inputVehicle").append('<div class="text-center"><label class="control-label col-sm-2" style="color: black">Vehicle Number:</label>' +
+            '<input class="input-lg" id="' + i + 'vehicle" type="text"></div>')
     }
 }
 
@@ -184,7 +185,7 @@ function getAllRequest() {
             for (var i = 0; i < numberOfRequests; i++) {
                 if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
 
-                    $("#tableBodyRequests").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                    $("#tableBodyRequests").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                         'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
                         requestList[i].group_id + '</a></td></tr>');
                 }
@@ -210,10 +211,10 @@ function getRequest(group_id) {
             console.log("user details " + Object.values(visitorList));
             var numberOfVisitors = visitorList.length;
             $("#visitorTable").html("");
+            document.getElementById("requestedUser").innerHTML = visitorList[0].userName;
             for (var i = 0; i < numberOfVisitors; i++) {
-                $("#visitorTable").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].company + '</td>' +
-                    '<td>' + visitorList[i].date + '</td><td>' + visitorList[i].name + '</td><td>' + visitorList[i].purpose + '</td>' +
-                    '<td>' + visitorList[i].responded_emp + '</td><td>' + visitorList[i].vehicle_number + '</td></tr>');
+                $("#visitorTable").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].name + '</td>' +
+                    '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].purpose + '</td></tr>');
             }
         },
         error: function (err) {
@@ -261,14 +262,15 @@ function getAllRequestForUser() {
             for (var i = 0; i < numberOfVisitors; i++) {
                 if ($("#approve").prop("checked") == true) {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Approved") {
-                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                        $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span></td><td>' + requestList[i].state + '</td></tr>');
+                            '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span>' +
+                            '</td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
                 if ($("#reject").prop("checked") == true) {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Rejected") {
-                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
+                        $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
                             '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
@@ -276,16 +278,17 @@ function getAllRequestForUser() {
                 if ($("#modify").prop("checked") == true) {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Modify") {
                         $("#userTable").append('<tr><td style="text-align: left"> ' +
-                            '<a  data-toggle="modal" data-target="#myModal" ' +
-                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%" type="button" class="btn btn-outline-info">Edit</a></td>' +
-                            '<td><i class="glyphicon glyphicon-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
+                            '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
+                            '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                     }
                 }
                 if ($("#pending").prop("checked") == true) {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
-                        $("#userTable").append('<tr><td><a  data-toggle="modal" data-target="#myModal" ' +
-                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>' + requestList[i].state + '</td></tr>');
+                        $("#userTable").append('<tr><td style="text-align: left">' +
+                            '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
+                            'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '' +
+                            '</a></td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
                 if ($("#pending").prop("checked") == false && $("#modify").prop("checked") == false &&
@@ -293,28 +296,27 @@ function getAllRequestForUser() {
                     if (!groupIds.includes(requestList[i].group_id)) {
                         if (requestList[i].state === "Approved") {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
-                                '<a  data-toggle="modal" data-target="#myModal" ' +
+                                '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
                                 '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span></td><td>' + requestList[i].state + '</td></tr>');
 
                         }
                         if (requestList[i].state === "Rejected") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
-                                '<a  data-toggle="modal" data-target="#myModal" ' +
+                                '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                         if (requestList[i].state === "Modify") {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
-                                '<a  data-toggle="modal" data-target="#myModal" ' +
-                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%" type="button" class="btn btn-outline-info">Edit</a></td>' +
-                                '<td><i class="glyphicon glyphicon-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
+                                '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
+                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
+                                '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
-                                '<a  data-toggle="modal" data-target="#myModal" ' +
-                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
+                                '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
+                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
-
                     }
                 }
                 groupIds.push(requestList[i].group_id);
@@ -381,7 +383,7 @@ function modifyRequest(groupsId) {
                     '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'date"></td></tr>')
+                    '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>')
 
                 $("#" + '' + i + '' + "nic").val(visitorList[i].id);
                 $("#" + '' + i + '' + "name").val(visitorList[i].name);
@@ -391,8 +393,6 @@ function modifyRequest(groupsId) {
                 if (visitorList[i].vehicle_number != null || visitorList[i].vehicle_number != "") {
                     $('#vehicles').append('<input type="text" value="' + visitorList[i].vehicle_number + '">');
                 }
-
-
             }
         },
         error: function (err) {

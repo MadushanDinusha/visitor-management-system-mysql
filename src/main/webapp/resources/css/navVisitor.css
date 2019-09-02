@@ -1,6 +1,7 @@
-nav {
+nav.navbar-expand-lg {
     background-color: gray;
     color: white;
+    width: 100%;
 }
 
 .dropdown-menu {

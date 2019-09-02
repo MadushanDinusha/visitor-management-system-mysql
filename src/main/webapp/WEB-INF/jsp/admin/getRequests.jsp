@@ -28,13 +28,17 @@
                 <a class="nav-link" href="#">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i></span></a>
+                <a class="nav-link"
+                   href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
+                        class="fa fa-bell"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -45,8 +49,12 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
             </li>
@@ -55,14 +63,14 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
     </div>
 
 </nav>
-<a onclick="getAllRequest()">requests</a>
 <div class="container">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
     <div class="card-body">
@@ -80,47 +88,52 @@
 <%-- Modal--%>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg" style="width: 1200px">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request details</h3>
                     <div class="card-body">
                         <div id="tables" class="table-editable">
+                            Requested by : &nbsp; <b><span id="requestedUser"></span></b>
+                            <hr>
+                            <h5>Visitor Details</h5>
                             <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
-                                <th>nic</th>
-                                <th>name</th>
-                                <th>company</th>
-                                <th>date</th>
-                                <th>purpose</th>
-                                <th>responded_emp</th>
-                                <th>vehicle_number</th>
+                                <th>Nic</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Purpose</th>
                                 </thead>
                                 <tbody id="visitorTable">
                                 </tbody>
                             </table>
                         </div>
+                        <hr>
+                        <h5>Vehicle Details</h5>
+                        Number of Vehicles : <span id="numberOfVehicles"></span>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" id="rejectBtn" class="btn btn-danger" onclick="rejects()">Reject</button>
-                <button type="button" id="modifyBtn" class="btn btn-success" onclick="modifies()" >Modify</button>
+                <button type="button" id="modifyBtn" class="btn btn-success" onclick="modifies()">Modify</button>
                 <button type="button" id="approveBtn" class="btn btn-primary" onclick="approve()">Approve</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+     id="mi-modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel">Do you want to </h4><b><p id="request"></p></b>
             </div>
             <div class="modal-footer">
@@ -130,11 +143,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modify-modal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+     id="modify-modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabels">Do you want to </h4><b><p id="requests"></p></b>
                 Any comment : <input type="text" id="message">
             </div>

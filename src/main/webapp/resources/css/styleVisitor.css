@@ -6,12 +6,7 @@ a.btn-info{
     background-color: gainsboro;
     
 }
-.container
-{
-    background-color: gray;
-    border: 1px double black;
-    border-radius: 7px;
-}
+
 hr
 {
    border-top: 1px solid black;
@@ -66,13 +61,12 @@ label
 .btn-info
 {
     width: 40px;
-        padding:7%;
+    padding:7%;
     border:none;
+    color: white;
 }
 .btn-info:hover 
 {
     color: gainsboro;
     background-color: black;
-    
-    
 }

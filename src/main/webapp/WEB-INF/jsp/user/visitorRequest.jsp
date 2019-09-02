@@ -19,11 +19,12 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/styleVisitor.css"/>">
 
     <style type="text/css">
-
+        a {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg ">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -31,13 +32,17 @@
                 <a class="nav-link" href="">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i></span></a>
+                <a class="nav-link"
+                   href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
+                        class="fa fa-bell"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -48,8 +53,12 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
             </li>
@@ -58,7 +67,8 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
@@ -66,18 +76,20 @@
 
 </nav>
 
-<div class="container" style="margin-top: 3%">
-    <h2 style="color: aliceblue">Visitor Requests</h2>
-    <hr>
+<div class="container">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
+
     <form action="">
-        <div class="row" >
-            <label class="control-label col-sm-2">No of Visitors:</label>
+        <div class="row">
+            <h5>Visitor Details</h5>
+            <hr>
+            <label class="control-label col-sm-2" style="color: black">No of Visitors:</label>
             <div class="col-sm-1">
                 <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0"id="tableNumber" name="quantity" value="1" type="number">
+                    <input class="quantity" min="0" id="tableNumber" name="quantity" value="1" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a onclick="makeTable()" class="btn btn-info">Ok</a></div>
+            <div class="col-sm-1"><a onclick="makeTable()" style="color: white" class="btn btn-info">Ok</a></div>
         </div>
         <table class="table table-dark table-hover" id="tb1">
             <thead>
@@ -94,31 +106,28 @@
 
             </tbody>
         </table>
+
         <div class="row">
-            <label class="control-label col-sm-2">No of Vehicles:</label>
+            <h5>Vehicle Details</h5>
+            <hr>
+            <label style="color: black" class="control-label col-sm-2">No of Vehicles:</label>
             <div class="col-sm-1">
                 <div class="def-number-input number-input safari_only">
                     <input id="numberOfVehicles" class="quantity" min="0" name="quantity" value="1" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a onclick="makeVehicleInputs()" id="btnok" class="btn btn-info">Ok</a></div>
-        </div>
-        <div class="row">
-
-
-
-            <div class="col-sm-3" id="inputVehicle">
-
+            <div class="col-sm-1"><a onclick="makeVehicleInputs()" id="btnok" style="color: white" class="btn btn-info">Ok</a>
             </div>
         </div>
-
-
+        <div class="row">
+            <div class="container" id="inputVehicle">
+            </div>
+        </div>
         <div class="row">
             <button type="reset" class="btn">Clear</button>
             <button type="submit" onclick="addVisitor()" class="btn">Submit</button>
         </div>
     </form>
 </div>
-
 </body>
 </html>

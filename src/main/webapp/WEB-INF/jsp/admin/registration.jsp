@@ -17,8 +17,7 @@
     <script type="text/javascript" src="<c:url value="/resources/javascript/javas.js"/>"></script>
     <style type="text/css">
         body {
-            color: #fff;
-            background: #c8c3c3;
+
             font-family: 'Roboto', sans-serif;
         }
 
@@ -138,13 +137,17 @@
                 <a class="nav-link" href="#">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i></span></a>
+                <a class="nav-link"
+                   href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
+                        class="fa fa-bell"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -155,8 +158,12 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
             </li>
@@ -165,94 +172,98 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
     </div>
 
 </nav>
-<div class="signup-form">
-    <form action="" method="post">
-        <h2>Sign Up</h2>
-        <p>Please fill in this form to create an account!</p>
-        <hr>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="Username" id="userName"
-                       required="required">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email Address" id="email"
-                       required="required">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="Password" id="password"
-                       required="required">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
+<div class="container">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Create an account</h3>
+
+    <div class="table-editable">
+        <div class="signup-form">
+            <form action="" method="post">
+                <h2>Sign Up</h2>
+                <p>Please fill in this form to create an account!</p>
+                <hr>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Username" id="userName"
+                               required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                        <input type="email" class="form-control" name="email" placeholder="Email Address" id="email"
+                               required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Password" id="password"
+                               required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
 				<span class="input-group-addon">
 					<i class="fa fa-lock"></i>
 					<i class="fa fa-check"></i>
 				</span>
-                <input type="text" class="form-control" name="confirm_password" id="confirmPassword"
-                       placeholder="Confirm Password" required="required">
-            </div>
+                        <input type="text" class="form-control" name="confirm_password" id="confirmPassword"
+                               placeholder="Confirm Password" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
+                        <input type="email" class="form-control" name="email" id="HODEmail" placeholder="HOD Mail"
+                               required="required">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
+
+                        <select class="mdb-select md-form" id="role" required="required">
+                            <option value="" disabled selected>Choose Account type</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
+                            <option value="GUARD">GUARD</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+                        <select class="mdb-select md-form" id="department" required="required">
+                            <option value="" disabled selected>Choose Department</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Compliance">Compliance</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Central-IT">Central-IT</option>
+                            <option value="EAG">EAG</option>
+                            <option value="Stores">Stores</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+
+                    </div>
+                </div>
+
+            </form>
+            <button onclick="registerUser()" class="btn btn-primary btn-lg">Sign Up</button>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
-                <input type="email" class="form-control" name="email" id="HODEmail" placeholder="HOD Mail"
-                       required="required">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
-
-                <select class="mdb-select md-form" id="role" required="required">
-                    <option value="" disabled selected>Choose Account type</option>
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="USER">USER</option>
-                    <option value="GUARD">GUARD</option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-institution"></i></span>
-                <select class="mdb-select md-form" id="department" required="required">
-                    <option value="" disabled selected>Choose Department</option>
-                    <option value="Administration">Administration</option>
-                    <option value="Compliance">Compliance</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Central-IT">Central-IT</option>
-                    <option value="EAG">EAG</option>
-                    <option value="Stores">Stores</option>
-                    <option value="Other">Other</option>
-
-                </select>
-
-            </div>
-        </div>
-
-    </form>
-        <button onclick="registerUser()" class="btn btn-primary btn-lg">Sign Up</button>
+    </div>
 </div>
 </body>
-<script>
-
-</script>
 </html>
