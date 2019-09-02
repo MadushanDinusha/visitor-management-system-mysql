@@ -39,7 +39,7 @@ public class VisitorServiceImpl implements VisitorService {
         LOGGER.info("visitor {}", visitor);
         User employee = userService.getUsersByUsername(authentication.getName());
         Request request = new Request();
-        request.setRequest_id(visitor.getId());
+        request.setRequest_id(visitor.getNic());
         request.setUser_id(employee.getId());
         request.setGroup_id(visitor.getGroupId());
         request.setState("Pending");
@@ -48,8 +48,8 @@ public class VisitorServiceImpl implements VisitorService {
         visitorRepository.save(visitor);
     }
 
-    public Visitor findVisitorById(long id) {
-        return visitorRepository.findVisitorById(id);
+    public Visitor findVisitorById(String id) {
+        return visitorRepository.findVisitorByNic(id);
     }
 
     public List<Visitor> findVisitorByGroupId(String id) {

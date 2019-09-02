@@ -7,7 +7,7 @@ import java.util.List;
 public interface VisitorService {
     void saveVisitor(Visitor visitor);
 
-    Visitor findVisitorById(long id);
+    Visitor findVisitorById(String id);
 
     List<Visitor> findVisitorByGroupId(String id);
 

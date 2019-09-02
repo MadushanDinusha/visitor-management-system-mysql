@@ -1,18 +1,20 @@
 package com.visitor.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "request")
 public class Request {
 
     @Id
-    private long request_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long id;
 
-    @Column(name="group_id")
+    @Column(name = "request_id")
+    private String request_id;
+
+    @Column(name = "group_id")
     private String group_id;
 
     @Column(name = "user_id")
@@ -24,6 +26,14 @@ public class Request {
     @Column(name = "comment")
     private String comment;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -32,11 +42,11 @@ public class Request {
         this.comment = comment;
     }
 
-    public long getRequest_id() {
+    public String getRequest_id() {
         return request_id;
     }
 
-    public void setRequest_id(long request_id) {
+    public void setRequest_id(String request_id) {
         this.request_id = request_id;
     }
 

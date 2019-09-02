@@ -191,6 +191,16 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping(value = {"/admin/getVehiclesByGroupId/{group_id}","/user/getVehiclesByGroupId/{group_id}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<?>> getVehicleDetailsByGroupId(@PathVariable("group_id") String group_id) {
+        try {
+            return new ResponseEntity<>( vehicleService.getVehicleListByGroupId(group_id),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/admin/registerUser", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> registerUser(@RequestBody Map<String, String> request) {

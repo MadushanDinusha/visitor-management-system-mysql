@@ -10,7 +10,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface VisitorRepository extends JpaRepository<Visitor,Long> {
-    Visitor findVisitorById(long id);
+    @Query("FROM Visitor WHERE nic = ?1")
+    Visitor findVisitorByNic(String nic);
     List<Visitor> findVisitorByGroupId(String id);
     @Query("FROM Visitor WHERE responded_emp = ?1")
     List<Visitor> findVisitorByRespondedEmp(String userName);

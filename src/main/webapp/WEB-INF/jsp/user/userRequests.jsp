@@ -84,29 +84,32 @@
 <%-- Modal--%>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg" style="width: 1200px">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request details</h3>
                     <div class="card-body">
                         <div id="tables" class="table-editable">
+                            <hr>
+                            <h6>Visitor Details</h6>
                             <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
-                                <th>nic</th>
-                                <th>name</th>
-                                <th>company</th>
-                                <th>date</th>
-                                <th>purpose</th>
-                                <th>responded_emp</th>
-                                <th>vehicle_number</th>
+                                <th>Nic</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Purpose</th>
                                 </thead>
                                 <tbody id="visitorTable">
                                 </tbody>
                             </table>
                         </div>
+                        <hr>
+                        <h6>Vehicle Details</h6>
+                        Number of Vehicles : <span id="numberOfVehicles"></span>
                     </div>
                 </div>
             </div>
@@ -122,20 +125,20 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
                     <div class="card-body">
                         <div id="tabless" class="table-editable">
+                            <span  style="display: none" id="requestedUser"></span>
                             <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
-                                <th>nic</th>
-                                <th>name</th>
-                                <th>company</th>
-                                <th>date</th>
-                                <th>purpose</th>
+                                <th>Nic</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Purpose</th>
                                 </thead>
                                 <tbody id="visitorTables">
                                 </tbody>

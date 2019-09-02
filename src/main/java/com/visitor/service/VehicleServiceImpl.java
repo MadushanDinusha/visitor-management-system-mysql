@@ -5,6 +5,8 @@ import com.visitor.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
@@ -14,5 +16,10 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public void save(Vehicle vehicle) {
         vehicleRepository.save(vehicle);
+    }
+
+    @Override
+    public List<Vehicle> getVehicleListByGroupId(String groupId){
+        return vehicleRepository.findVehicleByGroupId(groupId);
     }
 }

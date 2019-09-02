@@ -6,32 +6,43 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="visitor_details")
+@Table(name = "visitor_details")
 public class Visitor {
 
-
     @Id
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
 
-    @Column(name="group_id")
+    @Column(name = "nic")
+    private String nic;
+
+    @Column(name = "group_id")
     private String groupId;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name="purpose")
+    @Column(name = "purpose")
     private String purpose;
 
-    @Column(name="company")
+    @Column(name = "company")
     private String company;
 
     @Column(name = "date")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Timestamp date;
 
     @Column(name = "responded_emp")
     private String userName;
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
 
     public long getId() {
         return id;
@@ -92,7 +103,7 @@ public class Visitor {
     @Override
     public String toString() {
         return "Visitor{" +
-                "id='" + id + '\'' +
+                "nic='" + nic + '\'' +
                 ", name='" + name + '\'' +
                 ", purpose='" + purpose + '\'' +
                 ", company='" + company + '\'' +

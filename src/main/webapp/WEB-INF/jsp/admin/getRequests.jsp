@@ -99,7 +99,7 @@
                         <div id="tables" class="table-editable">
                             Requested by : &nbsp; <b><span id="requestedUser"></span></b>
                             <hr>
-                            <h5>Visitor Details</h5>
+                            <h6>Visitor Details</h6>
                             <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
                                 <th>Nic</th>
@@ -113,7 +113,7 @@
                             </table>
                         </div>
                         <hr>
-                        <h5>Vehicle Details</h5>
+                        <h6>Vehicle Details</h6>
                         Number of Vehicles : <span id="numberOfVehicles"></span>
                     </div>
                 </div>

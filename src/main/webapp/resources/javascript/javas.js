@@ -96,8 +96,7 @@ function addVisitor() {
     if ($("#0nic").val() != undefined) {
         for (var j = 0; j < numberOfTables; j++) {
             var visitor = new Object();
-            var nicId = $("#" + '' + j + '' + "nic").val();
-            visitor.id = parseFloat(nicId);
+            visitor.nic = $("#" + '' + j + '' + "nic").val();
             visitor.groupId = group_id;
             visitor.name = $("#" + '' + j + '' + "name").val();
             visitor.company = $("#" + '' + j + '' + "company").val();
@@ -216,6 +215,22 @@ function getRequest(group_id) {
                 $("#visitorTable").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].name + '</td>' +
                     '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].purpose + '</td></tr>');
             }
+        },
+        error: function (err) {
+            alert("er" + err.responseText);
+        }
+    });
+    $.ajax({
+        url: 'getVehiclesByGroupId/' + group_id,
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        processData: false,
+        success: function (data) {
+            var visitorList = data;
+            console.log("user details " + Object.values(visitorList));
+            var numberOfVehicles = visitorList.length;
+            document.getElementById("numberOfVehicles").innerHTML=numberOfVehicles;
         },
         error: function (err) {
             alert("er" + err.responseText);
