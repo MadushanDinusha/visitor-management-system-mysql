@@ -85,7 +85,7 @@
 </div>
 <%-- Modal--%>
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg" style="width: 1200px">
+    <div class="modal-dialog modal-lg" >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -123,8 +123,8 @@
 </div>
 <%-- Modal--%>
 <div class="modal fade" id="myModals" role="dialog">
-    <div class="modal-dialog modal-lg" style="width: 1200px">
-        <div class="modal-content" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content -lg" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -139,8 +139,8 @@
                                 <th>Nic</th>
                                 <th>Name</th>
                                 <th>Company</th>
-                                <th>Date</th>
                                 <th>Purpose</th>
+                                <th>Date</th>
                                 </thead>
                                 <tbody id="visitorTables">
                                 </tbody>

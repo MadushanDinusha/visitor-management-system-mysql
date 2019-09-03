@@ -259,6 +259,19 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping(value = "/user/updateVisitor",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor){
+        try {
+            LOGGER.info("visitor updating {}",visitor);
+            visitorService.updateVisitor(visitor);
+            requestService.updateRequestState(visitor.getGroupId(),"Pending");
+            return new ResponseEntity<>("Successfully Updated",HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
@@ -268,18 +281,6 @@ public class ApplicationController {
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/user/updateVisitor",method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor){
-        try {
-            LOGGER.info("visitor updating {}",visitor);
-            visitorService.updateVisitor(visitor);
-            return new ResponseEntity<>("Successfully Updated",HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

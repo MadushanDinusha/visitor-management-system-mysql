@@ -1,5 +1,6 @@
 var group_ids = '';
 var buttonState = '';
+var groupIdForUpdate = '';
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
@@ -384,7 +385,7 @@ function ModalNo() {
 
 function modifyRequest(groupsId) {
     $('#myModals').modal('show');
-
+    groupIdForUpdate = groupsId;
     $.ajax({
         url: 'newRequest/' + groupsId,
         dataType: 'json',
@@ -396,21 +397,20 @@ function modifyRequest(groupsId) {
             var listSize = visitorList.length;
             $("#visitorTables").html("");
             for (var i = 0; i < listSize; i++) {
-                $("#visitorTables").append('<tr><td><input id="' + i + 'nic"></td>' +
+                $("#visitorTables").append('<tr>' +
+                    '<td><input type="text" class="form-control" id="' + i + 'nic"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td>' +
-                    '<td><input style="display: none" id="' + i + 'id"></td></tr>')
+                    '<td><input type="text" class="form-control" id="' + i + 'date" ></td>' +
+                    '<td style="visibility: hidden;width: 0px"><input style="visibility: hidden;width: 0px" id="' + i + 'id"></td>' +
+                    '</tr>');
                 $("#" + '' + i + '' + "id").val(visitorList[i].id);
                 $("#" + '' + i + '' + "nic").val(visitorList[i].nic);
                 $("#" + '' + i + '' + "name").val(visitorList[i].name);
                 $("#" + '' + i + '' + "company").val(visitorList[i].company);
                 $("#" + '' + i + '' + "purpose").val(visitorList[i].purpose);
                 $("#" + '' + i + '' + "date").val(visitorList[i].date);
-                if (visitorList[i].vehicle_number != null || visitorList[i].vehicle_number != "") {
-                    $('#vehicles').append('<input type="text" value="' + visitorList[i].vehicle_number + '">');
-                }
             }
         },
         error: function (err) {
@@ -421,7 +421,6 @@ function modifyRequest(groupsId) {
 
 function saveModify() {
     var rowCount = $('#modifyTable >tbody >tr').length;
-    alert(rowCount);
     for (var i = 0; i < rowCount; i++) {
         var visitorModify = new Object();
         visitorModify.id = parseFloat($("#" + '' + i + '' + "id").val());
@@ -430,12 +429,17 @@ function saveModify() {
         visitorModify.company = $("#" + '' + i + '' + "company").val();
         visitorModify.purpose = $("#" + '' + i + '' + "purpose").val();
         visitorModify.date = $("#" + '' + i + '' + "date").val();
+        visitorModify.groupId = groupIdForUpdate;
         $.ajax({
             url: "updateVisitor",
             dataType: 'text',
             type: 'post',
             contentType: 'application/json',
-            data: JSON.stringify(visitorModify)
+            data: JSON.stringify(visitorModify),
+            success:function (data) {
+                $('#myModals').modal('hide');
+                getAllRequestForUser();
+            }
         });
     }
 }
