@@ -73,7 +73,8 @@
         <div id="tables1" class="table-editable">
         <table class="table table-hover">
                 <thead>
-                <th>Request Number</th>
+                <th>Your Request</th>
+                <th></th>
                 <th></th>
                 <th>State</th>
                 </thead>

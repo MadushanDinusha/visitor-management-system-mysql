@@ -14,14 +14,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
-    private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
+
     @Autowired
     VisitorRepository visitorRepository;
 
@@ -38,15 +36,15 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public void saveVisitor(Visitor visitor) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         visitor.setUserName(authentication.getName());
-        LOGGER.info("visitor {}", visitor);
         User employee = userService.getUsersByUsername(authentication.getName());
         Request request = new Request();
         request.setRequest_id(visitor.getNic());
         request.setUser_id(employee.getId());
         request.setGroup_id(visitor.getGroupId());
+        request.setLastUpdatedTime(timestamp);
         request.setState("Pending");
-        LOGGER.info("request details {}", request);
         requestService.saveRequest(request);
         visitorRepository.save(visitor);
     }

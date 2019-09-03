@@ -6,6 +6,12 @@ function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
 }
 
+function convertTime(timestamp) {
+    var time = timestamp.split(/[- :]/);
+    var date = new Date(Date.UTC(time[0], time[1]-1, time[2], time[3], time[4], time[5]));
+    return date;
+}
+
 function getAll() {
     var inputText = "hello";
     $.ajax({
@@ -189,7 +195,8 @@ function getAllRequest() {
 
                     $("#tableBodyRequests").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                         'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
-                        requestList[i].group_id + '</a></td></tr>');
+                        requestList[i].group_id + '</a></td>' +
+                        '<td>'+ requestList[i].lastUpdatedTime+'</td></tr>');
                 }
                 groupIds.push(requestList[i].group_id);
             }
@@ -282,6 +289,7 @@ function getAllRequestForUser() {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Approved") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
                             '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span>' +
                             '</td><td>' + requestList[i].state + '</td></tr>');
                     }
@@ -290,6 +298,7 @@ function getAllRequestForUser() {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Rejected") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
                             '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
@@ -298,6 +307,7 @@ function getAllRequestForUser() {
                         $("#userTable").append('<tr><td style="text-align: left"> ' +
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
+                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
                             '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                     }
                 }
@@ -306,7 +316,9 @@ function getAllRequestForUser() {
                         $("#userTable").append('<tr><td style="text-align: left">' +
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '' +
-                            '</a></td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
+                            '</a></td>' +
+                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                            '<td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
                 if ($("#pending").prop("checked") == false && $("#modify").prop("checked") == false &&
@@ -316,24 +328,29 @@ function getAllRequestForUser() {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
                                 '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span></td><td>' + requestList[i].state + '</td></tr>');
 
                         }
                         if (requestList[i].state === "Rejected") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
-                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
+                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                                '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                         if (requestList[i].state === "Modify") {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
+                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
                                 '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
-                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
+                                'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
+                                '<td>'+requestList[i].lastUpdatedTime+'</td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                     }
                 }
@@ -375,7 +392,7 @@ function ModalYes() {
     $("#mi-modal").modal('hide');
     $("#myModal").modal('hide');
     $("#modify-modal").modal('hide');
-    getAllRequest();
+    setInterval(getAllRequest,1000);
 }
 
 function ModalNo() {

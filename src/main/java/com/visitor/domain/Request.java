@@ -1,6 +1,9 @@
 package com.visitor.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "request")
@@ -25,6 +28,18 @@ public class Request {
 
     @Column(name = "comment")
     private String comment;
+
+    @Column(name="lastUpdatedTime")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Timestamp lastUpdatedTime;
+
+    public Timestamp getLastUpdatedTime() {
+        return lastUpdatedTime;
+    }
+
+    public void setLastUpdatedTime(Timestamp lastUpdatedTime) {
+        this.lastUpdatedTime = lastUpdatedTime;
+    }
 
     public long getId() {
         return id;
@@ -77,11 +92,13 @@ public class Request {
     @Override
     public String toString() {
         return "Request{" +
-                "request_id=" + request_id +
+                "id=" + id +
+                ", request_id='" + request_id + '\'' +
                 ", group_id='" + group_id + '\'' +
                 ", user_id=" + user_id +
                 ", state='" + state + '\'' +
                 ", comment='" + comment + '\'' +
+                ", lastUpdatedTime='" + lastUpdatedTime + '\'' +
                 '}';
     }
 }

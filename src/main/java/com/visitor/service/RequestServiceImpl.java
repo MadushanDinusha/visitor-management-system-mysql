@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class RequestServiceImpl implements RequestService{
 
@@ -23,6 +25,7 @@ public class RequestServiceImpl implements RequestService{
     }
 
     public void updateRequestState(String groupId, String state) {
-        requestRepository.updateRequestState(groupId,state);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        requestRepository.updateRequestState(groupId,timestamp,state);
     }
 }

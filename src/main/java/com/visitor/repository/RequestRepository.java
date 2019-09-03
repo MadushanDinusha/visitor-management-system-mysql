@@ -10,15 +10,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Min;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository("requestRepository")
 public interface RequestRepository extends CrudRepository<Request,Long> {
     @Modifying
-    @Query("UPDATE Request SET state = :state WHERE group_id = :group_id")
+    @Query("UPDATE Request SET lastUpdatedTime = :lastUpdatedTime, state = :state WHERE group_id = :group_id")
     @Transactional
-    void updateRequestState(@Param("group_id") String group_id, @Param("state") String state);
+    void updateRequestState(@Param("group_id") String group_id, @Param("lastUpdatedTime") Timestamp lastUpdatedTime, @Param("state") String state);
 
     @Query("FROM Request WHERE user_id = ?1")
     List<Request> findRequestsByUser_id(int user_id);
