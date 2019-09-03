@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Visitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VehicleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VisitorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VisitorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VehicleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VehicleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VehicleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/styleVisitor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/styleVisitor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,7 +77,8 @@
       <workItem from="1566886657705" duration="27477000" />
       <workItem from="1567354457771" duration="8729000" />
       <workItem from="1567399732488" duration="6264000" />
-      <workItem from="1567410035146" duration="19377000" />
+      <workItem from="1567410035146" duration="19801000" />
+      <workItem from="1567483191539" duration="5154000" />
     </task>
     <servers />
   </component>

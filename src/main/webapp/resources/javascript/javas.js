@@ -112,6 +112,7 @@ function addVisitor() {
                 data: JSON.stringify(visitor),
                 processData: false,
                 success: function () {
+
                     console.log("saved items " + j);
                 },
                 error: function (err) {
@@ -119,6 +120,7 @@ function addVisitor() {
                 }
             });
         }
+
     }
     var numberOfVehicles = $("#numberOfVehicles").val();
     var firstVehicle = $("#0vehicle").val();
@@ -135,15 +137,14 @@ function addVisitor() {
                     "vehicle_number": vehicleNumber
                 }),
                 processData: false,
-                success: function () {
-
-                },
+                success: function () {},
                 error: function (err) {
                     console.log(err.responseText);
                 }
             });
         }
     }
+    $("#successModal").modal('show');
 }
 
 function makeTable() {
@@ -155,7 +156,7 @@ function makeTable() {
             '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
             '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
             '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-            '<td><input type="text" class="form-control" id="' + i + 'date"></td></tr>');
+            '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>');
     }
 }
 

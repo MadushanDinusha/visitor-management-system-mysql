@@ -132,9 +132,15 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Do you want to </h4><b><p id="request"></p></b>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="modal-title" id="myModalLabel">Do you want to </h5>
+                        <b><p id="request"></p></b>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="modal-btn-si" onclick="ModalYes()">Yes</button>
@@ -148,10 +154,16 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabels">Do you want to </h4><b><p id="requests"></p></b>
-                Any comment : <input type="text" id="message">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="modal-title" id="myModalLabels">Do you want to Modify</h5>
+                        <b><p id="requests"></p></b>
+                        Comment : <input type="text" id="message">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="modal-btn-sis" onclick="ModalYes()">Yes</button>

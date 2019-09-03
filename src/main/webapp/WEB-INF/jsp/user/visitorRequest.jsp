@@ -80,16 +80,16 @@
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
 
     <form action="">
-        <div class="row">
+        <div class="text-center">
             <h5>Visitor Details</h5>
             <hr>
             <label class="control-label col-sm-2" style="color: black">No of Visitors:</label>
-            <div class="col-sm-1">
+            <div style="display:inline-block">
                 <div class="def-number-input number-input safari_only">
                     <input class="quantity" min="0" id="tableNumber" name="quantity" value="1" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a onclick="makeTable()" style="color: white" class="btn btn-info">Ok</a></div>
+            <div style="display:inline-block;"><a onclick="makeTable()" class="btn btn-outline-info">Ok</a></div>
         </div>
         <table class="table table-dark table-hover" id="tb1">
             <thead>
@@ -107,27 +107,44 @@
             </tbody>
         </table>
 
-        <div class="row">
+        <div class="text-center">
             <h5>Vehicle Details</h5>
             <hr>
-            <label style="color: black" class="control-label col-sm-2">No of Vehicles:</label>
-            <div class="col-sm-1">
+            <label class="control-label col-sm-2" style="color: black">No of Vehicles:</label>
+            <div style="display:inline-block">
                 <div class="def-number-input number-input safari_only">
-                    <input id="numberOfVehicles" class="quantity" min="0" name="quantity" value="1" type="number">
+                    <input class="quantity" min="0" id="numberOfVehicles" name="quantity" value="0" type="number">
                 </div>
             </div>
-            <div class="col-sm-1"><a onclick="makeVehicleInputs()" id="btnok" style="color: white" class="btn btn-info">Ok</a>
-            </div>
+            <div style="display:inline-block;"><a onclick="makeVehicleInputs()" class="btn btn-outline-info">Ok</a></div>
         </div>
         <div class="row">
             <div class="container" id="inputVehicle">
             </div>
         </div>
         <div class="row">
-            <button type="reset" class="btn">Clear</button>
-            <button type="submit" onclick="addVisitor()" class="btn">Submit</button>
+            <button type="reset" class="btn btn-outline-dark">Clear</button>
+            <a  onclick="addVisitor()" class="btn btn-outline-success">Submit</a>
         </div>
     </form>
+</div>
+<%--Success Modal--%>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+             <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i>  Request Sent Successfully
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
