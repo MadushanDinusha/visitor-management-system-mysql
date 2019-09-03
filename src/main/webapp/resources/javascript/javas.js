@@ -137,7 +137,8 @@ function addVisitor() {
                     "vehicle_number": vehicleNumber
                 }),
                 processData: false,
-                success: function () {},
+                success: function () {
+                },
                 error: function (err) {
                     console.log(err.responseText);
                 }
@@ -213,7 +214,7 @@ function getRequest(group_id) {
             $("#visitorTable").html("");
             document.getElementById("requestedUser").innerHTML = visitorList[0].userName;
             for (var i = 0; i < numberOfVisitors; i++) {
-                $("#visitorTable").append('<tr><td>' + visitorList[i].id + '</td><td>' + visitorList[i].name + '</td>' +
+                $("#visitorTable").append('<tr><td>' + visitorList[i].nic + '</td><td>' + visitorList[i].name + '</td>' +
                     '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].purpose + '</td></tr>');
             }
         },
@@ -231,7 +232,7 @@ function getRequest(group_id) {
             var visitorList = data;
             console.log("user details " + Object.values(visitorList));
             var numberOfVehicles = visitorList.length;
-            document.getElementById("numberOfVehicles").innerHTML=numberOfVehicles;
+            document.getElementById("numberOfVehicles").innerHTML = numberOfVehicles;
         },
         error: function (err) {
             alert("er" + err.responseText);
@@ -399,9 +400,10 @@ function modifyRequest(groupsId) {
                     '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
                     '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>')
-
-                $("#" + '' + i + '' + "nic").val(visitorList[i].id);
+                    '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td>' +
+                    '<td><input style="display: none" id="' + i + 'id"></td></tr>')
+                $("#" + '' + i + '' + "id").val(visitorList[i].id);
+                $("#" + '' + i + '' + "nic").val(visitorList[i].nic);
                 $("#" + '' + i + '' + "name").val(visitorList[i].name);
                 $("#" + '' + i + '' + "company").val(visitorList[i].company);
                 $("#" + '' + i + '' + "purpose").val(visitorList[i].purpose);
@@ -417,6 +419,26 @@ function modifyRequest(groupsId) {
     });
 }
 
+function saveModify() {
+    var rowCount = $('#modifyTable >tbody >tr').length;
+    alert(rowCount);
+    for (var i = 0; i < rowCount; i++) {
+        var visitorModify = new Object();
+        visitorModify.id = parseFloat($("#" + '' + i + '' + "id").val());
+        visitorModify.nic = $("#" + '' + i + '' + "nic").val();
+        visitorModify.name = $("#" + '' + i + '' + "name").val();
+        visitorModify.company = $("#" + '' + i + '' + "company").val();
+        visitorModify.purpose = $("#" + '' + i + '' + "purpose").val();
+        visitorModify.date = $("#" + '' + i + '' + "date").val();
+        $.ajax({
+            url: "updateVisitor",
+            dataType: 'text',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(visitorModify)
+        });
+    }
+}
 
 
 

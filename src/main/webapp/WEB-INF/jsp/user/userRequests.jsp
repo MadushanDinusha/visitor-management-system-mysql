@@ -64,12 +64,14 @@
 <div class="container">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
     <div class="card-body">
-        <input type="checkbox" onclick="getAllRequestForUser()" value="Approved" id="approve"> Approved<br>
-        <input type="checkbox" onclick="getAllRequestForUser()" value="Rejected" id="reject"> Rejected<br>
-        <input type="checkbox" onclick="getAllRequestForUser()" value="Modify" id="modify"> Modify<br>
-        <input type="checkbox" onclick="getAllRequestForUser()" value="Pending" id="pending"> Pending<br>
+        <div class="text-center">
+            <input type="checkbox"  onclick="getAllRequestForUser()" value="Approved" id="approve"> Approved<br>
+            <input type="checkbox" onclick="getAllRequestForUser()" value="Rejected" id="reject"> Rejected<br>
+            <input type="checkbox" onclick="getAllRequestForUser()" value="Modify" id="modify"> Modify<br>
+            <input type="checkbox" onclick="getAllRequestForUser()" value="Pending" id="pending"> Pending<br>
+        </div>
         <div id="tables1" class="table-editable">
-            <table class="table table-hover">
+        <table class="table table-hover">
                 <thead>
                 <th>Request Number</th>
                 <th></th>
@@ -132,7 +134,7 @@
                     <div class="card-body">
                         <div id="tabless" class="table-editable">
                             <span  style="display: none" id="requestedUser"></span>
-                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <table id="modifyTable" class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
                                 <th>Nic</th>
                                 <th>Name</th>
@@ -150,6 +152,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-outline-success" onclick="saveModify()">Save</a>
             </div>
         </div>
     </div>

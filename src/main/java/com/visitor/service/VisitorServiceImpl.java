@@ -14,6 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -56,8 +59,7 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorRepository.findVisitorByGroupId(id);
     }
 
-    public void updateVisitor(String groupId,String state) {
-        LOGGER.info("updating state group_id {}, state {}",groupId,state);
-        requestRepository.updateVisitorState(groupId,state);
+    public void updateVisitor(Visitor visitor){
+        visitorRepository.updateVisitorById( visitor.getId(),visitor.getCompany(),visitor.getName(),visitor.getNic(),visitor.getPurpose(),visitor.getDate());
     }
 }

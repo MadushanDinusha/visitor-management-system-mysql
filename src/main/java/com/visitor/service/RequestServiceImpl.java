@@ -21,4 +21,8 @@ public class RequestServiceImpl implements RequestService{
     public void updateComment(String group_id, String comment) {
         requestRepository.updateComment(group_id,comment);
     }
+
+    public void updateRequestState(String groupId, String state) {
+        requestRepository.updateRequestState(groupId,state);
+    }
 }

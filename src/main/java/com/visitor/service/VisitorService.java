@@ -11,5 +11,5 @@ public interface VisitorService {
 
     List<Visitor> findVisitorByGroupId(String id);
 
-    void updateVisitor(String groupId,String state);
+    void updateVisitor(Visitor visitor);
 }

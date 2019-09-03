@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -251,7 +250,7 @@ public class ApplicationController {
     public ResponseEntity<?> updateVisitorState(@RequestBody Map<String,String> request) {
         try {
             LOGGER.info("request {}",request);
-            visitorService.updateVisitor(request.get("group_id"),request.get("state"));
+            requestService.updateRequestState(request.get("group_id"),request.get("state"));
             requestService.updateComment(request.get("group_id"),request.get("message"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -269,6 +268,18 @@ public class ApplicationController {
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/user/updateVisitor",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor){
+        try {
+            LOGGER.info("visitor updating {}",visitor);
+            visitorService.updateVisitor(visitor);
+            return new ResponseEntity<>("Successfully Updated",HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
