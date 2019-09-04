@@ -77,7 +77,7 @@
         <div id="table" class="table-editable">
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <thead>
-                <th>Request Id</th>
+                <th colspan="2">Pending requests</th>
                 </thead>
                 <tbody id="tableBodyRequests">
                 </tbody>

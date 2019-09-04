@@ -288,11 +288,16 @@ function getAllRequestForUser() {
             var groupIds = [];
             $("#userTable").html("");
             for (var i = 0; i < numberOfVisitors; i++) {
+                var date = new Date(requestList[i].lastUpdatedTime);
+                date.setHours(date.getHours() + 5);
+                date.setMinutes(date.getMinutes()+30);
+                var index = date.toString().lastIndexOf(':') +3;
                 if ($("#approve").prop("checked") == true) {
+
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Approved") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                            '<td>'+date.toString().substring(0, index)+'</td>' +
                             '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span>' +
                             '</td><td>' + requestList[i].state + '</td></tr>');
                     }
@@ -301,7 +306,7 @@ function getAllRequestForUser() {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Rejected") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                            '<td>'+date.toString().substring(0, index)+'</td>' +
                             '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
@@ -310,7 +315,7 @@ function getAllRequestForUser() {
                         $("#userTable").append('<tr><td style="text-align: left"> ' +
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
-                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                            '<td>'+date.toString().substring(0, index)+'</td>' +
                             '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                     }
                 }
@@ -320,7 +325,7 @@ function getAllRequestForUser() {
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '' +
                             '</a></td>' +
-                            '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                            '<td>'+date.toString().substring(0, index)+'</td>' +
                             '<td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
@@ -331,7 +336,7 @@ function getAllRequestForUser() {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                                '<td>'+date.toString().substring(0, index)+'</td>' +
                                 '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span></td><td>' + requestList[i].state + '</td></tr>');
 
                         }
@@ -339,21 +344,21 @@ function getAllRequestForUser() {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                                '<td>'+date.toString().substring(0, index)+'</td>' +
                                 '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                         if (requestList[i].state === "Modify") {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
-                                '<td>'+requestList[i].lastUpdatedTime+'</td>' +
+                                '<td>'+date.toString().substring(0, index)+'</td>' +
                                 '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+requestList[i].lastUpdatedTime+'</td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
+                                '<td>'+date.toString().substring(0, index)+'</td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                     }
                 }

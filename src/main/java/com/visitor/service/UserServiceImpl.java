@@ -14,10 +14,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -63,27 +61,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userName) {
-            userRepository.delete(getUsersByUsername(userName));
-            LOGGER.info("User successfully deleted");
+        userRepository.delete(getUsersByUsername(userName));
+        LOGGER.info("User successfully deleted");
     }
 
     @Override
-    public User getAdmin(String hodEmail){
+    public User getAdmin(String hodEmail) {
         return userRepository.getUserByEmail(hodEmail);
     }
 
     @Override
     public List<Request> getRequest() {
-        return (List<Request>) requestRepository.findAll();
+        Comparator<Request> compareByTime = (Request r1, Request r2) -> (r1.getLastUpdatedTime()).compareTo((r2.getLastUpdatedTime()));
+        List<Request> requestList = (List<Request>) requestRepository.findAll();
+        Collections.sort(requestList, compareByTime.reversed());
+        return requestList;
     }
 
     @Override
     public List<Request> getRequestByUserName(int employee_id) {
-        return requestRepository.findRequestsByUser_id(employee_id);
+        Comparator<Request> compareByTime = (Request r1, Request r2) -> (r1.getLastUpdatedTime()).compareTo((r2.getLastUpdatedTime()));
+        List<Request> requestList = requestRepository.findRequestsByUser_id(employee_id);
+        Collections.sort(requestList, compareByTime);
+        return requestList;
     }
 
     @Override
-    public int getIdByUserName(String userName){
+    public int getIdByUserName(String userName) {
         return userRepository.getUserByUsername(userName).getId();
     }
 }
