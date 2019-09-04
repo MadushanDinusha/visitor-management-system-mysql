@@ -192,11 +192,14 @@ function getAllRequest() {
             var groupIds = [];
             for (var i = 0; i < numberOfRequests; i++) {
                 if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
-
+                    var date = new Date(requestList[i].lastUpdatedTime);
+                    date.setHours(date.getHours() + 5);
+                    date.setMinutes(date.getMinutes()+30);
+                    var index = date.toString().lastIndexOf(':') +3;
                     $("#tableBodyRequests").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                         'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
                         requestList[i].group_id + '</a></td>' +
-                        '<td>'+ requestList[i].lastUpdatedTime+'</td></tr>');
+                        '<td>'+ date.toString().substring(0, index) +'</td></tr>');
                 }
                 groupIds.push(requestList[i].group_id);
             }
