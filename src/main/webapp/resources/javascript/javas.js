@@ -1,15 +1,25 @@
 var group_ids = '';
 var buttonState = '';
 var groupIdForUpdate = '';
+var userRole = '';
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
 }
 
-function convertTime(timestamp) {
-    var time = timestamp.split(/[- :]/);
-    var date = new Date(Date.UTC(time[0], time[1]-1, time[2], time[3], time[4], time[5]));
-    return date;
+function getUserRoll() {
+    $.ajax({
+        url: 'getUserRole',
+        dataType: 'text',
+        type: 'get',
+        contentType: 'application/json',
+        success: function (data) {
+            userRole = data;
+        },
+        error: function (err) {
+            alert("er" + err.responseText);
+        }
+    });
 }
 
 function getAll() {
@@ -127,7 +137,6 @@ function addVisitor() {
                 }
             });
         }
-
     }
     var numberOfVehicles = $("#numberOfVehicles").val();
     var firstVehicle = $("#0vehicle").val();
@@ -190,16 +199,23 @@ function getAllRequest() {
             var numberOfRequests = requestList.length;
             $("#tableBodyRequests").html("");
             var groupIds = [];
+            var newApprovalRequestCount = 0;
             for (var i = 0; i < numberOfRequests; i++) {
+                if(!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && userRole ==="ADMIN"){
+                    newApprovalRequestCount++;
+                    document.getElementById("newRequestForAdmin").innerHTML= newApprovalRequestCount.toString();
+                }if(userRole !="ADMIN"){
+                    document.getElementById("newRequestForAdmin").style.display ="none";
+                }
                 if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
                     var date = new Date(requestList[i].lastUpdatedTime);
                     date.setHours(date.getHours() + 5);
-                    date.setMinutes(date.getMinutes()+30);
-                    var index = date.toString().lastIndexOf(':') +3;
+                    date.setMinutes(date.getMinutes() + 30);
+                    var index = date.toString().lastIndexOf(':') + 3;
                     $("#tableBodyRequests").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                         'onclick="getRequest(\'' + requestList[i].group_id + '\')">' +
                         requestList[i].group_id + '</a></td>' +
-                        '<td>'+ date.toString().substring(0, index) +'</td></tr>');
+                        '<td>' + date.toString().substring(0, index) + '</td></tr>');
                 }
                 groupIds.push(requestList[i].group_id);
             }
@@ -224,6 +240,7 @@ function getRequest(group_id) {
             var numberOfVisitors = visitorList.length;
             $("#visitorTable").html("");
             document.getElementById("requestedUser").innerHTML = visitorList[0].userName;
+
             for (var i = 0; i < numberOfVisitors; i++) {
                 $("#visitorTable").append('<tr><td>' + visitorList[i].nic + '</td><td>' + visitorList[i].name + '</td>' +
                     '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].purpose + '</td></tr>');
@@ -290,14 +307,14 @@ function getAllRequestForUser() {
             for (var i = 0; i < numberOfVisitors; i++) {
                 var date = new Date(requestList[i].lastUpdatedTime);
                 date.setHours(date.getHours() + 5);
-                date.setMinutes(date.getMinutes()+30);
-                var index = date.toString().lastIndexOf(':') +3;
+                date.setMinutes(date.getMinutes() + 30);
+                var index = date.toString().lastIndexOf(':') + 3;
                 if ($("#approve").prop("checked") == true) {
 
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Approved") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>'+date.toString().substring(0, index)+'</td>' +
+                            '<td>' + date.toString().substring(0, index) + '</td>' +
                             '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span>' +
                             '</td><td>' + requestList[i].state + '</td></tr>');
                     }
@@ -306,7 +323,7 @@ function getAllRequestForUser() {
                     if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Rejected") {
                         $("#userTable").append('<tr><td><a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                            '<td>'+date.toString().substring(0, index)+'</td>' +
+                            '<td>' + date.toString().substring(0, index) + '</td>' +
                             '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
@@ -315,7 +332,7 @@ function getAllRequestForUser() {
                         $("#userTable").append('<tr><td style="text-align: left"> ' +
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
-                            '<td>'+date.toString().substring(0, index)+'</td>' +
+                            '<td>' + date.toString().substring(0, index) + '</td>' +
                             '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                     }
                 }
@@ -325,7 +342,7 @@ function getAllRequestForUser() {
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '' +
                             '</a></td>' +
-                            '<td>'+date.toString().substring(0, index)+'</td>' +
+                            '<td>' + date.toString().substring(0, index) + '</td>' +
                             '<td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                     }
                 }
@@ -336,7 +353,7 @@ function getAllRequestForUser() {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+date.toString().substring(0, index)+'</td>' +
+                                '<td>' + date.toString().substring(0, index) + '</td>' +
                                 '<td><span><i class="fa fa-check-circle " style="font-size:30px;color: green"></i></span></td><td>' + requestList[i].state + '</td></tr>');
 
                         }
@@ -344,21 +361,21 @@ function getAllRequestForUser() {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+date.toString().substring(0, index)+'</td>' +
+                                '<td>' + date.toString().substring(0, index) + '</td>' +
                                 '<td><i class="fa fa-times-circle" style="font-size:30px;color: red"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                         if (requestList[i].state === "Modify") {
                             $("#userTable").append('<tr><td style="text-align: left"> ' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
-                                '<td>'+date.toString().substring(0, index)+'</td>' +
+                                '<td>' + date.toString().substring(0, index) + '</td>' +
                                 '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a></td>' +
-                                '<td>'+date.toString().substring(0, index)+'</td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
+                                '<td>' + date.toString().substring(0, index) + '</td><td><i class="fa fa-exclamation-circle" style="font-size:30px;color: yellow"></i></td><td>' + requestList[i].state + '</td></tr>');
                         }
                     }
                 }
@@ -400,7 +417,7 @@ function ModalYes() {
     $("#mi-modal").modal('hide');
     $("#myModal").modal('hide');
     $("#modify-modal").modal('hide');
-    setInterval(getAllRequest,1000);
+    setInterval(getAllRequest, 1000);
 }
 
 function ModalNo() {
@@ -461,7 +478,7 @@ function saveModify() {
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify(visitorModify),
-            success:function (data) {
+            success: function (data) {
                 $('#myModals').modal('hide');
                 getAllRequestForUser();
             }

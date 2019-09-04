@@ -45,6 +45,8 @@ public class VisitorServiceImpl implements VisitorService {
         request.setGroup_id(visitor.getGroupId());
         request.setLastUpdatedTime(timestamp);
         request.setState("Pending");
+        request.setAdminState("UnRead");
+        request.setEmployeeState("Read");
         requestService.saveRequest(request);
         visitorRepository.save(visitor);
     }

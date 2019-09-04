@@ -27,4 +27,9 @@ public interface RequestRepository extends CrudRepository<Request,Long> {
     @Query("UPDATE Request SET comment = :comment WHERE group_id = :group_id")
     @Transactional
     void updateComment(@Param("group_id") String group_id, @Param("comment") String comment);
+
+    @Modifying
+    @Query("UPDATE Request SET adminState = :adminState, employeeState = :employeeState WHERE group_id = :group_id")
+    @Transactional
+    void updateReadState(@Param("group_id") String group_id, @Param("adminState") String adminState, @Param("employeeState") String employeeState);
 }

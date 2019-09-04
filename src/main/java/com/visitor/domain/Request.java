@@ -33,6 +33,28 @@ public class Request {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Timestamp lastUpdatedTime;
 
+    @Column(name = "adminState")
+    private String adminState;
+
+    @Column(name = "employeeState")
+    private String employeeState;
+
+    public String getAdminState() {
+        return adminState;
+    }
+
+    public void setAdminState(String adminState) {
+        this.adminState = adminState;
+    }
+
+    public String getEmployeeState() {
+        return employeeState;
+    }
+
+    public void setEmployeeState(String employeeState) {
+        this.employeeState = employeeState;
+    }
+
     public Timestamp getLastUpdatedTime() {
         return lastUpdatedTime;
     }

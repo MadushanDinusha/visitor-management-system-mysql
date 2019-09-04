@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
@@ -37,7 +37,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
-                        class="fa fa-legal"></i></span></a>
+                        class="fa fa-legal"></i><span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
@@ -77,7 +77,7 @@
 </nav>
 
 <div class="container">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
+    <h3 style="margin-bottom: 5%" class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
 
     <form action="">
         <div class="text-center">
@@ -147,4 +147,11 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        getUserRoll();
+        getAllRequest();
+    });
+</script>
+
 </html>

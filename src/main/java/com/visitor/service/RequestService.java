@@ -8,4 +8,6 @@ public interface RequestService {
     void updateComment(String gorup_id, String comment);
 
     void updateRequestState(String groupId, String state);
+
+    void updateReadState(String groupId, String AdminState, String empState);
 }

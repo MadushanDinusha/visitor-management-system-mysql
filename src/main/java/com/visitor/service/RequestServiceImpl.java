@@ -28,4 +28,9 @@ public class RequestServiceImpl implements RequestService{
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         requestRepository.updateRequestState(groupId,timestamp,state);
     }
+
+    @Override
+    public void updateReadState(String groupId, String AdminState, String empState){
+        requestRepository.updateReadState(groupId,AdminState,empState);
+    }
 }
