@@ -117,29 +117,29 @@ public class ApplicationController {
     }
 
     @RequestMapping(value = "/user/userRequests", method = RequestMethod.GET)
-    public String getUserRequests(){
+    public String getUserRequests() {
         return "/user/userRequests";
     }
 
-    @RequestMapping(value = {"/user/getUserRole","/admin/getUserRole"}, method = RequestMethod.GET)
-    public  ResponseEntity<?> getUserRole(){
+    @RequestMapping(value = {"/user/getUserRole", "/admin/getUserRole"}, method = RequestMethod.GET)
+    public ResponseEntity<?> getUserRole() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             User user = userService.getUsersByUsername(authentication.getName());
-            return new ResponseEntity<>(user.getRoles().iterator().next().getRole(),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(user.getRoles().iterator().next().getRole(), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = {"/admin/newRequest/{group_id}","/user/newRequest/{group_id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin/newRequest/{group_id}", "/user/newRequest/{group_id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Visitor>> getRequests(@PathVariable("group_id") String group_id) {
         try {
             LOGGER.info("request id {}", group_id);
             List<Visitor> visitors = visitorService.findVisitorByGroupId(group_id);
             LOGGER.info("visitor details {}", visitors);
-            return new ResponseEntity<>(visitors,HttpStatus.OK);
+            return new ResponseEntity<>(visitors, HttpStatus.OK);
         } catch (Throwable t) {
             LOGGER.error("Error occurred while sending message", t);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -159,12 +159,12 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = {"/admin/newRequest","/user/newRequest"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/admin/newRequest", "/user/newRequest"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getRequests() {
         try {
             List<Request> requests = userService.getRequest();
-            return new ResponseEntity<>(requests,HttpStatus.OK);
+            return new ResponseEntity<>(requests, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -183,7 +183,7 @@ public class ApplicationController {
         return models;
     }
 
-    @RequestMapping(value = "/user/allRequests", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/user/allRequests", "/admin/allRequests"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getAllRequests() {
         try {
@@ -191,18 +191,18 @@ public class ApplicationController {
             int employee_id = userService.getIdByUserName(authentication.getName());
             List<Request> requests = userService.getRequestByUserName(employee_id);
             Collections.reverse(requests);
-            LOGGER.info("request by visitor {}",requests);
-            return new ResponseEntity<>(requests,HttpStatus.OK);
+            LOGGER.info("request by visitor {}", requests);
+            return new ResponseEntity<>(requests, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = {"/admin/getVehiclesByGroupId/{group_id}","/user/getVehiclesByGroupId/{group_id}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/admin/getVehiclesByGroupId/{group_id}", "/user/getVehiclesByGroupId/{group_id}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getVehicleDetailsByGroupId(@PathVariable("group_id") String group_id) {
         try {
-            return new ResponseEntity<>( vehicleService.getVehicleListByGroupId(group_id),HttpStatus.OK);
+            return new ResponseEntity<>(vehicleService.getVehicleListByGroupId(group_id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -229,19 +229,20 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
         try {
-            LOGGER.info("request to add visitor {}",visitor);
+            LOGGER.info("request to add visitor {}", visitor);
             visitorService.saveVisitor(visitor);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @RequestMapping(value = "/user/addVehicle", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> saveVehicle(@RequestBody Map<String,String> vehicle) {
+    public ResponseEntity<?> saveVehicle(@RequestBody Map<String, String> vehicle) {
         try {
-            LOGGER.info("request to add vehicle {}",vehicle);
-            String groupId= vehicle.get("group_id");
+            LOGGER.info("request to add vehicle {}", vehicle);
+            String groupId = vehicle.get("group_id");
             String vehicleNumber = vehicle.get("vehicle_number");
             Vehicle vehicleObj = new Vehicle();
             vehicleObj.setVehicleNumber(vehicleNumber);
@@ -255,29 +256,42 @@ public class ApplicationController {
 
     @RequestMapping(value = "/admin/updateState", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> updateVisitorState(@RequestBody Map<String,String> request) {
+    public ResponseEntity<?> updateVisitorState(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info("request {}",request);
-            requestService.updateRequestState(request.get("group_id"),request.get("state"));
-            requestService.updateComment(request.get("group_id"),request.get("message"));
-            requestService.updateReadState(request.get("group_id"),"Read","UnRead");
+            LOGGER.info("request {}", request);
+            requestService.updateRequestState(request.get("group_id"), request.get("state"));
+            requestService.updateComment(request.get("group_id"), request.get("message"));
+            requestService.updateReadState(request.get("group_id"), "Read", "UnRead");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            LOGGER.info("Error occurred while updating 'request' table",e);
+            LOGGER.info("Error occurred while updating 'request' table", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = "/user/updateVisitor",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/updateVisitor", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor){
+    public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor) {
         try {
-            LOGGER.info("visitor updating {}",visitor);
+            LOGGER.info("visitor updating {}", visitor);
             visitorService.updateVisitor(visitor);
-            requestService.updateRequestState(visitor.getGroupId(),"Pending");
-            requestService.updateReadState(visitor.getGroupId(),"UnRead","Read");
-            return new ResponseEntity<>("Successfully Updated",HttpStatus.OK);
-        }catch (Exception e){
+            requestService.updateRequestState(visitor.getGroupId(), "Pending");
+            requestService.updateReadState(visitor.getGroupId(), "UnRead", "Read");
+            return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = {"/admin/updateEmpState", "/user/updateEmpState"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> updateEmpState() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.getUsersByUsername(authentication.getName());
+            requestService.updateEmpState(user.getId(), "Read");
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable t) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

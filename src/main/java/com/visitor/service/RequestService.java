@@ -10,4 +10,6 @@ public interface RequestService {
     void updateRequestState(String groupId, String state);
 
     void updateReadState(String groupId, String AdminState, String empState);
+
+    void updateEmpState(int user_id,String employeeState);
 }

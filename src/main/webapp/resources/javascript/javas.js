@@ -201,11 +201,12 @@ function getAllRequest() {
             var groupIds = [];
             var newApprovalRequestCount = 0;
             for (var i = 0; i < numberOfRequests; i++) {
-                if(!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && userRole ==="ADMIN"){
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && userRole === "ADMIN") {
                     newApprovalRequestCount++;
-                    document.getElementById("newRequestForAdmin").innerHTML= newApprovalRequestCount.toString();
-                }if(userRole !="ADMIN"){
-                    document.getElementById("newRequestForAdmin").style.display ="none";
+                    document.getElementById("newRequestForAdmin").innerHTML = newApprovalRequestCount.toString();
+                }
+                if (userRole != "ADMIN") {
+                    document.getElementById("newRequestForAdmin").style.display = "none";
                 }
                 if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
                     var date = new Date(requestList[i].lastUpdatedTime);
@@ -304,7 +305,12 @@ function getAllRequestForUser() {
             var numberOfVisitors = requestList.length;
             var groupIds = [];
             $("#userTable").html("");
+            var newStatusCount = 0;
             for (var i = 0; i < numberOfVisitors; i++) {
+                if (requestList[i].employeeState === "UnRead" && userRole === "USER") {
+                    newStatusCount++;
+                    document.getElementById("newRequestForUser").innerHTML = newStatusCount.toString();
+                }
                 var date = new Date(requestList[i].lastUpdatedTime);
                 date.setHours(date.getHours() + 5);
                 date.setMinutes(date.getMinutes() + 30);
@@ -381,6 +387,7 @@ function getAllRequestForUser() {
                 }
                 groupIds.push(requestList[i].group_id);
             }
+
         },
         error: function (err) {
             alert("er" + err.responseText);
@@ -486,5 +493,13 @@ function saveModify() {
     }
 }
 
+function updateEmpState() {
+    $.ajax({
+        url: "updateEmpState",
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/json',
+    });
+}
 
 

@@ -33,4 +33,9 @@ public class RequestServiceImpl implements RequestService{
     public void updateReadState(String groupId, String AdminState, String empState){
         requestRepository.updateReadState(groupId,AdminState,empState);
     }
+
+    @Override
+   public void updateEmpState(int user_id,String employeeState){
+        requestRepository.updateEmpState(user_id,employeeState);
+    }
 }

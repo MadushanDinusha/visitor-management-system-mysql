@@ -42,7 +42,7 @@
             <li class="nav-item">
                 <a class="nav-link"
                    href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
-                        class="fa fa-bell"></i></span></a>
+                        class="fa fa-bell"></i>&nbsp;<span class="badge badge-light" id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -151,6 +151,7 @@
     $(document).ready(function () {
         getUserRoll();
         getAllRequest();
+        getAllRequestForUser();
     });
 </script>
 
