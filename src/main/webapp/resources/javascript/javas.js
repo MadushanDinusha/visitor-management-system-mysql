@@ -3,6 +3,7 @@ var buttonState = '';
 var groupIdForUpdate = '';
 var userRole = '';
 var userName = '';
+var deleteUserName = '';
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
@@ -53,8 +54,7 @@ function registerUser() {
             "role": $("#role").val()
         }),
         processData: false,
-        success: function () {
-            alert("successfully saved");
+        success: function (data) {
             window.location.href = "/visitor-manage/admin/allUsers";
         },
         error: function (err) {
@@ -64,22 +64,7 @@ function registerUser() {
 }
 
 function deleteUser(userName) {
-    $.ajax({
-        url: 'deleteUser',
-        dataType: 'text',
-        type: 'delete',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "userName": userName
-        }),
-        processData: false,
-        success: function () {
-            getAllUsers();
-        },
-        error: function (err) {
-            alert(err.responseText);
-        }
-    });
+    $("#deleteUserModal").modal("show");
 }
 
 function getAllUsers() {
@@ -95,8 +80,9 @@ function getAllUsers() {
             var numberOfUsers = userList.length;
             $("#tableBody").html("");
             for (var i = 0; i < numberOfUsers; i++) {
+                deleteUserName = userList[i].username;
                 $("#tableBody").append('<tr><td>' + userList[i].username + '</td>' +
-                    '<td><a style="color: black" href="mailto:'+userDetails.email+'">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
+                    '<td><a style="color: black" href="mailto:'+userList[i].email+'">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
                     '<td>' + userList[i].department + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
                     '<span class="fa fa-trash"></span></button></p></td>');
@@ -130,8 +116,7 @@ function addVisitor() {
                 data: JSON.stringify(visitor),
                 processData: false,
                 success: function () {
-
-                    console.log("saved items " + j);
+                   setInterval(reloadAddVisitor,1000);
                 },
                 error: function (err) {
                     console.log(err.responseText);
@@ -520,4 +505,31 @@ function showUserDetails() {
             alert(err.responseText);
         }
     });
+}
+function deleteYes() {
+    $.ajax({
+        url: 'deleteUser',
+        dataType: 'text',
+        type: 'delete',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "userName": deleteUserName
+        }),
+        processData: false,
+        success: function () {
+            $("#deleteUserModal").modal("hide");
+            getAllUsers();
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}
+
+function deleteNo(){
+    $("#deleteUserModal").modal("hide");
+}
+
+function reloadAddVisitor() {
+    window.location.href = "/visitor-manage/user/userRequests";
 }

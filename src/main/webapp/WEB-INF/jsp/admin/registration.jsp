@@ -81,18 +81,7 @@
             text-align: center;
         }
 
-        .signup-form .btn {
-            font-size: 16px;
-            font-weight: bold;
-            background: #19aa8d;
-            border: none;
-            min-width: 140px;
-        }
 
-        .signup-form .btn:hover, .signup-form .btn:focus {
-            background: #179b81;
-            outline: none;
-        }
 
         .signup-form a {
             color: #fff;
@@ -261,7 +250,24 @@
                 </div>
 
             </form>
-            <button onclick="registerUser()" class="btn btn-primary btn-lg">Sign Up</button>
+            <button onclick="registerUser()" class="btn btn-outline-success">Sign Up</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successModalForRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i>  Account Created Successfully
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

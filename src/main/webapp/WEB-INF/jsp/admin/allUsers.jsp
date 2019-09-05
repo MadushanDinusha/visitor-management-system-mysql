@@ -86,6 +86,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+     id="deleteUserModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="modal-title" id="myModalLabel">Do you want to delete the user </h5>
+                        <b><p id="request"></p></b>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-si" onclick="deleteYes()">Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no" onclick="deleteNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
