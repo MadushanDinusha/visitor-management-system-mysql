@@ -18,14 +18,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/navVisitor.css"/>">
-
+<style>
+    #userLink:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg ">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home
+                    <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
@@ -33,12 +39,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
-                        class="fa fa-legal"></i><span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
+                        class="fa fa-legal"></i>&nbsp;<span class="badge badge-light"
+                                                            id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
                    href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
-                        class="fa fa-bell"></i> &nbsp;<span class="badge badge-light" id="newRequestForUser"></span></span></a>
+                        class="fa fa-bell"></i> &nbsp;<span class="badge badge-light"
+                                                            id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -97,7 +105,7 @@
                     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request details</h3>
                     <div class="card-body">
                         <div id="tables" class="table-editable">
-                            Requested by : &nbsp; <b><span id="requestedUser"></span></b>
+                            Requested by : &nbsp; <b><a id="userLink" onclick="showUserDetails()"><span id="requestedUser"></span></a></b>
                             <hr>
                             <h6>Visitor Details</h6>
                             <table class="table table-bordered table-responsive-md table-striped text-center">
@@ -120,9 +128,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="rejectBtn" class="btn btn-danger" onclick="rejects()">Reject</button>
-                <button type="button" id="modifyBtn" class="btn btn-success" onclick="modifies()">Modify</button>
-                <button type="button" id="approveBtn" class="btn btn-primary" onclick="approve()">Approve</button>
+                <button type="button" id="rejectBtn" class="btn btn-outline-danger" onclick="rejects()">Reject</button>
+                <button type="button" id="modifyBtn" class="btn btn-outline-success" onclick="modifies()">Modify
+                </button>
+                <button type="button" id="approveBtn" class="btn btn-outline-primary" onclick="approve()">Approve
+                </button>
             </div>
         </div>
     </div>
@@ -168,6 +178,39 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="modal-btn-sis" onclick="ModalYes()">Yes</button>
                 <button type="button" class="btn btn-primary" id="modal-btn-nos" onclick="ModalNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="userDetails" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+                    <div class="card-body">
+                        <div id="UserDetailsTable" class="table-editable">
+                            <hr>
+                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>User name</th>
+                                <th>Email</th>
+                                <th>HOD mail</th>
+                                <th>Account type</th>
+                                <th>Department</th>
+                                </thead>
+                                <tbody id="userTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

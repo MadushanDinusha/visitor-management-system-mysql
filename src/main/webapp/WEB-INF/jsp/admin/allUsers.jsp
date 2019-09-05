@@ -36,7 +36,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i>
-                <span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
+                &nbsp;<span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i>&nbsp;<span class="badge badge-light" id="newRequestForUser"></span></span></a>
@@ -73,7 +73,6 @@
         <div id="table" class="table-editable">
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <thead>
-                <th>User Id</th>
                 <th>User Name</th>
                 <th>Email</th>
                 <th>Role</th>

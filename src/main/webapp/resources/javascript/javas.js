@@ -2,6 +2,7 @@ var group_ids = '';
 var buttonState = '';
 var groupIdForUpdate = '';
 var userRole = '';
+var userName = '';
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
@@ -94,8 +95,8 @@ function getAllUsers() {
             var numberOfUsers = userList.length;
             $("#tableBody").html("");
             for (var i = 0; i < numberOfUsers; i++) {
-                $("#tableBody").append('<tr><td>' + userList[i].id + '</td><td>' + userList[i].username + '</td>' +
-                    '<td>' + userList[i].email + '</td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
+                $("#tableBody").append('<tr><td>' + userList[i].username + '</td>' +
+                    '<td><a style="color: black" href="mailto:'+userDetails.email+'">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
                     '<td>' + userList[i].department + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
                     '<span class="fa fa-trash"></span></button></p></td>');
@@ -241,7 +242,7 @@ function getRequest(group_id) {
             var numberOfVisitors = visitorList.length;
             $("#visitorTable").html("");
             document.getElementById("requestedUser").innerHTML = visitorList[0].userName;
-
+            userName = visitorList[0].userName;
             for (var i = 0; i < numberOfVisitors; i++) {
                 $("#visitorTable").append('<tr><td>' + visitorList[i].nic + '</td><td>' + visitorList[i].name + '</td>' +
                     '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].purpose + '</td></tr>');
@@ -307,7 +308,7 @@ function getAllRequestForUser() {
             $("#userTable").html("");
             var newStatusCount = 0;
             for (var i = 0; i < numberOfVisitors; i++) {
-                if (requestList[i].employeeState === "UnRead" && userRole === "USER") {
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].employeeState === "UnRead") {
                     newStatusCount++;
                     document.getElementById("newRequestForUser").innerHTML = newStatusCount.toString();
                 }
@@ -502,4 +503,21 @@ function updateEmpState() {
     });
 }
 
-
+function showUserDetails() {
+    $("#userDetails").modal('show');
+    $.ajax({
+        url: 'getUserDetails/' + userName,
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        processData: false,
+        success: function (data) {
+            var userDetails = data;
+            $("#userTable").append('<tr><td>'+userDetails.username+'</td><td><a style="color: black" href="mailto:'+userDetails.email+'">'+userDetails.email+'</a></td><td>'+userDetails.hodMail+'</td>' +
+                '<td>'+userDetails.roles[0].role+'</td><td>'+userDetails.department+'</td></tr>')
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}

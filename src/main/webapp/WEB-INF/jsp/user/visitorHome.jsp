@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
-                        class="fa fa-legal"></i> <span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
+                        class="fa fa-legal"></i> &nbsp;<span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
