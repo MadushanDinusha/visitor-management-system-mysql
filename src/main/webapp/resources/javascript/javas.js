@@ -42,35 +42,35 @@ function getAll() {
 
 function registerUser() {
 
-        if (($("#userName").val() != null || $.trim($("#userName").val()) != '') && ($("#password").val() != null ||  $.trim($("#password").val()) != '') && ($("#email").val() !=null || $.trim($("#email").val())!='') && ($("#department").val()!=null||$.trim($("#department").val())!='') && ($("#HODEmail").val()!=null||$.trim($("#HODEmail").val())!='') && ($("#role").val()!=null||$.trim($("#role").val())!='')) {
-            if($("#password").val() != $("#confirmPassword").val() || $("#password").val() !=null || $.trim($("#password").val())!=''){
-                $("#passwordNotMatch").modal('show');
-        }else {
+    if (($("#userName").val() != null || $.trim($("#userName").val()) != '') && ($("#password").val() != null || $.trim($("#password").val()) != '') && ($("#email").val() != null || $.trim($("#email").val()) != '') && ($("#department").val() != null || $.trim($("#department").val()) != '') && ($("#HODEmail").val() != null || $.trim($("#HODEmail").val()) != '') && ($("#role").val() != null || $.trim($("#role").val()) != '')) {
+        if ($("#password").val() != $("#confirmPassword").val() || $("#password").val() == null || $.trim($("#password").val()) === '') {
+            $("#passwordNotMatch").modal('show');
+        } else {
 
-                $.ajax({
-                    url: 'registerUser',
-                    dataType: 'text',
-                    type: 'post',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        "userName": $("#userName").val(),
-                        "password": $("#password").val(),
-                        "email": $("#email").val(),
-                        "department": $("#department").val(),
-                        "hodEmail": $("#HODEmail").val(),
-                        "role": $("#role").val()
-                    }),
-                    processData: false,
-                    success: function (data) {
-                        window.location.href = "/visitor-manage/admin/allUsers";
-                    },
-                    error: function (err) {
-                        alert(err.responseText);
-                    }
-                });
+            $.ajax({
+                url: 'registerUser',
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "userName": $("#userName").val(),
+                    "password": $("#password").val(),
+                    "email": $("#email").val(),
+                    "department": $("#department").val(),
+                    "hodEmail": $("#HODEmail").val(),
+                    "role": $("#role").val()
+                }),
+                processData: false,
+                success: function (data) {
+                    window.location.href = "/visitor-manage/admin/allUsers";
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
         }
-    }else {
-            $("#successModalForRegistration").modal('show');
+    } else {
+        $("#successModalForRegistration").modal('show');
     }
 }
 
@@ -110,7 +110,7 @@ function addVisitor() {
     var group_id = makeUniqueId();
     if ($("#0nic").val() != undefined && okButtonClicked == true) {
         for (var j = 0; j < numberOfTables; j++) {
-            if (!($("#" + '' + j + '' + "name").val() == null || $("#" + '' + j + '' + "name").val() == "")) {
+            if (!($("#" + '' + j + '' + "nic").val() == null || $("#" + '' + j + '' + "nic").val() === "") && !($("#" + '' + j + '' + "name").val() == null || $("#" + '' + j + '' + "name").val() === "") && !($("#" + '' + j + '' + "company").val() == null || $("#" + '' + j + '' + "company").val() === "") && !($("#" + '' + j + '' + "purpose").val() == null || $("#" + '' + j + '' + "purpose").val() === "") && !($("#" + '' + j + '' + "date").val() == null || $("#" + '' + j + '' + "date").val() === "")) {
                 var visitor = new Object();
                 visitor.nic = $("#" + '' + j + '' + "nic").val();
                 visitor.groupId = group_id;
@@ -549,4 +549,15 @@ function deleteNo() {
 
 function reloadAddVisitor() {
     window.location.href = "/visitor-manage/user/userRequests";
+}
+
+function search() {
+    var search = $('#searchInput').val();
+    $('table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("' + search + '")').length;
+    if (len > 0) {
+        $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+            $(this).closest('tr').show();
+        });
+    } else {}
 }

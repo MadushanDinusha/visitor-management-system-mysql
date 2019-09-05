@@ -29,17 +29,23 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home
+                    <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i>
                 &nbsp;<span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i class="fa fa-bell"></i>&nbsp;<span class="badge badge-light" id="newRequestForUser"></span></span></a>
+                <a class="nav-link"
+                   href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
+                        class="fa fa-bell"></i>&nbsp;<span class="badge badge-light"
+                                                           id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
@@ -50,8 +56,12 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
             </li>
@@ -60,7 +70,8 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
@@ -70,8 +81,11 @@
 <div class="container">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
     <div class="card-body">
+        <div class="active-cyan-3 active-cyan-4 mb-4">
+            <input class="form-control" id="searchInput" type="text" placeholder="Search" aria-label="Search" onkeyup="search()">
+        </div>
         <div id="table" class="table-editable">
-            <table class="table table-bordered table-responsive-md table-striped text-center">
+            <table id="userInfo" class="table table-bordered table-responsive-md table-striped text-center">
                 <thead>
                 <th>User Name</th>
                 <th>Email</th>
