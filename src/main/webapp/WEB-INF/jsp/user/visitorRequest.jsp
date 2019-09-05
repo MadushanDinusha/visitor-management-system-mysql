@@ -138,7 +138,7 @@
                 </button>
             </div>
             <div class="modal-body">
-             <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i>  Request Sent Successfully
+             <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  Please fill Correctly
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>

@@ -4,6 +4,7 @@ var groupIdForUpdate = '';
 var userRole = '';
 var userName = '';
 var deleteUserName = '';
+var okButtonClicked = false;
 
 function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
@@ -40,27 +41,37 @@ function getAll() {
 }
 
 function registerUser() {
-    $.ajax({
-        url: 'registerUser',
-        dataType: 'text',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "userName": $("#userName").val(),
-            "password": $("#password").val(),
-            "email": $("#email").val(),
-            "department": $("#department").val(),
-            "hodEmail": $("#HODEmail").val(),
-            "role": $("#role").val()
-        }),
-        processData: false,
-        success: function (data) {
-            window.location.href = "/visitor-manage/admin/allUsers";
-        },
-        error: function (err) {
-            alert(err.responseText);
+
+        if (($("#userName").val() != null || $.trim($("#userName").val()) != '') && ($("#password").val() != null ||  $.trim($("#password").val()) != '') && ($("#email").val() !=null || $.trim($("#email").val())!='') && ($("#department").val()!=null||$.trim($("#department").val())!='') && ($("#HODEmail").val()!=null||$.trim($("#HODEmail").val())!='') && ($("#role").val()!=null||$.trim($("#role").val())!='')) {
+            if($("#password").val() != $("#confirmPassword").val() || $("#password").val() !=null || $.trim($("#password").val())!=''){
+                $("#passwordNotMatch").modal('show');
+        }else {
+
+                $.ajax({
+                    url: 'registerUser',
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "userName": $("#userName").val(),
+                        "password": $("#password").val(),
+                        "email": $("#email").val(),
+                        "department": $("#department").val(),
+                        "hodEmail": $("#HODEmail").val(),
+                        "role": $("#role").val()
+                    }),
+                    processData: false,
+                    success: function (data) {
+                        window.location.href = "/visitor-manage/admin/allUsers";
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
         }
-    });
+    }else {
+            $("#successModalForRegistration").modal('show');
+    }
 }
 
 function deleteUser(userName) {
@@ -82,7 +93,7 @@ function getAllUsers() {
             for (var i = 0; i < numberOfUsers; i++) {
                 deleteUserName = userList[i].username;
                 $("#tableBody").append('<tr><td>' + userList[i].username + '</td>' +
-                    '<td><a style="color: black" href="mailto:'+userList[i].email+'">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
+                    '<td><a style="color: black" href="mailto:' + userList[i].email + '">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
                     '<td>' + userList[i].department + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
                     '<span class="fa fa-trash"></span></button></p></td>');
@@ -97,31 +108,36 @@ function getAllUsers() {
 function addVisitor() {
     var numberOfTables = $("#tableNumber").val();
     var group_id = makeUniqueId();
-    if ($("#0nic").val() != undefined) {
+    if ($("#0nic").val() != undefined && okButtonClicked == true) {
         for (var j = 0; j < numberOfTables; j++) {
-            var visitor = new Object();
-            visitor.nic = $("#" + '' + j + '' + "nic").val();
-            visitor.groupId = group_id;
-            visitor.name = $("#" + '' + j + '' + "name").val();
-            visitor.company = $("#" + '' + j + '' + "company").val();
-            visitor.purpose = $("#" + '' + j + '' + "purpose").val();
-            visitor.date = $("#" + '' + j + '' + "date").val();
-            visitor.vehicleNumber = $("#vehicle").val();
-            console.log("visitor " + visitor);
-            $.ajax({
-                url: "addVisitor",
-                dataType: 'text',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify(visitor),
-                processData: false,
-                success: function () {
-                   setInterval(reloadAddVisitor,1000);
-                },
-                error: function (err) {
-                    console.log(err.responseText);
-                }
-            });
+            if (!($("#" + '' + j + '' + "name").val() == null || $("#" + '' + j + '' + "name").val() == "")) {
+                var visitor = new Object();
+                visitor.nic = $("#" + '' + j + '' + "nic").val();
+                visitor.groupId = group_id;
+                visitor.name = $("#" + '' + j + '' + "name").val();
+                visitor.company = $("#" + '' + j + '' + "company").val();
+                visitor.purpose = $("#" + '' + j + '' + "purpose").val();
+                visitor.date = $("#" + '' + j + '' + "date").val();
+                visitor.vehicleNumber = $("#vehicle").val();
+                console.log("visitor " + visitor);
+                $.ajax({
+                    url: "addVisitor",
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify(visitor),
+                    processData: false,
+                    success: function () {
+                        okButtonClicked = false;
+                        setInterval(reloadAddVisitor, 1000);
+                    },
+                    error: function (err) {
+                        console.log(err.responseText);
+                    }
+                });
+            } else {
+                $("#successModal").modal('show');
+            }
         }
     }
     var numberOfVehicles = $("#numberOfVehicles").val();
@@ -147,10 +163,10 @@ function addVisitor() {
             });
         }
     }
-    $("#successModal").modal('show');
 }
 
 function makeTable() {
+    okButtonClicked = true;
     var numberOfTables = $("#tableNumber").val();
     $("#tableNumbers").html("");
     for (var i = 0; i < numberOfTables; i++) {
@@ -498,14 +514,15 @@ function showUserDetails() {
         processData: false,
         success: function (data) {
             var userDetails = data;
-            $("#userTable").append('<tr><td>'+userDetails.username+'</td><td><a style="color: black" href="mailto:'+userDetails.email+'">'+userDetails.email+'</a></td><td>'+userDetails.hodMail+'</td>' +
-                '<td>'+userDetails.roles[0].role+'</td><td>'+userDetails.department+'</td></tr>')
+            $("#userTable").append('<tr><td>' + userDetails.username + '</td><td><a style="color: black" href="mailto:' + userDetails.email + '">' + userDetails.email + '</a></td><td>' + userDetails.hodMail + '</td>' +
+                '<td>' + userDetails.roles[0].role + '</td><td>' + userDetails.department + '</td></tr>')
         },
         error: function (err) {
             alert(err.responseText);
         }
     });
 }
+
 function deleteYes() {
     $.ajax({
         url: 'deleteUser',
@@ -526,7 +543,7 @@ function deleteYes() {
     });
 }
 
-function deleteNo(){
+function deleteNo() {
     $("#deleteUserModal").modal("hide");
 }
 
