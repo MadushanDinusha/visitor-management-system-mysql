@@ -41,11 +41,48 @@ function getAll() {
 }
 
 function registerUser() {
+    var userName = $("#userName").val();
+    var HODEmail = $("#HODEmail").val();
+    var password = $("#password").val();
+    var email = $("#email").val();
+    var accountType = $("#role").val();
+    var department = $("#department").val();
 
-    if (($("#userName").val() != null || $.trim($("#userName").val()) != '') && ($("#password").val() != null || $.trim($("#password").val()) != '') && ($("#email").val() != null || $.trim($("#email").val()) != '') && ($("#department").val() != null || $.trim($("#department").val()) != '') && ($("#HODEmail").val() != null || $.trim($("#HODEmail").val()) != '') && ($("#role").val() != null || $.trim($("#role").val()) != '')) {
-        if ($("#password").val() != $("#confirmPassword").val() || $("#password").val() == null || $.trim($("#password").val()) === '') {
+    if (userName === '') {
+        document.getElementById("message").innerHTML = "Please Enter User name";
+        $("#successModalForRegistration").modal('show');
+    } else if (email === '') {
+        document.getElementById("message").innerHTML = "Please Enter email";
+        $("#successModalForRegistration").modal('show');
+    }
+    else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        document.getElementById("message").innerHTML = "Please Enter a valid email";
+        $("#successModalForRegistration").modal('show');
+    }
+    else if (password === '') {
+        document.getElementById("message").innerHTML = "Please Enter password";
+        $("#successModalForRegistration").modal('show');
+    } else if (HODEmail === '') {
+        document.getElementById("message").innerHTML = "Please Enter HOD mail";
+        $("#successModalForRegistration").modal('show');
+    } else if(!HODEmail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        document.getElementById("message").innerHTML = "Please Enter a valid email";
+        $("#successModalForRegistration").modal('show');
+    }
+    else if (accountType === null) {
+        document.getElementById("message").innerHTML = "Please Choose an account type";
+        $("#successModalForRegistration").modal('show');
+    } else if (department === null) {
+        document.getElementById("message").innerHTML = "Please Choose a department";
+        $("#successModalForRegistration").modal('show');
+    } else {
+        if ($("#password").val() != $("#confirmPassword").val() || $("#password").val() == null) {
             $("#passwordNotMatch").modal('show');
-        } else {
+        }else if($("#password").val().length<6){
+            document.getElementById("message").innerHTML = "Password should contain at least 6 characters";
+            $("#successModalForRegistration").modal('show');
+        }
+        else {
 
             $.ajax({
                 url: 'registerUser',
@@ -65,14 +102,14 @@ function registerUser() {
                     window.location.href = "/visitor-manage/admin/allUsers";
                 },
                 error: function (err) {
-                    alert(err.responseText);
+                    document.getElementById("message").innerHTML = err.responseText;
+                    $("#successModalForRegistration").modal('show');
                 }
             });
         }
-    } else {
-        $("#successModalForRegistration").modal('show');
     }
 }
+
 
 function deleteUser(userName) {
     $("#deleteUserModal").modal("show");
@@ -559,5 +596,6 @@ function search() {
         $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
             $(this).closest('tr').show();
         });
-    } else {}
+    } else {
+    }
 }

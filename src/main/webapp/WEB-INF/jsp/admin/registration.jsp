@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,29 +175,26 @@
 
     <div class="table-editable">
         <div class="signup-form">
-            <form action="" method="post">
+            <form>
                 <h2>Sign Up</h2>
                 <p>Please fill in this form to create an account!</p>
                 <hr>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" name="username" placeholder="Username" id="userName"
-                               required="required">
+                        <input type="text" class="form-control" placeholder="Username" id="userName">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                        <input type="email" class="form-control" name="email" placeholder="Email Address" id="email"
-                               required="required">
+                        <input type="text" class="form-control" placeholder="Email Address" id="email">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" name="password" placeholder="Password" id="password"
-                               required="required">
+                        <input type="password" class="form-control" placeholder="Password" id="password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -205,15 +203,14 @@
 					<i class="fa fa-lock"></i>
 					<i class="fa fa-check"></i>
 				</span>
-                        <input type="password" class="form-control" name="confirm_password" id="confirmPassword"
-                               placeholder="Confirm Password" required="required">
+                        <input type="password" class="form-control" id="confirmPassword"
+                               placeholder="Confirm Password">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
-                        <input type="email" class="form-control" name="email" id="HODEmail" placeholder="HOD Mail"
-                               required="required">
+                        <input type="text" class="form-control" name="email" id="HODEmail" placeholder="HOD Mail">
                     </div>
                 </div>
 
@@ -221,7 +218,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
 
-                        <select class="mdb-select md-form" id="role" required="required">
+                        <select class="mdb-select md-form" id="role" >
                             <option value="" disabled selected>Choose Account type</option>
                             <option value="ADMIN">ADMIN</option>
                             <option value="USER">USER</option>
@@ -234,7 +231,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-institution"></i></span>
-                        <select class="mdb-select md-form" id="department" required="required">
+                        <select class="mdb-select md-form" id="department" >
                             <option value="" disabled selected>Choose Department</option>
                             <option value="Administration">Administration</option>
                             <option value="Compliance">Compliance</option>
@@ -248,7 +245,6 @@
 
                     </div>
                 </div>
-
             </form>
             <button onclick="registerUser()" class="btn btn-outline-success">Sign Up</button>
         </div>
@@ -263,7 +259,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  Please fill correctly
+                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  <span id="message"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
