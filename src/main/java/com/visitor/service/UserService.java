@@ -5,12 +5,13 @@ import com.visitor.domain.User;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface UserService {
 
     User getUsersByUsername(String username);
 
-    void saveUser(Map<String,String> user);
+    void saveUser(Map<String, String> user);
 
     List<User> getAllUsers();
 
@@ -23,4 +24,6 @@ public interface UserService {
     List<Request> getRequestByUserName(int employee_id);
 
     int getIdByUserName(String userName);
+
+    void updatePassword(String userName, String password);
 }

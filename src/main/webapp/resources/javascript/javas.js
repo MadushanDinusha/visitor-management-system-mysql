@@ -54,22 +54,19 @@ function registerUser() {
     } else if (email === '') {
         document.getElementById("message").innerHTML = "Please Enter email";
         $("#successModalForRegistration").modal('show');
-    }
-    else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    } else if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
         document.getElementById("message").innerHTML = "Please Enter a valid email";
         $("#successModalForRegistration").modal('show');
-    }
-    else if (password === '') {
+    } else if (password === '') {
         document.getElementById("message").innerHTML = "Please Enter password";
         $("#successModalForRegistration").modal('show');
     } else if (HODEmail === '') {
         document.getElementById("message").innerHTML = "Please Enter HOD mail";
         $("#successModalForRegistration").modal('show');
-    } else if(!HODEmail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    } else if (!HODEmail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
         document.getElementById("message").innerHTML = "Please Enter a valid email";
         $("#successModalForRegistration").modal('show');
-    }
-    else if (accountType === null) {
+    } else if (accountType === null) {
         document.getElementById("message").innerHTML = "Please Choose an account type";
         $("#successModalForRegistration").modal('show');
     } else if (department === null) {
@@ -78,11 +75,10 @@ function registerUser() {
     } else {
         if ($("#password").val() != $("#confirmPassword").val() || $("#password").val() == null) {
             $("#passwordNotMatch").modal('show');
-        }else if($("#password").val().length<6){
+        } else if ($("#password").val().length < 6) {
             document.getElementById("message").innerHTML = "Password should contain at least 6 characters";
             $("#successModalForRegistration").modal('show');
-        }
-        else {
+        } else {
 
             $.ajax({
                 url: 'registerUser',
@@ -189,7 +185,8 @@ function addVisitor() {
                 contentType: 'application/json',
                 data: JSON.stringify({
                     "group_id": group_id,
-                    "vehicle_number": vehicleNumber
+                    "vehicle_number": vehicleNumber,
+                    "contextPath":sessionStorage.getItem('contextPath')
                 }),
                 processData: false,
                 success: function () {
@@ -598,4 +595,23 @@ function search() {
         });
     } else {
     }
+}
+
+function changePassword(){
+    var newPassword = $("#newPassword").val();
+        $.ajax({
+            url: "updatePassword",
+            dataType: 'text',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "newPassword":newPassword
+            }),
+            success: function (data) {
+                alert("successfully changed");
+            },
+            error:function (err) {
+                alert(err.responseText);
+            }
+        });
 }

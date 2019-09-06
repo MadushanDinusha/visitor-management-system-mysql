@@ -219,9 +219,6 @@
 <script type="text/javascript">
     var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";
     sessionStorage.setItem('contextPath', contextPath);
-    $(document).ready(function () {
-        getAllRequest();
-    });
 </script>
 <script>
     $(document).ready(function () {

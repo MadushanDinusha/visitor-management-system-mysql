@@ -4,10 +4,7 @@ import com.visitor.domain.Request;
 import com.visitor.domain.User;
 import com.visitor.domain.Vehicle;
 import com.visitor.domain.Visitor;
-import com.visitor.service.RequestService;
-import com.visitor.service.UserService;
-import com.visitor.service.VehicleService;
-import com.visitor.service.VisitorService;
+import com.visitor.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +20,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import java.io.IOException;
 import java.util.*;
 
 
 @Controller
 public class ApplicationController {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
+
+    @Autowired
+    MailService mailService;
 
     @Autowired
     @Qualifier("userService")
@@ -42,6 +45,7 @@ public class ApplicationController {
 
     @Autowired
     VehicleService vehicleService;
+
 
     @GetMapping("/")
     public String loadIndex() {
@@ -77,6 +81,11 @@ public class ApplicationController {
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
         return "/admin/registration";
+    }
+
+    @GetMapping("/user/resetPassword")
+    public String getChangePassword() {
+        return "user/resetPassword";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -242,6 +251,8 @@ public class ApplicationController {
         try {
             LOGGER.info("request to add visitor {}", visitor);
             visitorService.saveVisitor(visitor);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            mailService.sendmail(authentication.getName());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -307,6 +318,20 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            LOGGER.info("new pw {}", request.get("newPassword"));
+            userService.updatePassword(authentication.getName(), request.get("newPassword"));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable t) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
@@ -317,5 +342,17 @@ public class ApplicationController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred while deleting the user", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @RequestMapping(value = {"/sendEmail"}, method = RequestMethod.POST)
+    public ResponseEntity<?> sendEmail() throws AddressException, MessagingException, IOException {
+        try {
+            LOGGER.info("sending mail");
+
+            return new ResponseEntity<> ("Email sent successfully",HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

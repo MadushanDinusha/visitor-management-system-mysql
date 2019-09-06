@@ -43,10 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http
                     .csrf().disable().authorizeRequests()
                     .antMatchers("/resources/**").permitAll()
-                    .antMatchers("/","/logout").permitAll()
+                    .antMatchers("/","/logout","/home/**").permitAll()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                     .antMatchers("/guard/**").hasAnyAuthority("ADMIN","GUARD")
+                    .antMatchers("/changePassword/**").hasAnyAuthority("ADMIN","GUARD","USER")
                     .anyRequest().authenticated().and().csrf().disable()
                     .formLogin().loginPage("/login").permitAll()
                     .failureUrl("/login?error=true")

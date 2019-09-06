@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.*;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
     @Qualifier("userRepository")
     @Autowired
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public User getUsersByUsername(String username) {
@@ -89,5 +91,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getIdByUserName(String userName) {
         return userRepository.getUserByUsername(userName).getId();
+    }
+
+    @Override
+    public void updatePassword(String userName,String password){
+            userRepository.updatePassword(userName,bCryptPasswordEncoder.encode(password));
     }
 }

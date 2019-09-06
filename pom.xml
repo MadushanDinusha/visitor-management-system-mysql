@@ -7,10 +7,11 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.visitor</groupId>
-	<artifactId>visitor-manage</artifactId>
-	<version>1.0</version>
-	<name>visitor-manage</name>
+	<groupId>hms.tap</groupId>
+	<artifactId>service-status-inquiry</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>service-status-inquiry</name>
+	<description>Demo project for Spring Boot</description>
 
 <packaging>war</packaging>
 	<properties>
@@ -24,6 +25,16 @@
 		<url>http://somerepository.com/view.cvs/tags/1.0</url>
 	</scm>
 	<dependencies>
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+			<version>1.5.5</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

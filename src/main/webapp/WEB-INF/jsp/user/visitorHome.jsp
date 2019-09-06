@@ -62,6 +62,10 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/resetPassword">Change Password<span> <i
+                        class="fa fa-power-off"></i></span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
                         class="fa fa-power-off"></i></span></a>
             </li>
