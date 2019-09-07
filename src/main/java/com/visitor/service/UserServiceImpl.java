@@ -1,6 +1,5 @@
 package com.visitor.service;
 
-import com.visitor.controller.ApplicationController;
 import com.visitor.domain.Request;
 import com.visitor.domain.Role;
 import com.visitor.domain.User;

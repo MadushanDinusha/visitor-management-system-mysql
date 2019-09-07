@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -32,17 +32,6 @@ public class User {
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
     private Set<Role> roles;
-
-    @Column(name = "reset_token")
-    private String resetToken;
-
-    public String getResetToken() {
-        return resetToken;
-    }
-
-    public void setResetToken(String resetToken) {
-        this.resetToken = resetToken;
-    }
 
     public int getId() {
         return id;

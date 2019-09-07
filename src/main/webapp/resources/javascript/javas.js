@@ -79,7 +79,6 @@ function registerUser() {
             document.getElementById("message").innerHTML = "Password should contain at least 6 characters";
             $("#successModalForRegistration").modal('show');
         } else {
-
             $.ajax({
                 url: 'registerUser',
                 dataType: 'text',
@@ -105,7 +104,6 @@ function registerUser() {
         }
     }
 }
-
 
 function deleteUser(userName) {
     $("#deleteUserModal").modal("show");
@@ -165,7 +163,7 @@ function addVisitor() {
                         setInterval(reloadAddVisitor, 1000);
                     },
                     error: function (err) {
-                        console.log(err.responseText);
+                        alert(err.responseText);
                     }
                 });
             } else {
@@ -186,7 +184,7 @@ function addVisitor() {
                 data: JSON.stringify({
                     "group_id": group_id,
                     "vehicle_number": vehicleNumber,
-                    "contextPath":sessionStorage.getItem('contextPath')
+                    "contextPath": sessionStorage.getItem('contextPath')
                 }),
                 processData: false,
                 success: function () {
@@ -597,21 +595,21 @@ function search() {
     }
 }
 
-function changePassword(){
+function changePassword() {
     var newPassword = $("#newPassword").val();
-        $.ajax({
-            url: "updatePassword",
-            dataType: 'text',
-            type: 'post',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "newPassword":newPassword
-            }),
-            success: function (data) {
-                alert("successfully changed");
-            },
-            error:function (err) {
-                alert(err.responseText);
-            }
-        });
+    $.ajax({
+        url: "updatePassword",
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "newPassword": newPassword
+        }),
+        success: function (data) {
+            alert("successfully changed");
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
 }

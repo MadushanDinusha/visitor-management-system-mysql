@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Autowired
         private DataSource dataSource;
 
-        private final String USERS_QUERY = "select username, password, active from user where username=?";
-        private final String ROLES_QUERY = "select u.username, r.role from user u inner join user_role ur on (u.id = ur.user_id) inner join role r on (ur.role_id=r.role_id) where u.username=?";
+        private final String USERS_QUERY = "select username, password, active from users where username=?";
+        private final String ROLES_QUERY = "select u.username, r.role from users u inner join user_role ur on (u.id = ur.user_id) inner join role r on (ur.role_id=r.role_id) where u.username=?";
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception{
             http
-                    .csrf().disable().authorizeRequests()
+                    .csrf().disable()
+                    .authorizeRequests()
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/","/logout","/home/**").permitAll()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")

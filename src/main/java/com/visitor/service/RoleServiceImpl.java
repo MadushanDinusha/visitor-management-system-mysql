@@ -1,6 +1,5 @@
 package com.visitor.service;
 
-import com.visitor.controller.ApplicationController;
 import com.visitor.domain.Role;
 import com.visitor.repository.RoleRepository;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
+//    private static final Logger LOGGER = LogManager.getLogger(ApplicationController.class);
 
     @Qualifier("roleRepository")
     @Autowired
@@ -20,7 +19,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public String findByRoleId(int id) {
-        LOGGER.info("user role {}", roleRepository.findRoleById(2));
         return roleRepository.findRoleById(2).getRole();
     }
 }
