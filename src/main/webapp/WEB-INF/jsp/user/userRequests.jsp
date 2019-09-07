@@ -18,6 +18,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/navVisitor.css"/>">
+    <style type="text/css">
+        .checkb {
+            margin-left: 50%;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg ">
@@ -66,11 +71,31 @@
 <div class="container">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
     <div class="card-body">
-        <div class="text-center">
-            <input type="checkbox"  onclick="getAllRequestForUser()" value="Approved" id="approve"> Approved<br>
-            <input type="checkbox" onclick="getAllRequestForUser()" value="Rejected" id="reject"> Rejected<br>
-            <input type="checkbox" onclick="getAllRequestForUser()" value="Modify" id="modify"> Modify<br>
-            <input type="checkbox" onclick="getAllRequestForUser()" value="Pending" id="pending"> Pending<br>
+        <div class="checkb">
+            <!-- Default switch -->
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" onclick="getAllRequestForUser()" value="Approved"
+                       id="approve">
+                <label class="custom-control-label" for="approve">Approved</label>
+            </div>
+
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" onclick="getAllRequestForUser()" value="Rejected"
+                       id="reject">
+                <label class="custom-control-label" for="reject">Rejected</label>
+            </div>
+
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" onclick="getAllRequestForUser()" value="Modify"
+                       id="modify">
+                <label class="custom-control-label" for="modify">Modify</label>
+            </div>
+
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" onclick="getAllRequestForUser()" value="Pending"
+                       id="pending">
+                <label class="custom-control-label" for="pending">Pending</label>
+            </div>
         </div>
         <div id="tables1" class="table-editable">
         <table class="table table-hover">
