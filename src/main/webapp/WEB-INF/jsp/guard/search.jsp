@@ -120,12 +120,4 @@
     </div>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        getAllUsers();
-        getUserRoll();
-        getAllRequest();
-        getAllRequestForUser();
-    });
-</script>
 </html>

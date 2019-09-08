@@ -669,22 +669,11 @@ function getUserByUserName(userName) {
             "userName": userName
         }),
         success: function (data) {
-            $("#updateUser").html("");
-            $("#updateUser").append('<tr>' +
-                '<td><input disabled="disabled" type="text" class="form-control" id="uusername" value="' + data.username + '"></td>' +
-                '<td><input type="text" class="form-control" id="uemail" value="' + data.email + '"></td>' +
-                '<td><select class="mdb-select md-form" id="urole" value="' + data.roles[0].role + '"> ' +
-                '<option value="ADMIN">ADMIN</option>' +
-                '<option value="USER">USER</option>' +
-                '<option value="GUARD">GUARD</option></select></td>' +
-                '<td><input type="text" class="form-control" id="uhodmail" value="' + data.hodMail + '"></td>' +
-                '<td><select class="mdb-select md-form" id="udepartment" value="' + data.roles[0].department + '">' +
-                '<option value="Administration">Administration</option>' +
-                '<option value="Compliance">Compliance</option>' +
-                '<option value="Finance">Finance</option><option value="Central-IT">Central-IT</option>' +
-                '<option value="EAG">EAG</option>' +
-                '<option value="Stores">Stores</option>' +
-                '<option value="Other">Other</option></select></td></tr>');
+            $("#userName").val(data.username);
+            $("#email").val(data.email);
+            $("#HODEmail").val(data.hodMail);
+            $("#role").val(data.roles[0].role);
+            $("#department").val(data.department);
             $("#editDetailsModal").modal('show');
         },
         error: function (err) {
@@ -700,16 +689,16 @@ function editUserDetails() {
         dataType: 'text',
         contentType: 'application/json',
         data: JSON.stringify({
-            "userName": $("#uusername").val(),
-            "email": $("#uemail").val(),
-            "role": $("#urole").val(),
-            "hodMail": $("#uhodmail").val(),
-            "department": $("#udepartment").val(),
+            "userName":$("#userName").val(),
+            "email": $("#email").val(),
+            "hodMail": $("#HODEmail").val(),
+            "role": $("#role").val(),
+            "department": $("#department").val(),
         }),
         success: function (data) {
             $("#editDetailsModal").modal('hide');
-            alert("suc")
-
+            $("#successModal").modal('show');
+            setInterval(getAllUsers,1000);
         },
         error: function (err) {
             alert(err.responseText);

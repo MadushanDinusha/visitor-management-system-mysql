@@ -49,10 +49,14 @@ public class ApplicationController {
     @Autowired
     RoleService roleService;
 
-
     @GetMapping("/")
     public String loadIndex() {
         return "index";
+    }
+
+    @GetMapping("/guard/search")
+    public String loadSearchPage() {
+        return "guard/search";
     }
 
     @GetMapping("/user/visitorRequest")
@@ -367,7 +371,7 @@ public class ApplicationController {
             String hodMail = request.get("hodMail");
             String role = request.get("role");
             String department = request.get("department");
-            userService.updateUser(userName,email,hodMail,department);
+            userService.updateUser(userName, email, hodMail, department);
             User user = userService.getUsersByUsername(userName);
             int role_id = user.getRoles().iterator().next().getId();
             roleService.updateRoleByRoleId(role, role_id);
@@ -376,15 +380,14 @@ public class ApplicationController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
-    @RequestMapping(value = "/admin/getUserDetails",method = RequestMethod.POST)
-    public ResponseEntity<?> getUserByUserId(@RequestBody Map<String,String> request){
-        try{
+    @RequestMapping(value = "/admin/getUserDetails", method = RequestMethod.POST)
+    public ResponseEntity<?> getUserByUserId(@RequestBody Map<String, String> request) {
+        try {
             User user = userService.getUsersByUsername(request.get("userName"));
-            return new ResponseEntity<>(user,HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

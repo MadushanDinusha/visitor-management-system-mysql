@@ -57,7 +57,6 @@
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <button class="btn login_btn" type="submit">Login</button>
                         </div>
-                        <a onclick="changePassword()">change password</a>
                     </div>
                 </form>
             </div>

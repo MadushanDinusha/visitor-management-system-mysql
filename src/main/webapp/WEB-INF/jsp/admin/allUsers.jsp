@@ -22,6 +22,102 @@
         .list-group-item {
             cursor: pointer;
         }
+
+        .form-control, .form-control:focus, .input-group-addon {
+            border-color: #e1e1e1;
+        }
+
+        select {
+            width: auto;
+            box-shadow: none;
+            height: 40px;
+            width: 285px;
+
+        }
+
+        .form-control, .btn {
+            border-radius: 3px;
+        }
+
+        .signup-form {
+            width: 390px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+
+        .signup-form form {
+            color: #999;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            background: #f2f2f2;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        .signup-form h2 {
+            color: #333;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .signup-form hr {
+            margin: 0 -30px 20px;
+        }
+
+        .signup-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .signup-form label {
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .signup-form .form-control {
+            min-height: 38px;
+            box-shadow: none !important;
+        }
+
+        .signup-form .input-group-addon {
+            max-width: 42px;
+            text-align: center;
+        }
+
+
+        .signup-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .signup-form a:hover {
+            text-decoration: none;
+        }
+
+        .signup-form form a {
+            color: #19aa8d;
+            text-decoration: none;
+        }
+
+        .signup-form form a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-form .fa {
+            font-size: 21px;
+        }
+
+        .signup-form .fa-paper-plane {
+            font-size: 18px;
+        }
+
+        .signup-form .fa-check {
+            color: #fff;
+            left: 17px;
+            top: 18px;
+            font-size: 7px;
+            position: absolute;
+        }
+
     </style>
 </head>
 <body>
@@ -79,11 +175,11 @@
 
 </nav>
 <div class="container">
-    <a onclick="updateUserRole()" >update</a>
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
     <div class="card-body">
         <div class="active-cyan-3 active-cyan-4 mb-4">
-            <input class="form-control" id="searchInput" type="text" placeholder="Search" aria-label="Search" onkeyup="search()">
+            <input class="form-control" id="searchInput" type="text" placeholder="Search" aria-label="Search"
+                   onkeyup="search()">
         </div>
         <div id="table" class="table-editable">
             <table id="userInfo" class="table table-bordered table-responsive-md table-striped text-center">
@@ -127,35 +223,88 @@
 <%--Modal--%>
 <div class="modal fade" id="editDetailsModal" role="dialog">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content -lg" >
+        <div class="modal-content -lg">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
-                    <div class="card-body">
-                        <div id="tabless" class="table-editable">
-                            <span  style="display: none" id="requestedUser"></span>
-                            <table id="updateTable" class="table table-bordered table-responsive-md table-striped text-center">
-                                <thead>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>HOD mail</th>
-                                <th>Department</th>
-                                </thead>
-                                <tbody id="updateUser">
-                                </tbody>
-                            </table>
-                            <div class="container-fluid" id="vehicles"></div>
-                        </div>
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Update User</h3>
+                    <div class="signup-form">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">User Name :</p>
+                                    <br>
+                                    <input disabled="disabled" type="text" class="form-control" placeholder="Username" id="userName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">Email :</p>
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Email Address" id="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">HOD mail :</p>
+                                    <br>
+                                    <input type="text" class="form-control" name="email" id="HODEmail"
+                                           placeholder="HOD Mail">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">Role :</p>
+                                    <select class="mdb-select md-form" id="role">
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="USER">USER</option>
+                                        <option value="GUARD">GUARD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">Department :</p>
+                                    <br>
+                                    <select class="mdb-select md-form" id="department">
+                                        <option value="Administration" id="Administration">Administration</option>
+                                        <option value="Compliance" id="Compliance">Compliance</option>
+                                        <option value="Finance" id="Finance">Finance</option>
+                                        <option value="Central-IT" id="Central-IT">Central-IT</option>
+                                        <option value="EAG" id="EAG"></option>
+                                        <option value="Stores" id="Stores">Stores</option>
+                                        <option value="Other" id="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <a class="btn btn-outline-success" onclick="editUserDetails()">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Success Modal--%>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i> Successfully Updated
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
