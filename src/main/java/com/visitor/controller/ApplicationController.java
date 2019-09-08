@@ -391,4 +391,14 @@ public class ApplicationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(value = "/user/getUserName",method = RequestMethod.GET)
+    public ResponseEntity<?> getUserName(){
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return new ResponseEntity<>(authentication.getName(),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

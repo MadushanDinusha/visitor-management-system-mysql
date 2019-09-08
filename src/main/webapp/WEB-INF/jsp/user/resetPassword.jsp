@@ -21,6 +21,6 @@
 </head>
 <body>
 <input type="text"  id="newPassword">
-<button onclick="changePassword()">ok</button>
+
 </body>
 </html>

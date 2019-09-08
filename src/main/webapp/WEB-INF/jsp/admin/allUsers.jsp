@@ -144,7 +144,8 @@
                                                            id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/guard/search">Search
+                    <span> <i class="fa fa-clock-o"></i></span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -273,7 +274,7 @@
                                         <option value="Compliance" id="Compliance">Compliance</option>
                                         <option value="Finance" id="Finance">Finance</option>
                                         <option value="Central-IT" id="Central-IT">Central-IT</option>
-                                        <option value="EAG" id="EAG"></option>
+                                        <option value="EAG" id="EAG">EAG</option>
                                         <option value="Stores" id="Stores">Stores</option>
                                         <option value="Other" id="Other">Other</option>
                                     </select>

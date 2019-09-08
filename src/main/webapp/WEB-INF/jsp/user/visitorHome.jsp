@@ -29,7 +29,6 @@
         }
         .container
         {
-            margin-left:35%;
             margin-top:10%;
         }
         a.homeTag
@@ -48,6 +47,9 @@
         #homebody
         {
             background-color: seashell;
+        }
+        .nav-link{
+            cursor: pointer;
         }
 
     </style>
@@ -96,7 +98,7 @@
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/resetPassword">Change Password<span> <i
+                <a class="nav-link"   onclick="showChangePasswordModal()">Change Password<span> <i
                         class="fa fa-key"></i></span></a>
             </li>
             <li class="nav-item">
@@ -109,7 +111,7 @@
 
 </nav>
 <br>
-<h4 style="margin-left:5%"> Welcome Username !</h4>
+<h4 style="margin-left:5%"> Welcome <span id="welcomeUserName"></span> !</h4>
 <div class="container">
     <a class="homeTag" href="#">
         <div class="col-sm-4">
@@ -132,14 +134,92 @@
         </div>
     </a>
 </div>
-
-
+<div class="modal fade" id="modalChangePassword" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content -lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Change Password</h3>
+                    <p>New Password :</p>
+                    <input type="password" class="form-control" id="changePassword">
+                    <p>Confirm Password :</p>
+                    <input type="password" class="form-control" id="confirmChangePassword">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-outline-success" onclick="changePassword()">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Success Modal--%>
+<div class="modal fade" id="successModalForChangePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i> Successfully Changed Password
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Error Modal--%>
+<div class="modal fade" id="errorModalForChangePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i> Password do not match
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Error Modal--%>
+<div class="modal fade" id="errorModalForCharacterChangePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i> Password should contain at least 6 characters
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
         getUserRoll();
         getAllRequest();
         getAllRequestForUser();
+        getUserName();
     });
 </script>
 

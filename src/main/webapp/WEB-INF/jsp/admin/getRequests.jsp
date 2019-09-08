@@ -49,7 +49,8 @@
                                                             id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Search<span> <i class="fa fa-clock-o"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/guard/search">Search
+                    <span> <i class="fa fa-clock-o"></i></span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"

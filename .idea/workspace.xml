@@ -5,9 +5,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/allUsers.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/allUsers.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/Search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/registration.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/requestDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/requestDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/resetPassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/resetPassword.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorHome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorHome.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,7 +87,7 @@
       <workItem from="1566841067776" duration="2378000" />
       <workItem from="1566872718732" duration="9572000" />
       <workItem from="1566886657705" duration="27477000" />
-      <workItem from="1567952841984" duration="3717000" />
+      <workItem from="1567952841984" duration="9707000" />
     </task>
     <servers />
   </component>

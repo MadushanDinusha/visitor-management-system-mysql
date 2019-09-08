@@ -180,7 +180,7 @@ function addVisitor() {
                 processData: false,
                 success: function () {
                     okButtonClicked = false;
-                    setInterval(reloadAddVisitor, 1000);
+                    setTimeout(reloadAddVisitor, 1000);
                 },
                 error: function (err) {
                     alert(err.responseText);
@@ -476,7 +476,7 @@ function ModalYes() {
     $("#mi-modal").modal('hide');
     $("#myModal").modal('hide');
     $("#modify-modal").modal('hide');
-    setInterval(getAllRequest, 1000);
+    setTimeout(getAllRequest, 1000);
 }
 
 function ModalNo() {
@@ -608,7 +608,6 @@ function search() {
     table = document.getElementById("table");
     tr = table.getElementsByTagName("tr");
 
-    // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
         if (td) {
@@ -622,23 +621,37 @@ function search() {
     }
 }
 
+function showChangePasswordModal() {
+    $("#modalChangePassword").modal('show');
+}
+
 function changePassword() {
-    var newPassword = $("#newPassword").val();
-    $.ajax({
-        url: "updatePassword",
-        dataType: 'text',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "newPassword": newPassword
-        }),
-        success: function (data) {
-            alert("successfully changed");
-        },
-        error: function (err) {
-            alert(err.responseText);
+    var newPassword = $("#changePassword").val();
+    var confirmChange = $("#confirmChangePassword").val();
+    if(newPassword.length<5){
+        $("#errorModalForCharacterChangePassword").modal('show');
+    }else {
+        if (newPassword === confirmChange) {
+            $.ajax({
+                url: "updatePassword",
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "newPassword": newPassword
+                }),
+                success: function () {
+                    $("#modalChangePassword").modal('hide');
+                    $("#successModalForChangePassword").modal('show');
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }else {
+            $("#errorModalForChangePassword").modal('show');
         }
-    });
+    }
 }
 
 function updateUserRole() {
@@ -689,7 +702,7 @@ function editUserDetails() {
         dataType: 'text',
         contentType: 'application/json',
         data: JSON.stringify({
-            "userName":$("#userName").val(),
+            "userName": $("#userName").val(),
             "email": $("#email").val(),
             "hodMail": $("#HODEmail").val(),
             "role": $("#role").val(),
@@ -698,10 +711,26 @@ function editUserDetails() {
         success: function (data) {
             $("#editDetailsModal").modal('hide');
             $("#successModal").modal('show');
-            setInterval(getAllUsers,1000);
+            setTimeout(getAllUsers, 1000);
         },
         error: function (err) {
             alert(err.responseText);
+        }
+    });
+}
+
+function getUserName() {
+    $.ajax({
+        url: 'getUserName',
+        dataType: 'text',
+        type: 'get',
+        contentType: 'application/json',
+        processData: false,
+        success: function (data) {
+            document.getElementById("welcomeUserName").innerHTML = data;
+        },
+        error: function (err) {
+            alert(err.responseText)
         }
     });
 }
