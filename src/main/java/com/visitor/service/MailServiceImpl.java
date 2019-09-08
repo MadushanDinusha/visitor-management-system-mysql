@@ -19,11 +19,11 @@ public class MailServiceImpl implements MailService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("biafradmin@brandix.com", "welcome@4312");
+                return new PasswordAuthentication("", "");
             }
         });
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("biafradmin@brandix.com", false));
+        msg.setFrom(new InternetAddress("", false));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hashand@brandix.com"));
         msg.setSubject("New Request");
         msg.setContent(userName + " has sent a new request \n link here - http://localho st:8080/visitor-manage/admin/getRequests ", "text/html");

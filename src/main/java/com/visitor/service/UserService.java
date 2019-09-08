@@ -26,4 +26,6 @@ public interface UserService {
     int getIdByUserName(String userName);
 
     void updatePassword(String userName, String password);
+
+    void updateUser(String userName, String email,String hodMail,String department);
 }

@@ -127,7 +127,8 @@ function getAllUsers() {
                     '<td><a style="color: black" href="mailto:' + userList[i].email + '">' + userList[i].email + '</a></td><td>' + userList[i].roles[0].role + '</td><td>' + userList[i].hodMail + '</td>' +
                     '<td>' + userList[i].department + '</td><td><p data-placement="top" data-toggle="tooltip" title="Delete">' +
                     '<button class="btn btn-danger btn-xs" onclick="deleteUser(\'' + userList[i].username + '\')">' +
-                    '<span class="fa fa-trash"></span></button></p></td>');
+                    '<span class="fa fa-trash-o"></span></button></p></td>' +
+                    '<td><button onclick="getUserByUserName(\'' + userList[i].username + '\')"><span class="fa fa-edit"></span></button></td></tr>');
             }
         },
         error: function (err) {
@@ -137,40 +138,57 @@ function getAllUsers() {
 }
 
 function addVisitor() {
+    var table, tr, td, i;
+    table = document.getElementById("tb1");
+    tr = table.getElementsByTagName("tr");
     var numberOfTables = $("#tableNumber").val();
     var group_id = makeUniqueId();
-    if ($("#0nic").val() != undefined && okButtonClicked == true) {
-        for (var j = 0; j < numberOfTables; j++) {
-            if (!($("#" + '' + j + '' + "nic").val() == null || $("#" + '' + j + '' + "nic").val() === "") && !($("#" + '' + j + '' + "name").val() == null || $("#" + '' + j + '' + "name").val() === "") && !($("#" + '' + j + '' + "company").val() == null || $("#" + '' + j + '' + "company").val() === "") && !($("#" + '' + j + '' + "purpose").val() == null || $("#" + '' + j + '' + "purpose").val() === "") && !($("#" + '' + j + '' + "date").val() == null || $("#" + '' + j + '' + "date").val() === "")) {
-                var visitor = new Object();
-                visitor.nic = $("#" + '' + j + '' + "nic").val();
-                visitor.groupId = group_id;
-                visitor.name = $("#" + '' + j + '' + "name").val();
-                visitor.company = $("#" + '' + j + '' + "company").val();
-                visitor.purpose = $("#" + '' + j + '' + "purpose").val();
-                visitor.date = $("#" + '' + j + '' + "date").val();
-                visitor.vehicleNumber = $("#vehicle").val();
-                console.log("visitor " + visitor);
-                $.ajax({
-                    url: "addVisitor",
-                    dataType: 'text',
-                    type: 'post',
-                    contentType: 'application/json',
-                    data: JSON.stringify(visitor),
-                    processData: false,
-                    success: function () {
-                        okButtonClicked = false;
-                        setInterval(reloadAddVisitor, 1000);
-                    },
-                    error: function (err) {
-                        alert(err.responseText);
-                    }
-                });
-            } else {
-                $("#successModal").modal('show');
+    var foundEmpty = false;
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            var k = i - 1;
+            var nic = $("#" + '' + k + '' + "nic").val();
+            var names = $("#" + '' + k + '' + "name").val();
+            var company = $("#" + '' + k + '' + "purpose").val();
+            var dates = $("#" + '' + k + '' + "company").val();
+            var purpose = $("#" + '' + k + '' + "date").val();
+            if (nic === '' || nic == null || names === '' || names == null || company === '' || company == null || dates === '' || dates == null || purpose === '' || purpose == null) {
+                foundEmpty = true;
             }
         }
     }
+    if (foundEmpty) {
+        $("#successModal").modal('show');
+    } else if ($("#0nic").val() != undefined && okButtonClicked == true) {
+        for (var j = 0; j < numberOfTables; j++) {
+            var visitor = new Object();
+            visitor.nic = $("#" + '' + j + '' + "nic").val();
+            visitor.groupId = group_id;
+            visitor.name = $("#" + '' + j + '' + "name").val();
+            visitor.company = $("#" + '' + j + '' + "company").val();
+            visitor.purpose = $("#" + '' + j + '' + "purpose").val();
+            visitor.date = $("#" + '' + j + '' + "date").val();
+            visitor.vehicleNumber = $("#vehicle").val();
+            console.log("visitor " + visitor);
+            $.ajax({
+                url: "addVisitor",
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(visitor),
+                processData: false,
+                success: function () {
+                    okButtonClicked = false;
+                    setInterval(reloadAddVisitor, 1000);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+    }
+
     var numberOfVehicles = $("#numberOfVehicles").val();
     var firstVehicle = $("#0vehicle").val();
     if (numberOfVehicles > 0 && firstVehicle != undefined) {
@@ -203,11 +221,11 @@ function makeTable() {
     $("#tableNumbers").html("");
     for (var i = 0; i < numberOfTables; i++) {
         $("#tableNumbers").append('' +
-            '<tr><td><input type="text" class="form-control" id="' + i + 'nic"></td>' +
-            '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
-            '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
-            '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-            '<td><input type="text" class="form-control" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>');
+            '<tr><td><input type="text" class="nic" id="' + i + 'nic"></td>' +
+            '<td><input type="text" class="names" id="' + i + 'name"></td>' +
+            '<td><input type="text" class="company" id="' + i + 'company"></td>' +
+            '<td><input type="text" class="purpose" id="' + i + 'purpose"></td>' +
+            '<td><input type="text" class="date" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>');
     }
 }
 
@@ -584,14 +602,23 @@ function reloadAddVisitor() {
 }
 
 function search() {
-    var search = $('#searchInput').val();
-    $('table tbody tr').hide();
-    var len = $('table tbody tr:not(.notfound) td:contains("' + search + '")').length;
-    if (len > 0) {
-        $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
-            $(this).closest('tr').show();
-        });
-    } else {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
     }
 }
 
@@ -607,6 +634,82 @@ function changePassword() {
         }),
         success: function (data) {
             alert("successfully changed");
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}
+
+function updateUserRole() {
+    $.ajax({
+        url: "updateRole",
+        type: "post",
+        dataType: 'text',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "ba": "aa"
+        }),
+        success: function (data) {
+            alert("successfully changed");
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    })
+}
+
+function getUserByUserName(userName) {
+    $.ajax({
+        url: "getUserDetails",
+        type: "post",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "userName": userName
+        }),
+        success: function (data) {
+            $("#updateUser").html("");
+            $("#updateUser").append('<tr>' +
+                '<td><input disabled="disabled" type="text" class="form-control" id="uusername" value="' + data.username + '"></td>' +
+                '<td><input type="text" class="form-control" id="uemail" value="' + data.email + '"></td>' +
+                '<td><select class="mdb-select md-form" id="urole" value="' + data.roles[0].role + '"> ' +
+                '<option value="ADMIN">ADMIN</option>' +
+                '<option value="USER">USER</option>' +
+                '<option value="GUARD">GUARD</option></select></td>' +
+                '<td><input type="text" class="form-control" id="uhodmail" value="' + data.hodMail + '"></td>' +
+                '<td><select class="mdb-select md-form" id="udepartment" value="' + data.roles[0].department + '">' +
+                '<option value="Administration">Administration</option>' +
+                '<option value="Compliance">Compliance</option>' +
+                '<option value="Finance">Finance</option><option value="Central-IT">Central-IT</option>' +
+                '<option value="EAG">EAG</option>' +
+                '<option value="Stores">Stores</option>' +
+                '<option value="Other">Other</option></select></td></tr>');
+            $("#editDetailsModal").modal('show');
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}
+
+function editUserDetails() {
+    $.ajax({
+        url: "updateUserDetails",
+        type: "post",
+        dataType: 'text',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "userName": $("#uusername").val(),
+            "email": $("#uemail").val(),
+            "role": $("#urole").val(),
+            "hodMail": $("#uhodmail").val(),
+            "department": $("#udepartment").val(),
+        }),
+        success: function (data) {
+            $("#editDetailsModal").modal('hide');
+            alert("suc")
+
         },
         error: function (err) {
             alert(err.responseText);

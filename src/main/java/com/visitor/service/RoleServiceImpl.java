@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.sax.SAXResult;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -20,5 +22,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public String findByRoleId(int id) {
         return roleRepository.findRoleById(2).getRole();
+    }
+
+    @Override
+    public void updateRoleByRoleId(String role, int id) {
+        roleRepository.updateRoleByUserId(role, id);
     }
 }

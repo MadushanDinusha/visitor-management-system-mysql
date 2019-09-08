@@ -79,6 +79,7 @@
 
 </nav>
 <div class="container">
+    <a onclick="updateUserRole()" >update</a>
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
     <div class="card-body">
         <div class="active-cyan-3 active-cyan-4 mb-4">
@@ -93,6 +94,7 @@
                 <th>HOD mail</th>
                 <th>Department</th>
                 <th>Delete</th>
+                <th>Edit</th>
                 </thead>
                 <tbody id="tableBody">
                 </tbody>
@@ -118,6 +120,42 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="modal-btn-si" onclick="deleteYes()">Yes</button>
                 <button type="button" class="btn btn-primary" id="modal-btn-no" onclick="deleteNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Modal--%>
+<div class="modal fade" id="editDetailsModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content -lg" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User details</h3>
+                    <div class="card-body">
+                        <div id="tabless" class="table-editable">
+                            <span  style="display: none" id="requestedUser"></span>
+                            <table id="updateTable" class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>HOD mail</th>
+                                <th>Department</th>
+                                </thead>
+                                <tbody id="updateUser">
+                                </tbody>
+                            </table>
+                            <div class="container-fluid" id="vehicles"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-outline-success" onclick="editUserDetails()">Save</a>
             </div>
         </div>
     </div>

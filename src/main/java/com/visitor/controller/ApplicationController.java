@@ -46,6 +46,9 @@ public class ApplicationController {
     @Autowired
     VehicleService vehicleService;
 
+    @Autowired
+    RoleService roleService;
+
 
     @GetMapping("/")
     public String loadIndex() {
@@ -252,7 +255,7 @@ public class ApplicationController {
             LOGGER.info("request to add visitor {}", visitor);
             visitorService.saveVisitor(visitor);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            mailService.sendmail(authentication.getName());
+//            mailService.sendmail(authentication.getName());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -349,10 +352,40 @@ public class ApplicationController {
         try {
             LOGGER.info("sending mail");
 
-            return new ResponseEntity<> ("Email sent successfully",HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Email sent successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @RequestMapping(value = {"/admin/updateUserDetails"}, method = RequestMethod.POST)
+    public ResponseEntity<?> updateRoleByUserId(@RequestBody Map<String, String> request) {
+        try {
+            String userName = request.get("userName");
+            String email = request.get("email");
+            String hodMail = request.get("hodMail");
+            String role = request.get("role");
+            String department = request.get("department");
+            userService.updateUser(userName,email,hodMail,department);
+            User user = userService.getUsersByUsername(userName);
+            int role_id = user.getRoles().iterator().next().getId();
+            roleService.updateRoleByRoleId(role, role_id);
+            LOGGER.info("updating role {}", request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "/admin/getUserDetails",method = RequestMethod.POST)
+    public ResponseEntity<?> getUserByUserId(@RequestBody Map<String,String> request){
+        try{
+            User user = userService.getUsersByUsername(request.get("userName"));
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
