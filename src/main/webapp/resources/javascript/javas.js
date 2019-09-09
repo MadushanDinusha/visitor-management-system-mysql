@@ -10,6 +10,11 @@ function makeUniqueId() {
     return 'visitor_' + Math.random().toString(36).substr(2, 16);
 }
 
+function validateDate(dtValue) {
+    var dtRegex = new RegExp(/\b\d{4}[\-]\d{1,2}[\-]\d{1,2}[\' ']\d{2}[\:]\d{2}\b/);
+    return dtRegex.test(dtValue);
+}
+
 function getUserRoll() {
     $.ajax({
         url: 'getUserRole',
@@ -142,24 +147,38 @@ function addVisitor() {
     table = document.getElementById("tb1");
     tr = table.getElementsByTagName("tr");
     var numberOfTables = $("#tableNumber").val();
+    var numberOfVehicles = $("#numberOfVehicles").val();
     var group_id = makeUniqueId();
     var foundEmpty = false;
+    var foundEmptyVehicle = false;
+    var incorrectDateAndTime = false;
+    for (var vehicle = 0; vehicle < numberOfVehicles; vehicle++) {
+        var vehicleValue = $("#" + '' + vehicle + '' + "vehicle").val();
+        if (vehicleValue === null || vehicleValue === '') {
+            foundEmptyVehicle = true;
+        }
+    }
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
         if (td) {
             var k = i - 1;
             var nic = $("#" + '' + k + '' + "nic").val();
             var names = $("#" + '' + k + '' + "name").val();
-            var company = $("#" + '' + k + '' + "purpose").val();
-            var dates = $("#" + '' + k + '' + "company").val();
-            var purpose = $("#" + '' + k + '' + "date").val();
+            var company = $("#" + '' + k + '' + "company").val();
+            var dates = $("#" + '' + k + '' + "date").val();
+            var purpose = $("#" + '' + k + '' + "purpose").val();
             if (nic === '' || nic == null || names === '' || names == null || company === '' || company == null || dates === '' || dates == null || purpose === '' || purpose == null) {
                 foundEmpty = true;
+            } else if (!validateDate(dates)) {
+                incorrectDateAndTime = true;
             }
         }
     }
-    if (foundEmpty) {
+    if(foundEmpty || foundEmptyVehicle){
         $("#successModal").modal('show');
+    }
+    else if (incorrectDateAndTime) {
+        $("#errorInDateAndTime").modal('show');
     } else if ($("#0nic").val() != undefined && okButtonClicked == true) {
         for (var j = 0; j < numberOfTables; j++) {
             var visitor = new Object();
@@ -180,6 +199,7 @@ function addVisitor() {
                 processData: false,
                 success: function () {
                     okButtonClicked = false;
+                    $("#sendingEmailModal").modal("show");
                     setTimeout(reloadAddVisitor, 1000);
                 },
                 error: function (err) {
@@ -188,8 +208,6 @@ function addVisitor() {
             });
         }
     }
-
-    var numberOfVehicles = $("#numberOfVehicles").val();
     var firstVehicle = $("#0vehicle").val();
     if (numberOfVehicles > 0 && firstVehicle != undefined) {
         for (var v = 0; v < numberOfVehicles; v++) {
@@ -628,9 +646,9 @@ function showChangePasswordModal() {
 function changePassword() {
     var newPassword = $("#changePassword").val();
     var confirmChange = $("#confirmChangePassword").val();
-    if(newPassword.length<5){
+    if (newPassword.length < 5) {
         $("#errorModalForCharacterChangePassword").modal('show');
-    }else {
+    } else {
         if (newPassword === confirmChange) {
             $.ajax({
                 url: "updatePassword",
@@ -648,7 +666,7 @@ function changePassword() {
                     alert(err.responseText);
                 }
             });
-        }else {
+        } else {
             $("#errorModalForChangePassword").modal('show');
         }
     }
