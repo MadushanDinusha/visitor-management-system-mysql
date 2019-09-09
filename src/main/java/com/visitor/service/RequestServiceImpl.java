@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class RequestServiceImpl implements RequestService{
@@ -37,5 +38,10 @@ public class RequestServiceImpl implements RequestService{
     @Override
    public void updateEmpState(int user_id,String employeeState){
         requestRepository.updateEmpState(user_id,employeeState);
+    }
+
+    @Override
+    public List<Request> getRequestByGroupId(String groupId) {
+        return requestRepository.getRequestByGroup_id(groupId);
     }
 }

@@ -23,6 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 
@@ -152,12 +158,9 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<List<Visitor>> getRequests(@PathVariable("group_id") String group_id) {
         try {
-            LOGGER.info("request id {}", group_id);
             List<Visitor> visitors = visitorService.findVisitorByGroupId(group_id);
-            LOGGER.info("visitor details {}", visitors);
             return new ResponseEntity<>(visitors, HttpStatus.OK);
         } catch (Throwable t) {
-            LOGGER.error("Error occurred while sending message", t);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -167,10 +170,8 @@ public class ApplicationController {
     public ResponseEntity<List<?>> getGroupList() {
         try {
             List<User> groupsList = userService.getAllUsers();
-            LOGGER.info("Getting all users lists {}", groupsList);
             return new ResponseEntity<>(groupsList, HttpStatus.OK);
         } catch (Throwable t) {
-            LOGGER.error("Error occurred while getting group list", t);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -207,7 +208,6 @@ public class ApplicationController {
             int employee_id = userService.getIdByUserName(authentication.getName());
             List<Request> requests = userService.getRequestByUserName(employee_id);
             Collections.reverse(requests);
-            LOGGER.info("request by visitor {}", requests);
             return new ResponseEntity<>(requests, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -247,7 +247,6 @@ public class ApplicationController {
                 return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
             }
         } catch (Throwable t) {
-            LOGGER.error("Error occurred while saving user", t);
             return new ResponseEntity<>("internal error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -256,7 +255,6 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
         try {
-            LOGGER.info("request to add visitor {}", visitor);
             visitorService.saveVisitor(visitor);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //            mailService.sendmail(authentication.getName());
@@ -270,7 +268,6 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> saveVehicle(@RequestBody Map<String, String> vehicle) {
         try {
-            LOGGER.info("request to add vehicle {}", vehicle);
             String groupId = vehicle.get("group_id");
             String vehicleNumber = vehicle.get("vehicle_number");
             Vehicle vehicleObj = new Vehicle();
@@ -287,13 +284,11 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> updateVisitorState(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info("request {}", request);
             requestService.updateRequestState(request.get("group_id"), request.get("state"));
             requestService.updateComment(request.get("group_id"), request.get("message"));
             requestService.updateReadState(request.get("group_id"), "Read", "UnRead");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            LOGGER.info("Error occurred while updating 'request' table", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -302,7 +297,6 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> updateVisitor(@RequestBody Visitor visitor) {
         try {
-            LOGGER.info("visitor updating {}", visitor);
             visitorService.updateVisitor(visitor);
             requestService.updateRequestState(visitor.getGroupId(), "Pending");
             requestService.updateReadState(visitor.getGroupId(), "UnRead", "Read");
@@ -330,7 +324,6 @@ public class ApplicationController {
     public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            LOGGER.info("new pw {}", request.get("newPassword"));
             userService.updatePassword(authentication.getName(), request.get("newPassword"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Throwable t) {
@@ -343,7 +336,6 @@ public class ApplicationController {
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info("username {}", request.get("userName"));
             userService.deleteUser(request.get("userName"));
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
@@ -354,7 +346,6 @@ public class ApplicationController {
     @RequestMapping(value = {"/sendEmail"}, method = RequestMethod.POST)
     public ResponseEntity<?> sendEmail() throws AddressException, MessagingException, IOException {
         try {
-            LOGGER.info("sending mail");
 
             return new ResponseEntity<>("Email sent successfully", HttpStatus.OK);
         } catch (Exception e) {
@@ -375,7 +366,6 @@ public class ApplicationController {
             User user = userService.getUsersByUsername(userName);
             int role_id = user.getRoles().iterator().next().getId();
             roleService.updateRoleByRoleId(role, role_id);
-            LOGGER.info("updating role {}", request);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -392,12 +382,37 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/user/getUserName",method = RequestMethod.GET)
-    public ResponseEntity<?> getUserName(){
+    @RequestMapping(value = "/user/getUserName", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserName() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            return new ResponseEntity<>(authentication.getName(),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(authentication.getName(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/getVisitorDetailsForCheckInAndCheckOut", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getVisitorDetailsForCheckInAndCheckOut() {
+        try {
+            List<Visitor> visitorList = visitorService.getAllVisitors();
+            List<Visitor> returnVisitorList = new ArrayList<>();
+
+            for (Visitor visitor : visitorList) {
+                java.util.Date today = new java.util.Date();
+                String dates = new SimpleDateFormat("yyyy-MM-dd").format(today);
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = (Date)formatter.parse(dates);
+                String visitorDates = new SimpleDateFormat("yyyy-MM-dd").format(visitor.getDate());
+                DateFormat formatters = new SimpleDateFormat("yyyy-MM-dd");
+                Date VisitorDate = (Date)formatters.parse(visitorDates);
+                List<Request> requests = requestService.getRequestByGroupId(visitor.getGroupId());
+                if (VisitorDate.compareTo(date) >= 0 && requests.get(0).getState().equals("Approved")) {
+                    returnVisitorList.add(visitor);
+                }
+            }
+            return new ResponseEntity<>(returnVisitorList, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

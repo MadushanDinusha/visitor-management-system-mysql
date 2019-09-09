@@ -156,7 +156,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  Please Enter date and time in correct format
+                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  Please Enter date and time in correct format (YYYY-MM-DD HH:MM)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>

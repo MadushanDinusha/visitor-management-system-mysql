@@ -25,4 +25,5 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     void updateVisitorById(@Param("id") long id, @Param("company") String company,
                            @Param("name") String name, @Param("nic") String nic, @Param("purpose") String purpose, @Param("date") Timestamp date);
 
+
 }

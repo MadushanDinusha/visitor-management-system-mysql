@@ -61,4 +61,8 @@ public class VisitorServiceImpl implements VisitorService {
     public void updateVisitor(Visitor visitor){
         visitorRepository.updateVisitorById( visitor.getId(),visitor.getCompany(),visitor.getName(),visitor.getNic(),visitor.getPurpose(),visitor.getDate());
     }
+
+    public List<Visitor> getAllVisitors(){
+        return visitorRepository.findAll();
+    }
 }

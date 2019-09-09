@@ -37,4 +37,7 @@ public interface RequestRepository extends CrudRepository<Request,Long> {
     @Query("UPDATE Request SET  employeeState = :employeeState WHERE user_id = :user_id")
     @Transactional
     void updateEmpState(@Param("user_id") int user_id, @Param("employeeState") String employeeState);
+
+    @Query("FROM Request WHERE group_id = ?1")
+    List<Request> getRequestByGroup_id(String groupId);
 }

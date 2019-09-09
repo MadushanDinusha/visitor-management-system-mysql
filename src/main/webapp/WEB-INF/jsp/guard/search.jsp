@@ -92,7 +92,7 @@
                 <th style="color: mediumseagreen">Check-In-Time</th>
                 <th style="color: red">Check-Out-Time</th>
                 </thead>
-                <tbody id="tableBody">
+                <tbody id="visitorList">
                 </tbody>
             </table>
         </div>
@@ -121,4 +121,10 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        getVisitorDetailsForCheckInAndCheckOut();
+    });
+</script>
+
 </html>

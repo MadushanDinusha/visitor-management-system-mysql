@@ -174,10 +174,9 @@ function addVisitor() {
             }
         }
     }
-    if(foundEmpty || foundEmptyVehicle){
+    if (foundEmpty || foundEmptyVehicle) {
         $("#successModal").modal('show');
-    }
-    else if (incorrectDateAndTime) {
+    } else if (incorrectDateAndTime) {
         $("#errorInDateAndTime").modal('show');
     } else if ($("#0nic").val() != undefined && okButtonClicked == true) {
         for (var j = 0; j < numberOfTables; j++) {
@@ -746,6 +745,24 @@ function getUserName() {
         processData: false,
         success: function (data) {
             document.getElementById("welcomeUserName").innerHTML = data;
+        },
+        error: function (err) {
+            alert(err.responseText)
+        }
+    });
+}
+
+function getVisitorDetailsForCheckInAndCheckOut() {
+    $.ajax({
+        url: 'getVisitorDetailsForCheckInAndCheckOut',
+        dataType: 'json',
+        contentType: 'application/json',
+        processData: false,
+        success: function (visitorList) {
+            var visitorListSize = visitorList.length;
+            for (var i = 0; i < visitorListSize; i++) {
+                $("#visitorList").append('<tr><td>' + visitorList[i].nic + '</td><td>' + visitorList[i].name + '</td><td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td><td>' + visitorList[i].date + '</td></tr>')
+            }
         },
         error: function (err) {
             alert(err.responseText)
