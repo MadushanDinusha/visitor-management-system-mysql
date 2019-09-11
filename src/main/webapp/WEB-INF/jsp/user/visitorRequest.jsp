@@ -78,7 +78,7 @@
 </nav>
 
 <div class="container">
-    <h3 style="margin-bottom: 5%" class="card-header text-center font-weight-bold text-uppercase py-4">Request Approval details</h3>
+    <h3 style="margin-bottom: 5%" class="card-header text-center font-weight-bold text-uppercase py-4">Add Reqeust</h3>
 
     <form action="">
         <div class="text-center">
@@ -123,7 +123,7 @@
             <div class="container" id="inputVehicle">
             </div>
         </div>
-        <div class="row">
+        <div class="text-center">
             <button type="reset" class="btn btn-outline-dark">Clear</button>
             <a  onclick="addVisitor()" class="btn btn-outline-success">Submit</a>
         </div>

@@ -846,7 +846,6 @@ function getVisitorDetailsForCheckInAndCheckOut() {
 
 function updateVisitorCheckIn(index, visitorId) {
     var checkIn = $("#" + '' + index + '' + "checkIn").val();
-
     $.ajax({
         url: "updateVisitorCheckIn",
         type: "post",
@@ -889,7 +888,6 @@ function updateVisitorCheckOut(index, visitorId) {
 
 function updateVisitorPassId(index, visitorId) {
     var passId = $("#" + '' + index + '' + "passId").val();
-
     $.ajax({
         url: "updateVisitorPassId",
         type: "post",
@@ -931,14 +929,13 @@ function getVehiclesDetails(groupId) {
 }
 
 function sendMail() {
-    alert(sessionStorage.getItem("contextPath"))
     $.ajax({
         url: "sendMail",
         type: "post",
         dataType: 'text',
         contentType: 'application/json',
         data: JSON.stringify({
-            "contextPath": getContextPath(),
+            "contextPath": getContextPath()
         }),
         success: function () {
             setTimeout(reloadUserRequests, 1000);

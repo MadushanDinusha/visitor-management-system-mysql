@@ -81,7 +81,7 @@
 
 </nav>
 <div class="container">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Requests</h3>
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Pending Requests</h3>
     <div class="card-body">
         <div id="table" class="table-editable">
             <table class="table table-bordered table-responsive-md table-striped text-center">

@@ -121,7 +121,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Request details</h3>
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Your Requests</h3>
                     <div class="card-body">
                         <div id="tables" class="table-editable">
                             <hr>
