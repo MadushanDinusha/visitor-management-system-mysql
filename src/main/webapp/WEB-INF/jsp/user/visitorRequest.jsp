@@ -182,6 +182,10 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    var contextPath = "<c:out value="${pageContext.request.contextPath}"/>";
+    sessionStorage.setItem('contextPath', contextPath);
+</script>
 <script>
     $(document).ready(function () {
         getUserRoll();

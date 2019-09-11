@@ -257,8 +257,18 @@ public class ApplicationController {
     public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
         try {
             visitorService.saveVisitor(visitor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/user/sendMail", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> sendMail(@RequestBody Map<String ,String> request) {
+        try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            mailService.sendmail(authentication.getName());
+            mailService.sendmail(authentication.getName(),request.get("contextPath"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

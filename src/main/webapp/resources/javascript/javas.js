@@ -159,6 +159,7 @@ function addVisitor() {
     var group_id = makeUniqueId();
     var foundEmpty = false;
     var foundEmptyVehicle = false;
+    var successOfLastRecord = false;
     var incorrectDateAndTime = false;
     for (var vehicle = 0; vehicle < numberOfVehicles; vehicle++) {
         var vehicleValue = $("#" + '' + vehicle + '' + "vehicle").val();
@@ -197,22 +198,41 @@ function addVisitor() {
             visitor.date = $("#" + '' + j + '' + "date").val();
             visitor.vehicleNumber = $("#vehicle").val();
             console.log("visitor " + visitor);
-            $.ajax({
-                url: "addVisitor",
-                dataType: 'text',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify(visitor),
-                processData: false,
-                success: function () {
-                    okButtonClicked = false;
-                    $("#sendingEmailModal").modal("show");
-                    setTimeout(reloadAddVisitor, 1000);
-                },
-                error: function (err) {
-                    alert(err.responseText);
-                }
-            });
+            if (j === numberOfTables - 1) {
+                $.ajax({
+                    url: "addVisitor",
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify(visitor),
+                    processData: false,
+                    success: function () {
+                        okButtonClicked = false;
+                        $("#sendingEmailModal").modal("show");
+                        sendMail()
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: "addVisitor",
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify(visitor),
+                    processData: false,
+                    success: function () {
+                        okButtonClicked = false;
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+            }
+
+
         }
     }
     var firstVehicle = $("#0vehicle").val();
@@ -622,7 +642,7 @@ function deleteNo() {
     $("#deleteUserModal").modal("hide");
 }
 
-function reloadAddVisitor() {
+function reloadUserRequests() {
     window.location.href = "/visitor-manage/user/userRequests";
 }
 
@@ -804,11 +824,7 @@ function getVisitorDetailsForCheckInAndCheckOut() {
                             '<td>' + visitorList[i].passId + '</td>' +
                             '<td><input id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
                             '<td><input id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
-
-
                     }
-
-
                 } else {
                     $("#visitorList").append('<tr>' +
                         '<td>' + visitorList[i].nic + '</td>' +
@@ -914,6 +930,22 @@ function getVehiclesDetails(groupId) {
     });
 }
 
-function updatePassId(visitorId) {
+function sendMail() {
+    alert(sessionStorage.getItem("contextPath"))
+    $.ajax({
+        url: "sendMail",
+        type: "post",
+        dataType: 'text',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "contextPath": getContextPath(),
+        }),
+        success: function () {
+            setTimeout(reloadUserRequests, 1000);
+        }
+    });
+}
 
+function getContextPath() {
+    return "${pageContext.request.contextPath}";
 }
