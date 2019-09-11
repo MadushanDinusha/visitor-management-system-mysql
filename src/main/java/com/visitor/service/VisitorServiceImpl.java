@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -36,6 +37,7 @@ public class VisitorServiceImpl implements VisitorService {
     public void saveVisitor(Visitor visitor) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Calendar cal = Calendar.getInstance();
         visitor.setUserName(authentication.getName());
         User employee = userService.getUsersByUsername(authentication.getName());
         Request request = new Request();
@@ -47,6 +49,11 @@ public class VisitorServiceImpl implements VisitorService {
         request.setAdminState("UnRead");
         request.setEmployeeState("Read");
         requestService.saveRequest(request);
+        cal.setTimeInMillis(visitor.getDate().getTime());
+        cal.add(Calendar.HOUR, -5);
+        cal.add(Calendar.MINUTE, -30);
+        Timestamp timestamps = new Timestamp(cal.getTime().getTime());
+        visitor.setDate(timestamps);
         visitorRepository.save(visitor);
     }
 
@@ -64,5 +71,17 @@ public class VisitorServiceImpl implements VisitorService {
 
     public List<Visitor> getAllVisitors(){
         return visitorRepository.findAll();
+    }
+
+    public void updateVisitorCheckIn(String checkIn, long id){
+        visitorRepository.updateVisitorCheckIn(checkIn,id);
+    }
+
+    public void updateVisitorCheckOut(String checkOut, long id){
+        visitorRepository.updateVisitorCheckOut(checkOut,id);
+    }
+
+    public void updateVisitorPassId(String passId, long visitorId){
+        visitorRepository.updateVisitorPassId(passId,visitorId);
     }
 }

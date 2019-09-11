@@ -77,7 +77,8 @@
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Visitor details</h3>
     <div class="card-body">
         <div class="active-cyan-3 active-cyan-4 mb-4">
-            <input class="form-control" id="searchInput" type="text" placeholder="Search by NIC" aria-label="Search" onkeyup="search()">
+            <input class="form-control" id="searchInput" type="text" placeholder="Search by NIC" aria-label="Search"
+                   onkeyup="search()">
         </div>
         <div id="table" class="table-editable">
             <table id="userInfo" class="table table-bordered table-responsive-md table-striped text-center">
@@ -120,6 +121,35 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="vehicleDetailsModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Vehicle Details</h3>
+                    <div class="card-body">
+                        <div id="tables" class="table-editable">
+                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>Vehicle Number</th>
+                                </thead>
+                                <tbody id="vehicleTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script>
     $(document).ready(function () {

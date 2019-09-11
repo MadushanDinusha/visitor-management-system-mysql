@@ -23,7 +23,22 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     @Query("UPDATE Visitor SET company = :company ,name = :name, nic = :nic,purpose = :purpose,date = :date WHERE id = :id")
     @Transactional
     void updateVisitorById(@Param("id") long id, @Param("company") String company,
-                           @Param("name") String name, @Param("nic") String nic, @Param("purpose") String purpose, @Param("date") Timestamp date);
+                           @Param("name") String name, @Param("nic") String nic, @Param("purpose") String purpose,
+                           @Param("date") Timestamp date);
 
 
+    @Modifying
+    @Query("UPDATE Visitor SET check_in = :check_in WHERE id = :id")
+    @Transactional
+    void updateVisitorCheckIn(@Param("check_in") String check_in, @Param("id") long id);
+
+    @Modifying
+    @Query("UPDATE Visitor SET check_out = :check_out WHERE id = :id")
+    @Transactional
+    void updateVisitorCheckOut(@Param("check_out") String check_out, @Param("id") long id);
+
+    @Modifying
+    @Query("UPDATE Visitor SET pass_id = :pass_id WHERE id = :id")
+    @Transactional
+    void updateVisitorPassId(@Param("pass_id") String pass_id,@Param("id") long id);
 }

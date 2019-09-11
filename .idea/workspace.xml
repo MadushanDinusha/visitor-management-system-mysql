@@ -4,14 +4,11 @@
     <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/repository/RequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/RequestRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/domain/Visitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VisitorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/repository/VisitorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/RequestServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/service/VisitorServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/visitorRequest.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,6 +90,19 @@
       <workItem from="1568027672081" duration="1809000" />
       <workItem from="1568029548768" duration="276000" />
       <workItem from="1568030228956" duration="1683000" />
+      <workItem from="1568032353920" duration="1930000" />
+      <workItem from="1568039481300" duration="1742000" />
+      <workItem from="1568084335155" duration="1035000" />
+      <workItem from="1568115530609" duration="1724000" />
+      <workItem from="1568117306433" duration="207000" />
+      <workItem from="1568125322617" duration="605000" />
+      <workItem from="1568177633325" duration="1736000" />
+      <workItem from="1568179413019" duration="239000" />
+      <workItem from="1568179948818" duration="1725000" />
+      <workItem from="1568181805086" duration="1721000" />
+      <workItem from="1568183808423" duration="1754000" />
+      <workItem from="1568185627060" duration="1783000" />
+      <workItem from="1568187521562" duration="236000" />
     </task>
     <servers />
   </component>

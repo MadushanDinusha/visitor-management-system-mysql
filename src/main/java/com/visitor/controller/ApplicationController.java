@@ -1,5 +1,6 @@
 package com.visitor.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.visitor.domain.Request;
 import com.visitor.domain.User;
 import com.visitor.domain.Vehicle;
@@ -402,16 +403,56 @@ public class ApplicationController {
                 java.util.Date today = new java.util.Date();
                 String dates = new SimpleDateFormat("yyyy-MM-dd").format(today);
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = (Date)formatter.parse(dates);
+                Date date = (Date) formatter.parse(dates);
                 String visitorDates = new SimpleDateFormat("yyyy-MM-dd").format(visitor.getDate());
                 DateFormat formatters = new SimpleDateFormat("yyyy-MM-dd");
-                Date VisitorDate = (Date)formatters.parse(visitorDates);
+                Date VisitorDate = (Date) formatters.parse(visitorDates);
                 List<Request> requests = requestService.getRequestByGroupId(visitor.getGroupId());
                 if (VisitorDate.compareTo(date) >= 0 && requests.get(0).getState().equals("Approved")) {
                     returnVisitorList.add(visitor);
                 }
             }
             return new ResponseEntity<>(returnVisitorList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/updateVisitorCheckIn", method = RequestMethod.POST)
+    public ResponseEntity<?> updateVisitorCheckIn(@RequestBody Map<String, String> request) {
+        try {
+            visitorService.updateVisitorCheckIn(request.get("checkIn"), Long.parseLong(request.get("visitorId")));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/updateVisitorCheckOut", method = RequestMethod.POST)
+    public ResponseEntity<?> updateVisitorCheckOut(@RequestBody Map<String, String> request) {
+        try {
+            visitorService.updateVisitorCheckOut(request.get("checkOut"), Long.parseLong(request.get("visitorId")));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/getVehiclesDetails/{groupId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getVehiclesDetails(@PathVariable("groupId") String groupId) {
+        try {
+           List<Vehicle> vehicles = vehicleService.getVehicleListByGroupId(groupId);
+            return new ResponseEntity<>(vehicles,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/updateVisitorPassId", method = RequestMethod.POST)
+    public ResponseEntity<?> updateVisitorPassId(@RequestBody Map<String, String> request) {
+        try {
+            visitorService.updateVisitorPassId(request.get("passId"), Long.parseLong(request.get("visitorId")));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

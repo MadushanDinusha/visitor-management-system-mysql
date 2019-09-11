@@ -36,6 +36,39 @@ public class Visitor {
     @Column(name = "responded_emp")
     private String userName;
 
+    @Column(name = "check_in")
+    private String checkIn;
+
+    @Column(name = "check_out")
+    private String checkOut;
+
+    @Column(name = "pass_id")
+    private String passId;
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public String getPassId() {
+        return passId;
+    }
+
+    public void setPassId(String passId) {
+        this.passId = passId;
+    }
+
     public String getNic() {
         return nic;
     }

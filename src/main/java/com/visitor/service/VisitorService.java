@@ -2,6 +2,7 @@ package com.visitor.service;
 
 import com.visitor.domain.Visitor;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface VisitorService {
@@ -14,4 +15,10 @@ public interface VisitorService {
     void updateVisitor(Visitor visitor);
 
     List<Visitor> getAllVisitors();
+
+    void updateVisitorCheckIn(String checkIn, long id);
+
+    void updateVisitorCheckOut(String checkIn, long id);
+
+    void updateVisitorPassId(String passId, long VisitorId);
 }
