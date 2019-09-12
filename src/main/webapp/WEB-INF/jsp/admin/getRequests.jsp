@@ -115,6 +115,7 @@
                                 <th>Name</th>
                                 <th>Company</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th>Purpose</th>
                                 </thead>
                                 <tbody id="visitorTable">

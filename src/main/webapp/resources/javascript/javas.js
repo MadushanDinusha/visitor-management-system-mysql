@@ -11,7 +11,7 @@ function makeUniqueId() {
 }
 
 function validateDate(dtValue) {
-    var dtRegex = new RegExp(/\b\d{4}[\-]\d{1,2}[\-]\d{1,2}[\' ']\d{2}[\:]\d{2}\b/);
+    var dtRegex = new RegExp(/\b\d{1,2}[\/]\d{1,2}[\/]\d{4}\b/);
     return dtRegex.test(dtValue);
 }
 
@@ -175,11 +175,10 @@ function addVisitor() {
             var names = $("#" + '' + k + '' + "name").val();
             var company = $("#" + '' + k + '' + "company").val();
             var dates = $("#" + '' + k + '' + "date").val();
+            var time = $("#" + '' + k + '' + "time").val();
             var purpose = $("#" + '' + k + '' + "purpose").val();
-            if (nic === '' || nic == null || names === '' || names == null || company === '' || company == null || dates === '' || dates == null || purpose === '' || purpose == null) {
+            if (time === '' || time == null || nic === '' || nic == null || names === '' || names == null || company === '' || company == null || dates === '' || dates == null || purpose === '' || purpose == null) {
                 foundEmpty = true;
-            } else if (!validateDate(dates)) {
-                incorrectDateAndTime = true;
             }
         }
     }
@@ -196,8 +195,8 @@ function addVisitor() {
             visitor.company = $("#" + '' + j + '' + "company").val();
             visitor.purpose = $("#" + '' + j + '' + "purpose").val();
             visitor.date = $("#" + '' + j + '' + "date").val();
+            visitor.time = $("#" + '' + j + '' + "time").val();
             visitor.vehicleNumber = $("#vehicle").val();
-            console.log("visitor " + visitor);
             if (j === numberOfTables - 1) {
                 $.ajax({
                     url: "addVisitor",
@@ -270,7 +269,8 @@ function makeTable() {
             '<td><input type="text" class="names" id="' + i + 'name"></td>' +
             '<td><input type="text" class="company" id="' + i + 'company"></td>' +
             '<td><input type="text" class="purpose" id="' + i + 'purpose"></td>' +
-            '<td><input type="text" class="date" id="' + i + 'date" placeholder="YYYY-MM-DD HH:MM"></td></tr>');
+            '<td><input type="date" class="date" id="' + i + 'date"></td>' +
+            '<td><input type="time" id="' + i + 'time"></td></tr>');
     }
 }
 
@@ -341,7 +341,7 @@ function getRequest(group_id) {
             userName = visitorList[0].userName;
             for (var i = 0; i < numberOfVisitors; i++) {
                 $("#visitorTable").append('<tr><td>' + visitorList[i].nic + '</td><td>' + visitorList[i].name + '</td>' +
-                    '<td>' + visitorList[i].company + '</td><td>' + increaseDate(visitorList[i].date) + '</td><td>' + visitorList[i].purpose + '</td></tr>');
+                    '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].date + '</td><td>' + visitorList[i].time + '</td><td>' + visitorList[i].purpose + '</td></tr>');
             }
         },
         error: function (err) {
@@ -544,11 +544,12 @@ function modifyRequest(groupsId) {
             $("#visitorTables").html("");
             for (var i = 0; i < listSize; i++) {
                 $("#visitorTables").append('<tr>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'nic"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'name"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'company"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'purpose"></td>' +
-                    '<td><input type="text" class="form-control" id="' + i + 'date" ></td>' +
+                    '<td><input type="text"  id="' + i + 'nic"></td>' +
+                    '<td><input type="text"  id="' + i + 'name"></td>' +
+                    '<td><input type="text"  id="' + i + 'company"></td>' +
+                    '<td><input type="text"  id="' + i + 'purpose"></td>' +
+                    '<td><input type="date"  id="' + i + 'date" ></td>' +
+                    '<td><input type="time"  id="' + i + 'time" ></td>' +
                     '<td style="visibility: hidden;width: 0px"><input style="visibility: hidden;width: 0px" id="' + i + 'id"></td>' +
                     '</tr>');
                 $("#" + '' + i + '' + "id").val(visitorList[i].id);
@@ -556,7 +557,8 @@ function modifyRequest(groupsId) {
                 $("#" + '' + i + '' + "name").val(visitorList[i].name);
                 $("#" + '' + i + '' + "company").val(visitorList[i].company);
                 $("#" + '' + i + '' + "purpose").val(visitorList[i].purpose);
-                $("#" + '' + i + '' + "date").val(increaseDate(visitorList[i].date));
+                $("#" + '' + i + '' + "date").val(visitorList[i].date);
+                $("#" + '' + i + '' + "time").val(visitorList[i].time);
             }
         },
         error: function (err) {
@@ -575,6 +577,7 @@ function saveModify() {
         visitorModify.company = $("#" + '' + i + '' + "company").val();
         visitorModify.purpose = $("#" + '' + i + '' + "purpose").val();
         visitorModify.date = $("#" + '' + i + '' + "date").val();
+        visitorModify.time = $("#" + '' + i + '' + "time").val();
         visitorModify.groupId = groupIdForUpdate;
         $.ajax({
             url: "updateVisitor",
@@ -798,7 +801,8 @@ function getVisitorDetailsForCheckInAndCheckOut() {
                                 '<td>' + visitorList[i].nic + '</td>' +
                                 '<td>' + visitorList[i].name + '</td>' +
                                 '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                                '<td>' + increaseDate(visitorList[i].date) + '</td>' +
+                                '<td>' + visitorList[i].date + '</td>' +
+                                '<td>' + visitorList[i].time + '</td>' +
                                 '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
                                 '<td>' + visitorList[i].passId + '</td>' +
                                 '<td>' + visitorList[i].checkIn + '</td>' +
@@ -808,33 +812,37 @@ function getVisitorDetailsForCheckInAndCheckOut() {
                                 '<td>' + visitorList[i].nic + '</td>' +
                                 '<td>' + visitorList[i].name + '</td>' +
                                 '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                                '<td>' + increaseDate(visitorList[i].date) + '</td>' +
+                                '<td>' + visitorList[i].date + '</td>' +
+                                '<td>' + visitorList[i].time + '</td>' +
                                 '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
                                 '<td>' + visitorList[i].passId + '</td>' +
                                 '<td>' + visitorList[i].checkIn + '</td>' +
-                                '<td><input id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
+                                '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
                         }
                     } else {
                         $("#visitorList").append('<tr>' +
                             '<td>' + visitorList[i].nic + '</td>' +
                             '<td>' + visitorList[i].name + '</td>' +
-                            '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                            '<td>' + increaseDate(visitorList[i].date) + '</td>' +
+                            '<td>' + visitorList[i].company + '</td>' +
+                            '<td>' + visitorList[i].purpose + '</td>' +
+                            '<td>' + visitorList[i].date + '</td>' +
+                            '<td>' + visitorList[i].time + '</td>' +
                             '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
                             '<td>' + visitorList[i].passId + '</td>' +
-                            '<td><input id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
-                            '<td><input id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
+                            '<td><input type="time" id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
+                            '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
                     }
                 } else {
                     $("#visitorList").append('<tr>' +
                         '<td>' + visitorList[i].nic + '</td>' +
                         '<td>' + visitorList[i].name + '</td>' +
                         '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                        '<td>' + increaseDate(visitorList[i].date) + '</td>' +
+                        '<td>' + visitorList[i].date + '</td>' +
+                        '<td>' + visitorList[i].time + '</td>' +
                         '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
                         '<td><input id="' + i + 'passId"><br><a id = "' + i + 'passBtn" onclick="updateVisitorPassId(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a> </td>' +
-                        '<td><input id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
-                        '<td><input id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
+                        '<td><input type="time" id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
+                        '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
                 }
             }
         },

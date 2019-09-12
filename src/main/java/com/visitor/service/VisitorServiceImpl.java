@@ -5,8 +5,6 @@ import com.visitor.domain.User;
 import com.visitor.domain.Visitor;
 import com.visitor.repository.RequestRepository;
 import com.visitor.repository.VisitorRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -14,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -37,7 +34,6 @@ public class VisitorServiceImpl implements VisitorService {
     public void saveVisitor(Visitor visitor) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        Calendar cal = Calendar.getInstance();
         visitor.setUserName(authentication.getName());
         User employee = userService.getUsersByUsername(authentication.getName());
         Request request = new Request();
@@ -49,11 +45,6 @@ public class VisitorServiceImpl implements VisitorService {
         request.setAdminState("UnRead");
         request.setEmployeeState("Read");
         requestService.saveRequest(request);
-        cal.setTimeInMillis(visitor.getDate().getTime());
-        cal.add(Calendar.HOUR, -5);
-        cal.add(Calendar.MINUTE, -30);
-        Timestamp timestamps = new Timestamp(cal.getTime().getTime());
-        visitor.setDate(timestamps);
         visitorRepository.save(visitor);
     }
 
@@ -66,7 +57,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     public void updateVisitor(Visitor visitor){
-        visitorRepository.updateVisitorById( visitor.getId(),visitor.getCompany(),visitor.getName(),visitor.getNic(),visitor.getPurpose(),visitor.getDate());
+        visitorRepository.updateVisitorById( visitor.getId(),visitor.getCompany(),visitor.getName(),visitor.getNic(),visitor.getPurpose(),visitor.getDate(),visitor.getTime());
     }
 
     public List<Visitor> getAllVisitors(){

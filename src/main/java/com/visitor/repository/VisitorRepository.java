@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -20,11 +21,11 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     List<Visitor> findVisitorByRespondedEmp(String userName);
 
     @Modifying
-    @Query("UPDATE Visitor SET company = :company ,name = :name, nic = :nic,purpose = :purpose,date = :date WHERE id = :id")
+    @Query("UPDATE Visitor SET company = :company ,name = :name, nic = :nic,purpose = :purpose,date = :date, time= :time WHERE id = :id")
     @Transactional
     void updateVisitorById(@Param("id") long id, @Param("company") String company,
                            @Param("name") String name, @Param("nic") String nic, @Param("purpose") String purpose,
-                           @Param("date") Timestamp date);
+                           @Param("date") Date date,@Param("time") String time);
 
 
     @Modifying

@@ -1,8 +1,6 @@
 package com.visitor.repository;
 
 import com.visitor.domain.Request;
-import com.visitor.domain.User;
-import jdk.nashorn.internal.objects.annotations.Property;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

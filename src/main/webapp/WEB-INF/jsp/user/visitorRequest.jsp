@@ -99,7 +99,8 @@
                 <th>Name</th>
                 <th>Company</th>
                 <th>Reason</th>
-                <th>Date & Time</th>
+                <th>Date</th>
+                <th>Time</th>
 
             </tr>
             </thead>

@@ -3,6 +3,8 @@ package com.visitor.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
@@ -30,8 +32,11 @@ public class Visitor {
     private String company;
 
     @Column(name = "date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp date;
+    private Date date;
+
+    @Column(name = "time")
+    @JsonFormat(pattern = "HH:mm")
+    private String time;
 
     @Column(name = "responded_emp")
     private String userName;
@@ -109,11 +114,11 @@ public class Visitor {
         this.company = company;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -133,15 +138,29 @@ public class Visitor {
         this.groupId = groupId;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Visitor{" +
-                "nic='" + nic + '\'' +
+                "id=" + id +
+                ", nic='" + nic + '\'' +
+                ", groupId='" + groupId + '\'' +
                 ", name='" + name + '\'' +
                 ", purpose='" + purpose + '\'' +
                 ", company='" + company + '\'' +
                 ", date=" + date +
+                ", time='" + time + '\'' +
                 ", userName='" + userName + '\'' +
+                ", checkIn='" + checkIn + '\'' +
+                ", checkOut='" + checkOut + '\'' +
+                ", passId='" + passId + '\'' +
                 '}';
     }
 }
