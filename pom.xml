@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.visitor</groupId>
 	<artifactId>visitor-management-system</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>visitor-management-system</name>
 	<description>Visitor management system for Brandix</description>
 
@@ -20,9 +20,9 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<scm>
-		<connection>scm:svn:http://somerepository.com/svn_repo/tags/1.0</connection>
-		<developerConnection>scm:svn:https://somerepository.com/svn_repo/tags/1.0</developerConnection>
-		<url>http://somerepository.com/view.cvs/tags/1.0</url>
+		<connection>scm:svn:http://somerepository.com/svn_repo/tags/visitor-management-system-0.0.1</connection>
+		<developerConnection>scm:svn:https://somerepository.com/svn_repo/tags/visitor-management-system-0.0.1</developerConnection>
+		<url>http://somerepository.com/view.cvs/tags/visitor-management-system-0.0.1</url>
 	</scm>
 	<dependencies>
 		<dependency>
