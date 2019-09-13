@@ -280,6 +280,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p style="width: 100px">Change Password :</p>
+                                    <br>
+                                    <input type="password" class="form-control" name="email" id="changePw"
+                                           placeholder="Change Password">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

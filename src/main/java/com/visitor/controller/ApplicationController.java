@@ -373,7 +373,14 @@ public class ApplicationController {
             String hodMail = request.get("hodMail");
             String role = request.get("role");
             String department = request.get("department");
-            userService.updateUser(userName, email, hodMail, department);
+            if (request.get("password") == null || request.get("password").equals("")){
+                LOGGER.info("inside if");
+                userService.updateUser(userName, email, hodMail, department);
+            }else {
+                LOGGER.info("else {}",request.get("password"));
+                userService.updateUser(userName, email, hodMail, department);
+                userService.updatePassword(userName,request.get("password"));
+            }
             User user = userService.getUsersByUsername(userName);
             int role_id = user.getRoles().iterator().next().getId();
             roleService.updateRoleByRoleId(role, role_id);

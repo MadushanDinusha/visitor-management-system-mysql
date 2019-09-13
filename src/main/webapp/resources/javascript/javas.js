@@ -746,27 +746,56 @@ function getUserByUserName(userName) {
 }
 
 function editUserDetails() {
-    $.ajax({
-        url: "updateUserDetails",
-        type: "post",
-        dataType: 'text',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "userName": $("#userName").val(),
-            "email": $("#email").val(),
-            "hodMail": $("#HODEmail").val(),
-            "role": $("#role").val(),
-            "department": $("#department").val(),
-        }),
-        success: function (data) {
-            $("#editDetailsModal").modal('hide');
-            $("#successModal").modal('show');
-            setTimeout(getAllUsers, 1000);
-        },
-        error: function (err) {
-            alert(err.responseText);
-        }
-    });
+    var changePw = $("#changePw").val();
+    alert(changePw);
+    if(changePw ===null || changePw ==="" ||changePw ===undefined){
+        alert("inside");
+        $.ajax({
+            url: "updateUserDetails",
+            type: "post",
+            dataType: 'text',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userName": $("#userName").val(),
+                "email": $("#email").val(),
+                "hodMail": $("#HODEmail").val(),
+                "role": $("#role").val(),
+                "department": $("#department").val(),
+            }),
+            success: function (data) {
+                $("#editDetailsModal").modal('hide');
+                $("#successModal").modal('show');
+                setTimeout(getAllUsers, 1000);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }else {
+        alert("out")
+        $.ajax({
+            url: "updateUserDetails",
+            type: "post",
+            dataType: 'text',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userName": $("#userName").val(),
+                "email": $("#email").val(),
+                "hodMail": $("#HODEmail").val(),
+                "role": $("#role").val(),
+                "department": $("#department").val(),
+                "password":changePw
+            }),
+            success: function (data) {
+                $("#editDetailsModal").modal('hide');
+                $("#successModal").modal('show');
+                setTimeout(getAllUsers, 1000);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
 }
 
 function getUserName() {
