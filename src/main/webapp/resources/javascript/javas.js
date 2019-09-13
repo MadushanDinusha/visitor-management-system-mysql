@@ -816,6 +816,7 @@ function getUserName() {
 
 
 function updateVisitorCheckIn(index, visitorId, checkIn) {
+    alert(checkIn);
     $.ajax({
         url: "updateVisitorCheckIn",
         type: "post",
@@ -827,6 +828,7 @@ function updateVisitorCheckIn(index, visitorId, checkIn) {
         }),
         success: function (data) {
             $("#passIdCheckInModal").modal("hide");
+            $("#sureModalPassIdCheckIn").modal("hide");
             getVisitorDetailsForCheckInAndCheckOut();
         },
         error: function (err) {
@@ -847,6 +849,7 @@ function updateVisitorCheckOut(index, visitorId, checkOut) {
         }),
         success: function (data) {
             $("#checkoutModal").modal("hide");
+            $("#sureModalCheckOut").modal("hide");
             getVisitorDetailsForCheckInAndCheckOut()
         },
         error: function (err) {
@@ -974,12 +977,15 @@ function getPassIdCheckInModal(index, visitorId) {
     $("#updatePassIdCheckIn").on('click', function () {
         var passId = $("#passIdInput").val();
         var checkIn = $("#checkInInput").val();
-        if((passId ==null || passId === "") && (checkIn ==null ||checkIn==="")){
+        if((passId ==null || passId === "") || (checkIn ==null ||checkIn==="")){
             $("#errorInPassIdOrCheckIn").modal('show');
         }else{
+            $("#sureModalPassIdCheckIn").modal("show");
+        }
+        $("#yseButton").on('click', function () {
             updateVisitorPassId(index, visitorId, passId);
             updateVisitorCheckIn(index, visitorId, checkIn);
-        }
+        });
     });
 }
 
@@ -990,7 +996,10 @@ function getCheckOutModal(index, visitorId) {
         if(checkOut == null ||checkOut ==""){
             $("#errorInPassIdOrCheckIn").modal('show');
         }else {
-            updateVisitorCheckOut(index, visitorId, checkOut);
+            $("#sureModalCheckOut").modal("show");
         }
+        $("#yseButtonCheckout").on('click', function () {
+            updateVisitorCheckOut(index, visitorId, checkOut);
+        });
     });
 }

@@ -233,6 +233,50 @@
         </div>
     </div>
 </div>
+<%--Sure Modal PassId--%>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+     id="sureModalPassIdCheckIn">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="modal-title">Are you sure</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="yseButton" >Yes</button>
+                <button type="button" class="btn btn-primary" id="noButton" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Sure Modal CheckOut--%>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+     id="sureModalCheckOut">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="modal-title">Are you sure</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="yseButtonCheckout" >Yes</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
