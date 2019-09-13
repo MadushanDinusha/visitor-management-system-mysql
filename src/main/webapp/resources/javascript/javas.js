@@ -826,6 +826,7 @@ function updateVisitorCheckIn(index, visitorId, checkIn) {
             "visitorId": visitorId
         }),
         success: function (data) {
+            $("#passIdCheckInModal").modal("hide");
             getVisitorDetailsForCheckInAndCheckOut();
         },
         error: function (err) {
@@ -845,6 +846,7 @@ function updateVisitorCheckOut(index, visitorId, checkOut) {
             "visitorId": visitorId
         }),
         success: function (data) {
+            $("#checkoutModal").modal("hide");
             getVisitorDetailsForCheckInAndCheckOut()
         },
         error: function (err) {
@@ -905,10 +907,6 @@ function sendMail() {
             setTimeout(reloadUserRequests, 1000);
         }
     });
-}
-
-function getContextPath() {
-    return "${pageContext.request.contextPath}";
 }
 
 function getVisitorReports() {
@@ -976,16 +974,23 @@ function getPassIdCheckInModal(index, visitorId) {
     $("#updatePassIdCheckIn").on('click', function () {
         var passId = $("#passIdInput").val();
         var checkIn = $("#checkInInput").val();
-        updateVisitorPassId(index, visitorId, passId);
-        updateVisitorCheckIn(index, visitorId, checkIn);
+        if((passId ==null || passId === "") && (checkIn ==null ||checkIn==="")){
+            $("#errorInPassIdOrCheckIn").modal('show');
+        }else{
+            updateVisitorPassId(index, visitorId, passId);
+            updateVisitorCheckIn(index, visitorId, checkIn);
+        }
     });
-
 }
 
 function getCheckOutModal(index, visitorId) {
     $("#checkoutModal").modal("show");
     $("#updateCheckOut").on('click', function () {
         var checkOut = $("#checkOutInput").val();
-        updateVisitorCheckOut(index, visitorId, checkOut);
+        if(checkOut == null ||checkOut ==""){
+            $("#errorInPassIdOrCheckIn").modal('show');
+        }else {
+            updateVisitorCheckOut(index, visitorId, checkOut);
+        }
     });
 }

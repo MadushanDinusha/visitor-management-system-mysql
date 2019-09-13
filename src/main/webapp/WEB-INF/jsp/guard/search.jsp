@@ -176,7 +176,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="updatePassIdCheckIn" class="btn btn-outline-success" data-dismiss="modal">
+                <button type="button" id="updatePassIdCheckIn" class="btn btn-outline-success">
                     Save
                 </button>
             </div>
@@ -209,8 +209,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="updateCheckOut" class="btn btn-outline-success" data-dismiss="modal">Save
+                <button type="button" id="updateCheckOut" class="btn btn-outline-success" >Save
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--ErrorModal--%>
+<div class="modal fade" id="errorInPassIdOrCheckIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-times-circle" style="color:red;font-size: 30px"></i>  Please fill Correctly
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -227,5 +245,4 @@
         });
     });
 </script>
-
 </html>
