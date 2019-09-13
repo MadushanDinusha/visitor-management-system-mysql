@@ -1,6 +1,5 @@
 package com.visitor.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.visitor.domain.Request;
 import com.visitor.domain.User;
 import com.visitor.domain.Vehicle;
@@ -24,12 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 
@@ -95,6 +90,11 @@ public class ApplicationController {
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
         return "/admin/registration";
+    }
+
+    @GetMapping("/admin/Reports")
+    public String getReports(){
+        return "admin/Reports";
     }
 
     @GetMapping("/user/resetPassword")
@@ -255,9 +255,7 @@ public class ApplicationController {
     @RequestMapping(value = "/user/addVisitor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> saveVisitor(@RequestBody Visitor visitor) {
-        LOGGER.info("adding visitor {}",visitor);
         try {
-
             visitorService.saveVisitor(visitor);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -267,10 +265,10 @@ public class ApplicationController {
 
     @RequestMapping(value = "/user/sendMail", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> sendMail(@RequestBody Map<String ,String> request) {
+    public ResponseEntity<?> sendMail(@RequestBody Map<String, String> request) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            mailService.sendmail(authentication.getName(),request.get("contextPath"));
+            mailService.sendmail(authentication.getName(), request.get("contextPath"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -453,8 +451,8 @@ public class ApplicationController {
     @RequestMapping(value = "/guard/getVehiclesDetails/{groupId}", method = RequestMethod.GET)
     public ResponseEntity<?> getVehiclesDetails(@PathVariable("groupId") String groupId) {
         try {
-           List<Vehicle> vehicles = vehicleService.getVehicleListByGroupId(groupId);
-            return new ResponseEntity<>(vehicles,HttpStatus.OK);
+            List<Vehicle> vehicles = vehicleService.getVehicleListByGroupId(groupId);
+            return new ResponseEntity<>(vehicles, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -463,8 +461,22 @@ public class ApplicationController {
     @RequestMapping(value = "/guard/updateVisitorPassId", method = RequestMethod.POST)
     public ResponseEntity<?> updateVisitorPassId(@RequestBody Map<String, String> request) {
         try {
+            LOGGER.info(request.get("passId"));
             visitorService.updateVisitorPassId(request.get("passId"), Long.parseLong(request.get("visitorId")));
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/admin/generateReport", method = RequestMethod.POST)
+    public ResponseEntity<?> generateReport(@RequestBody Map<String, java.sql.Date> request) {
+        try {
+            java.sql.Date from = (request.get("fromDate"));
+            java.sql.Date to = (request.get("toDate"));
+            List<Visitor> visitorList = visitorService.getVisitorDetailsByDate(from,to);
+            LOGGER.info("visitor details form to {}",visitorList);
+            return new ResponseEntity<>(visitorList,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

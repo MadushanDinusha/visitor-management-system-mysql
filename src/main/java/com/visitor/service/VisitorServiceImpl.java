@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -74,5 +75,9 @@ public class VisitorServiceImpl implements VisitorService {
 
     public void updateVisitorPassId(String passId, long visitorId){
         visitorRepository.updateVisitorPassId(passId,visitorId);
+    }
+
+    public List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate){
+       return visitorRepository.getVisitorDetailsByDate(fromDate,toDate);
     }
 }

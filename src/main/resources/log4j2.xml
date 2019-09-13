@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex</Property>
-        <Property name="log-path">/hms/logs/conversation-manager-ui</Property>
+        <Property name="log-path">/visitor/logs/visitor-management-system</Property>
         <Property name="log-pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level%x %c{1} [%t] - %msg%n</Property>
         <Property name="log-rotate-pattern">.log.%d{yyyy-MM-dd-HH}</Property>
     </Properties>

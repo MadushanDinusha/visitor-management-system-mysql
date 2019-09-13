@@ -21,4 +21,6 @@ public interface VisitorService {
     void updateVisitorCheckOut(String checkIn, long id);
 
     void updateVisitorPassId(String passId, long VisitorId);
+
+    List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate);
 }

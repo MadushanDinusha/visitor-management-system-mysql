@@ -42,4 +42,7 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     @Query("UPDATE Visitor SET pass_id = :pass_id WHERE id = :id")
     @Transactional
     void updateVisitorPassId(@Param("pass_id") String pass_id,@Param("id") long id);
+
+    @Query("FROM Visitor WHERE date between ?1 and ?2 ")
+    List<Visitor> getVisitorDetailsByDate(Date fromDate, Date toDate);
 }

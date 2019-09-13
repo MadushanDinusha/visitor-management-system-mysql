@@ -77,7 +77,7 @@
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Visitor details</h3>
     <div class="card-body">
         <div class="active-cyan-3 active-cyan-4 mb-4">
-            <input class="form-control" id="searchInput" type="text" placeholder="Search by NIC" aria-label="Search"
+            <input class="form-control" id="myInput" type="text" placeholder="Search by NIC" aria-label="Search"
                    onkeyup="search()">
         </div>
         <div id="table" class="table-editable">
@@ -86,13 +86,10 @@
                 <th>NIC</th>
                 <th>Name</th>
                 <th>Company</th>
-                <th>Reason</th>
                 <th>Date</th>
-                <th>Time</th>
                 <th>VehicleNo</th>
                 <th>Pass ID</th>
-                <th style="color: mediumseagreen">Check-In-Time</th>
-                <th style="color: red">Check-Out-Time</th>
+                <th>Check In</th>
                 </thead>
                 <tbody id="visitorList">
                 </tbody>
@@ -150,11 +147,84 @@
         </div>
     </div>
 </div>
-
+<%--Modal PassId Checkin--%>
+<div class="modal fade" id="passIdCheckInModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Pass Id and Check In
+                        Time</h3>
+                    <div class="card-body">
+                        <div class="table-editable">
+                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>Pass Id</th>
+                                <th>Check In</th>
+                                </thead>
+                                <tbody id="passIdCheckIn">
+                                <td><input type="text" class="form-control" id="passIdInput"></td>
+                                <td><input type="time" class="form-control" id="checkInInput"></td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="updatePassIdCheckIn" class="btn btn-outline-success" data-dismiss="modal">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--CehckoutModal--%>
+<div class="modal fade" id="checkoutModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Check Out Time</h3>
+                    <div class="card-body">
+                        <div class="table-editable">
+                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <thead>
+                                <th>Check Out</th>
+                                </thead>
+                                <tbody>
+                                <td><input type="time" class="form-control" id="checkOutInput"></td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="updateCheckOut" class="btn btn-outline-success" data-dismiss="modal">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
         getVisitorDetailsForCheckInAndCheckOut();
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#visitorList tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     });
 </script>
 

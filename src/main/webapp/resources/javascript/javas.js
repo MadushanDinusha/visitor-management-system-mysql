@@ -650,7 +650,7 @@ function reloadUserRequests() {
 }
 
 function search() {
-    var input, filter, table, tr, td, i, txtValue;
+    var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById("searchInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("table");
@@ -658,6 +658,7 @@ function search() {
 
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
+        td1 = tr[i].getElementsByTagName("td")[4];
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -668,6 +669,7 @@ function search() {
         }
     }
 }
+
 
 function showChangePasswordModal() {
     $("#modalChangePassword").modal('show');
@@ -783,77 +785,8 @@ function getUserName() {
     });
 }
 
-function getVisitorDetailsForCheckInAndCheckOut() {
-    $.ajax({
-        url: 'getVisitorDetailsForCheckInAndCheckOut',
-        dataType: 'json',
-        contentType: 'application/json',
-        type: "get",
-        processData: false,
-        success: function (visitorList) {
-            $("#visitorList").html("");
-            var visitorListSize = visitorList.length;
-            for (var i = 0; i < visitorListSize; i++) {
-                if (visitorList[i].passId != null) {
-                    if (visitorList[i].checkIn != null) {
-                        if (visitorList[i].checkOut != null) {
-                            $("#visitorList").append('<tr>' +
-                                '<td>' + visitorList[i].nic + '</td>' +
-                                '<td>' + visitorList[i].name + '</td>' +
-                                '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                                '<td>' + visitorList[i].date + '</td>' +
-                                '<td>' + visitorList[i].time + '</td>' +
-                                '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
-                                '<td>' + visitorList[i].passId + '</td>' +
-                                '<td>' + visitorList[i].checkIn + '</td>' +
-                                '<td>' + visitorList[i].checkOut + '</td></tr>')
-                        } else {
-                            $("#visitorList").append('<tr>' +
-                                '<td>' + visitorList[i].nic + '</td>' +
-                                '<td>' + visitorList[i].name + '</td>' +
-                                '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                                '<td>' + visitorList[i].date + '</td>' +
-                                '<td>' + visitorList[i].time + '</td>' +
-                                '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
-                                '<td>' + visitorList[i].passId + '</td>' +
-                                '<td>' + visitorList[i].checkIn + '</td>' +
-                                '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
-                        }
-                    } else {
-                        $("#visitorList").append('<tr>' +
-                            '<td>' + visitorList[i].nic + '</td>' +
-                            '<td>' + visitorList[i].name + '</td>' +
-                            '<td>' + visitorList[i].company + '</td>' +
-                            '<td>' + visitorList[i].purpose + '</td>' +
-                            '<td>' + visitorList[i].date + '</td>' +
-                            '<td>' + visitorList[i].time + '</td>' +
-                            '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
-                            '<td>' + visitorList[i].passId + '</td>' +
-                            '<td><input type="time" id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
-                            '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
-                    }
-                } else {
-                    $("#visitorList").append('<tr>' +
-                        '<td>' + visitorList[i].nic + '</td>' +
-                        '<td>' + visitorList[i].name + '</td>' +
-                        '<td>' + visitorList[i].company + '</td><td>' + visitorList[i].purpose + '</td>' +
-                        '<td>' + visitorList[i].date + '</td>' +
-                        '<td>' + visitorList[i].time + '</td>' +
-                        '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
-                        '<td><input id="' + i + 'passId"><br><a id = "' + i + 'passBtn" onclick="updateVisitorPassId(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a> </td>' +
-                        '<td><input type="time" id="' + i + 'checkIn"><br><a id = "' + i + 'cInBtn" onclick="updateVisitorCheckIn(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td>' +
-                        '<td><input type="time" id="' + i + 'checkOut"><br><a id = "' + i + 'cOutBtn" onclick="updateVisitorCheckOut(' + i + ',' + visitorList[i].id + ')" class="btn btn-outline-info">OK</a></td></tr>')
-                }
-            }
-        },
-        error: function (err) {
-            alert(err.responseText)
-        }
-    });
-}
 
-function updateVisitorCheckIn(index, visitorId) {
-    var checkIn = $("#" + '' + index + '' + "checkIn").val();
+function updateVisitorCheckIn(index, visitorId, checkIn) {
     $.ajax({
         url: "updateVisitorCheckIn",
         type: "post",
@@ -864,8 +797,7 @@ function updateVisitorCheckIn(index, visitorId) {
             "visitorId": visitorId
         }),
         success: function (data) {
-            $("#" + '' + index + '' + "checkIn").prop('disabled', true);
-            $("#" + '' + index + '' + "cInBtn").hide();
+            getVisitorDetailsForCheckInAndCheckOut();
         },
         error: function (err) {
             alert(err.responseText);
@@ -873,8 +805,7 @@ function updateVisitorCheckIn(index, visitorId) {
     });
 }
 
-function updateVisitorCheckOut(index, visitorId) {
-    var checkOut = $("#" + '' + index + '' + "checkOut").val();
+function updateVisitorCheckOut(index, visitorId, checkOut) {
     $.ajax({
         url: "updateVisitorCheckOut",
         type: "post",
@@ -885,8 +816,7 @@ function updateVisitorCheckOut(index, visitorId) {
             "visitorId": visitorId
         }),
         success: function (data) {
-            $("#" + '' + index + '' + "checkOut").prop('disabled', true);
-            $("#" + '' + index + '' + "cOutBtn").hide();
+            getVisitorDetailsForCheckInAndCheckOut()
         },
         error: function (err) {
             alert(err.responseText);
@@ -894,8 +824,7 @@ function updateVisitorCheckOut(index, visitorId) {
     });
 }
 
-function updateVisitorPassId(index, visitorId) {
-    var passId = $("#" + '' + index + '' + "passId").val();
+function updateVisitorPassId(index, visitorId, passId) {
     $.ajax({
         url: "updateVisitorPassId",
         type: "post",
@@ -906,8 +835,6 @@ function updateVisitorPassId(index, visitorId) {
             "visitorId": visitorId
         }),
         success: function (data) {
-            $("#" + '' + index + '' + "passId").prop('disabled', true);
-            $("#" + '' + index + '' + "passBtn").hide();
         },
         error: function (err) {
             alert(err.responseText);
@@ -943,7 +870,7 @@ function sendMail() {
         dataType: 'text',
         contentType: 'application/json',
         data: JSON.stringify({
-            "contextPath": getContextPath()
+            "contextPath": sessionStorage.getItem('contextPath')
         }),
         success: function () {
             setTimeout(reloadUserRequests, 1000);
@@ -953,4 +880,83 @@ function sendMail() {
 
 function getContextPath() {
     return "${pageContext.request.contextPath}";
+}
+
+function getVisitorReports() {
+    $.ajax({
+        url: 'generateReport',
+        dataType: 'text',
+        contentType: 'application/json',
+        type: "post",
+        processData: false,
+        data: JSON.stringify({
+            "fromDate": $("#fromDate").val(),
+            "toDate": $("#toDate").val()
+        }),
+        success: function (data) {
+            alert("suc")
+        },
+        error: function (err) {
+            alert(err.responseText)
+        }
+    });
+}
+
+function getVisitorDetailsForCheckInAndCheckOut() {
+    $.ajax({
+        url: 'getVisitorDetailsForCheckInAndCheckOut',
+        dataType: 'json',
+        contentType: 'application/json',
+        type: "get",
+        processData: false,
+        success: function (visitorList) {
+            $("#visitorList").html("");
+            var visitorListSize = visitorList.length;
+            for (var i = 0; i < visitorListSize; i++) {
+                if (visitorList[i].passId != null && visitorList[i].checkIn != null) {
+                    if (visitorList[i].checkOut != null) {
+                        $("#visitorList").html("");
+                    } else {
+                        $("#visitorList").append('<tr>' +
+                            '<td>' + visitorList[i].nic + '</td>' +
+                            '<td>' + visitorList[i].name + '</td>' +
+                            '<td>' + visitorList[i].company + '</td>' +
+                            '<td>' + visitorList[i].date + '</td>' +
+                            '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td>' +
+                            '<td><a class="btn btn-outline-info" onclick="getCheckOutModal(\'' + i + '\',\'' + visitorList[i].id + '\')">' + visitorList[i].passId + '</a></td>' +
+                            '<td>' + visitorList[i].checkIn + '</td></tr>')
+                    }
+                } else {
+                    $("#visitorList").append('<tr>' +
+                        '<td><a class="btn btn-outline-info" onclick="getPassIdCheckInModal(\'' + i + '\',\'' + visitorList[i].id + '\')" >' + visitorList[i].nic + '</a></td>' +
+                        '<td>' + visitorList[i].name + '</td>' +
+                        '<td>' + visitorList[i].company + '</td>' +
+                        '<td>' + visitorList[i].date + '</td>' +
+                        '<td><a class="btn btn-outline-info" onclick="getVehiclesDetails(\'' + visitorList[i].groupId + '\')" >info</a></td></tr>')
+                }
+            }
+        },
+        error: function (err) {
+            alert(err.responseText)
+        }
+    });
+}
+
+function getPassIdCheckInModal(index, visitorId) {
+    $("#passIdCheckInModal").modal("show");
+    $("#updatePassIdCheckIn").on('click', function () {
+        var passId = $("#passIdInput").val();
+        var checkIn = $("#checkInInput").val();
+        updateVisitorPassId(index, visitorId, passId);
+        updateVisitorCheckIn(index, visitorId, checkIn);
+    });
+
+}
+
+function getCheckOutModal(index, visitorId) {
+    $("#checkoutModal").modal("show");
+    $("#updateCheckOut").on('click', function () {
+        var checkOut = $("#checkOutInput").val();
+        updateVisitorCheckOut(index, visitorId, checkOut);
+    });
 }
