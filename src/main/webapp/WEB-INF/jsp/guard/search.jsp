@@ -168,7 +168,7 @@
                                 </thead>
                                 <tbody id="passIdCheckIn">
                                 <td><input type="text" class="form-control" id="passIdInput"></td>
-                                <td><input type="time" class="form-control" id="checkInInput"></td>
+                                <td><input type="time" class="form-control" id="checkInInput" value="now"></td>
                                 </tbody>
                             </table>
                         </div>
@@ -201,7 +201,7 @@
                                 <th>Check Out</th>
                                 </thead>
                                 <tbody>
-                                <td><input type="time" class="form-control" id="checkOutInput"></td>
+                                <td><input  type="time" class="form-control" id="checkOutInput" value="now"></td>
                                 </tbody>
                             </table>
                         </div>

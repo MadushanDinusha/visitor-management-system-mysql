@@ -963,7 +963,6 @@ function getVisitorDetailsForCheckInAndCheckOut() {
             for (var i = 0; i < visitorListSize; i++) {
                 if (visitorList[i].passId != null && visitorList[i].checkIn != null) {
                     if (visitorList[i].checkOut != null) {
-                        $("#visitorList").html("");
                     } else {
                         $("#visitorList").append('<tr>' +
                             '<td>' + visitorList[i].nic + '</td>' +
@@ -991,8 +990,12 @@ function getVisitorDetailsForCheckInAndCheckOut() {
 }
 
 function getPassIdCheckInModal(index, visitorId) {
-    $("#passIdInput").val("");
-    $("#checkInInput").val("");
+    var d = new Date(),
+        h = d.getHours(),
+        m = d.getMinutes();
+    if(h < 10) h = '0' + h;
+    if(m < 10) m = '0' + m;
+    $('#checkInInput').val( h + ':' + m);
     $("#passIdCheckInModal").modal("show");
     $("#updatePassIdCheckIn").on('click', function () {
         var passId = $("#passIdInput").val();
@@ -1010,7 +1013,12 @@ function getPassIdCheckInModal(index, visitorId) {
 }
 
 function getCheckOutModal(index, visitorId) {
-    $("#checkOutInput").val("");
+    var d = new Date(),
+        h = d.getHours(),
+        m = d.getMinutes();
+    if(h < 10) h = '0' + h;
+    if(m < 10) m = '0' + m;
+    $('#checkOutInput').val(h + ':' + m);
     $("#checkoutModal").modal("show");
     $("#updateCheckOut").on('click', function () {
         var checkOut = $("#checkOutInput").val();
