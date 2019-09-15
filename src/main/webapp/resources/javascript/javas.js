@@ -748,8 +748,7 @@ function getUserByUserName(userName) {
 function editUserDetails() {
     var changePw = $("#changePw").val();
     alert(changePw);
-    if(changePw ===null || changePw ==="" ||changePw ===undefined){
-        alert("inside");
+    if (changePw === null || changePw === "" || changePw === undefined) {
         $.ajax({
             url: "updateUserDetails",
             type: "post",
@@ -771,8 +770,7 @@ function editUserDetails() {
                 alert(err.responseText);
             }
         });
-    }else {
-        alert("out")
+    } else {
         $.ajax({
             url: "updateUserDetails",
             type: "post",
@@ -784,7 +782,7 @@ function editUserDetails() {
                 "hodMail": $("#HODEmail").val(),
                 "role": $("#role").val(),
                 "department": $("#department").val(),
-                "password":changePw
+                "password": changePw
             }),
             success: function (data) {
                 $("#editDetailsModal").modal('hide');
@@ -816,7 +814,6 @@ function getUserName() {
 
 
 function updateVisitorCheckIn(index, visitorId, checkIn) {
-    alert(checkIn);
     $.ajax({
         url: "updateVisitorCheckIn",
         type: "post",
@@ -887,7 +884,8 @@ function getVehiclesDetails(groupId) {
         success: function (vehicleList) {
             $("#vehicleTable").html("");
             for (var i = 0; i < vehicleList.length; i++) {
-                $("#vehicleTable").append('<tr><td id="' + i + '">' + vehicleList[i].vehicleNumber + '</td></tr>');
+                $("#vehicleTable").append('<tr><td id="' + i + '"><input type="text" id="' + i + 'vehicle" class="form-control" value="' + vehicleList[i].vehicleNumber + '"></td>' +
+                    '<td><a class="btn btn-outline-info" onclick="updateVehicleDetails(\'' + vehicleList[i].id + '\',\'' + i + '\')">Update</a></td></tr>');
                 $("#vehicleDetailsModal").modal('show');
             }
         },
@@ -895,6 +893,27 @@ function getVehiclesDetails(groupId) {
             alert(err.responseText)
         }
     });
+}
+
+function updateVehicleDetails(id, index) {
+    $("#updateVehicleDetailsModal").modal("show");
+        var vehicleNumber = $("#" + '' + index + '' + "vehicle").val();
+        $.ajax({
+            url: "updateVehicleNumber",
+            type: "post",
+            dataType: 'text',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "vehicleId": id,
+                "vehicleNumber": vehicleNumber
+            }),
+            success: function (data) {
+                $("#successModalForUpdatingVehicleNumber").modal("show");
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
 }
 
 function sendMail() {
@@ -924,7 +943,6 @@ function getVisitorReports() {
             "toDate": $("#toDate").val()
         }),
         success: function (data) {
-            alert("suc")
         },
         error: function (err) {
             alert(err.responseText)
@@ -973,13 +991,15 @@ function getVisitorDetailsForCheckInAndCheckOut() {
 }
 
 function getPassIdCheckInModal(index, visitorId) {
+    $("#passIdInput").val("");
+    $("#checkInInput").val("");
     $("#passIdCheckInModal").modal("show");
     $("#updatePassIdCheckIn").on('click', function () {
         var passId = $("#passIdInput").val();
         var checkIn = $("#checkInInput").val();
-        if((passId ==null || passId === "") || (checkIn ==null ||checkIn==="")){
+        if ((passId == null || passId === "") || (checkIn == null || checkIn === "")) {
             $("#errorInPassIdOrCheckIn").modal('show');
-        }else{
+        } else {
             $("#sureModalPassIdCheckIn").modal("show");
         }
         $("#yseButton").on('click', function () {
@@ -990,12 +1010,13 @@ function getPassIdCheckInModal(index, visitorId) {
 }
 
 function getCheckOutModal(index, visitorId) {
+    $("#checkOutInput").val("");
     $("#checkoutModal").modal("show");
     $("#updateCheckOut").on('click', function () {
         var checkOut = $("#checkOutInput").val();
-        if(checkOut == null ||checkOut ==""){
+        if (checkOut == null || checkOut == "") {
             $("#errorInPassIdOrCheckIn").modal('show');
-        }else {
+        } else {
             $("#sureModalCheckOut").modal("show");
         }
         $("#yseButtonCheckout").on('click', function () {

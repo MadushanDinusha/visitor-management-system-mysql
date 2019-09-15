@@ -8,4 +8,6 @@ public interface VehicleService {
     void save(Vehicle vehicle);
 
     List<Vehicle> getVehicleListByGroupId(String groupId);
+
+    void updateVehicleNumber(int id, String vehicleNumber);
 }

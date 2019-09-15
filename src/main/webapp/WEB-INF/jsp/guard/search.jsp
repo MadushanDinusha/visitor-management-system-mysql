@@ -133,6 +133,7 @@
                             <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
                                 <th>Vehicle Number</th>
+                                <th>Update Number</th>
                                 </thead>
                                 <tbody id="vehicleTable">
                                 </tbody>
@@ -273,6 +274,24 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="yseButtonCheckout" >Yes</button>
                 <button type="button" class="btn btn-primary"  data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--SuccessModal--%>
+<div class="modal fade" id="successModalForUpdatingVehicleNumber" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i>  SuccessFully Updated
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

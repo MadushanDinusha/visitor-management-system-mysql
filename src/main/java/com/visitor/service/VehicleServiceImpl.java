@@ -22,4 +22,9 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getVehicleListByGroupId(String groupId){
         return vehicleRepository.findVehicleByGroupId(groupId);
     }
+
+    @Override
+    public void updateVehicleNumber(int id, String vehicleNumber) {
+        vehicleRepository.updateVehicleNumber(vehicleNumber,id);
+    }
 }

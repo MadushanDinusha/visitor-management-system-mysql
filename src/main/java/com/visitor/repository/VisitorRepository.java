@@ -1,5 +1,6 @@
 package com.visitor.repository;
 
+
 import com.visitor.domain.Visitor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
+
     @Query("FROM Visitor WHERE nic = ?1")
     Visitor findVisitorByNic(String nic);
 

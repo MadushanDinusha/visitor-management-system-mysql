@@ -2,6 +2,7 @@ package com.visitor.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -33,7 +34,6 @@ public class Visitor {
     private Date date;
 
     @Column(name = "time")
-    @JsonFormat(pattern = "HH:mm")
     private String time;
 
     @Column(name = "responded_emp")

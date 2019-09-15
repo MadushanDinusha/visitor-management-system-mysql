@@ -9,7 +9,7 @@
 //import org.springframework.web.bind.annotation.*;
 //
 //@RestController
-//@RequestMapping("/secure/auth")
+//@RequestMapping("/secure/auth") 
 //public class AdminController {
 //
 //    @Qualifier("userRepository")

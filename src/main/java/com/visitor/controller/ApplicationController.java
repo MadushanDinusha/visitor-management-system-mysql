@@ -119,10 +119,8 @@ public class ApplicationController {
     }
 
     @RequestMapping(value = {"/access_denied"}, method = RequestMethod.GET)
-    public ModelAndView accessDenied() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("errors/access_denied");
-        return model;
+    public String accessDenied() {
+        return "errors/access_denied";
     }
 
     @RequestMapping(value = {"/admin/getRequests"}, method = RequestMethod.GET)
@@ -132,12 +130,6 @@ public class ApplicationController {
         return model;
     }
 
-    @RequestMapping(value = {"/admin/requestDetails"}, method = RequestMethod.GET)
-    public ModelAndView getRequestDetails() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("/admin/requestDetails");
-        return model;
-    }
 
     @RequestMapping(value = "/user/userRequests", method = RequestMethod.GET)
     public String getUserRequests() {
@@ -485,6 +477,18 @@ public class ApplicationController {
             LOGGER.info("visitor details form to {}",visitorList);
             return new ResponseEntity<>(visitorList,HttpStatus.OK);
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/guard/updateVehicleNumber", method = RequestMethod.POST)
+    public ResponseEntity<?> updateVehicleNumber(@RequestBody Map<String, String> request) {
+        try {
+            LOGGER.info(request);
+            vehicleService.updateVehicleNumber(Integer.parseInt(request.get("vehicleId")),request.get("vehicleNumber"));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            LOGGER.info("Error Occurred while updating vehicle details");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
