@@ -22,15 +22,72 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/navVisitor.css"/>">
 </head>
 <body>
-<div>
-    <p>Date-wise</p>
-    <input type="date" id="fromDate" class="form-control">
-    <input type="date" id="toDate" class="form-control">
-    <a class="btn btn-outline-info" onclick="getVisitorReports()">OK</a>
-</div>
-<div>
-<p>User-wise</p>
-    <input type="text" id="userNameForReport" class="form-control">
+<nav class="navbar navbar-expand-lg ">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home
+                    <span><i class="fa fa-home"></i></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i>&nbsp;<span class="badge badge-light"
+                                                            id="newRequestForAdmin"></span></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status<span> <i
+                        class="fa fa-bell"></i>&nbsp;<span class="badge badge-light"
+                                                           id="newRequestForUser"></span></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/guard/search">Search
+                    <span> <i class="fa fa-clock-o"></i></span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Settings <span><i class="fa fa-cog"></i></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+<div class="container">
+    <div class="text-center">
+        <p>Date-wise</p>
+        <input type="date" id="fromDate" class="text-center col-sm-2">
+        <input type="date" id="toDate" class="text-center col-sm-2">
+        <a class="btn btn-outline-info" onclick="getVisitorReports()">OK</a>
+    </div>
+    <div class="text-center">
+        <p>User-wise</p>
+        <input type="text" id="userNameForReport" class="text-center col-sm-4">
+        <a class="btn btn-outline-info" onclick="getVisitorReportsByUserName()">OK</a>
+    </div>
 </div>
 <%--Report Modal--%>
 <div class="modal fade" id="reportModal" role="dialog">

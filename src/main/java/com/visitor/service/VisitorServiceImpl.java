@@ -58,34 +58,45 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorRepository.findVisitorByGroupId(id);
     }
 
-    public void updateVisitor(Visitor visitor){
-        visitorRepository.updateVisitorById( visitor.getId(),visitor.getCompany(),visitor.getName(),visitor.getNic(),visitor.getPurpose(),visitor.getDate(),visitor.getTime());
+    public void updateVisitor(Visitor visitor) {
+        visitorRepository.updateVisitorById(visitor.getId(), visitor.getCompany(), visitor.getName(), visitor.getNic(), visitor.getPurpose(), visitor.getDate(), visitor.getTime());
     }
 
-    public List<Visitor> getAllVisitors(){
+    public List<Visitor> getAllVisitors() {
         return visitorRepository.findAll();
     }
 
-    public void updateVisitorCheckIn(String checkIn, long id){
-        visitorRepository.updateVisitorCheckIn(checkIn,id);
+    public void updateVisitorCheckIn(String checkIn, long id) {
+        visitorRepository.updateVisitorCheckIn(checkIn, id);
     }
 
-    public void updateVisitorCheckOut(String checkOut, long id){
-        visitorRepository.updateVisitorCheckOut(checkOut,id);
+    public void updateVisitorCheckOut(String checkOut, long id) {
+        visitorRepository.updateVisitorCheckOut(checkOut, id);
     }
 
-    public void updateVisitorPassId(String passId, long visitorId){
-        visitorRepository.updateVisitorPassId(passId,visitorId);
+    public void updateVisitorPassId(String passId, long visitorId) {
+        visitorRepository.updateVisitorPassId(passId, visitorId);
     }
 
-    public List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate){
+    public List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate) {
         List<Visitor> returnVisitorList = new ArrayList<>();
-        List<Visitor> visitorList = visitorRepository.getVisitorDetailsByDate(fromDate,toDate);
-        for(Visitor visitor : visitorList){
-            if(visitor.getCheckIn() !=null && visitor.getCheckOut() !=null){
+        List<Visitor> visitorList = visitorRepository.getVisitorDetailsByDate(fromDate, toDate);
+        for (Visitor visitor : visitorList) {
+            if (visitor.getCheckIn() != null && visitor.getCheckOut() != null) {
                 returnVisitorList.add(visitor);
             }
         }
-       return returnVisitorList;
+        return returnVisitorList;
+    }
+
+    public List<Visitor> getVisitorDetailsByDate(String userName) {
+        List<Visitor> returnVisitorList = new ArrayList<>();
+        List<Visitor> visitorList = visitorRepository.getVisitorDetailsByUserName(userName);
+        for (Visitor visitor : visitorList) {
+            if (visitor.getCheckIn() != null && visitor.getCheckOut() != null) {
+                returnVisitorList.add(visitor);
+            }
+        }
+        return returnVisitorList;
     }
 }

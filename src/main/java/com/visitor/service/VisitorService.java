@@ -23,4 +23,6 @@ public interface VisitorService {
     void updateVisitorPassId(String passId, long VisitorId);
 
     List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate);
+
+    List<Visitor> getVisitorDetailsByDate(String userName);
 }

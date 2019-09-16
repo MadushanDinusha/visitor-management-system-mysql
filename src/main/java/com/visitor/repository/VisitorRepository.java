@@ -47,4 +47,7 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
 
     @Query("FROM Visitor WHERE date between ?1 and ?2 ")
     List<Visitor> getVisitorDetailsByDate(Date fromDate, Date toDate);
+
+    @Query("FROM Visitor WHERE userName = ?1")
+    List<Visitor> getVisitorDetailsByUserName(String userName);
 }

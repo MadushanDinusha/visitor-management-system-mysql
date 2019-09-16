@@ -943,6 +943,7 @@ function getVisitorReports() {
             "toDate": $("#toDate").val()
         }),
         success: function (visitorList) {
+            $("#visitorReportTableBody").html("");
             var fromDate = $("#fromDate").val()
             var toDate = $("#toDate").val()
             $("#fromToDate").html('From ' + fromDate + ' To ' + toDate);
@@ -1064,4 +1065,37 @@ function createPDF() {
     win.document.write('</body></html>');
     win.document.close();
     win.print();
+}
+
+function getVisitorReportsByUserName() {
+    $.ajax({
+        url: 'generateReportAsUserWise',
+        dataType: 'json',
+        contentType: 'application/json',
+        type: "post",
+        processData: false,
+        data: JSON.stringify({
+            "userName": $("#userNameForReport").val(),
+        }),
+
+        success: function (visitorList) {
+            $("#visitorReportTableBody").html("");
+            var userName = $("#userNameForReport").val();
+            $("#fromToDate").html('User Name - '+userName);
+            for (var i = 0; i < visitorList.length; i++) {
+                $("#visitorReportTableBody").append('<tr>' +
+                    '<td>' + visitorList[i].nic + '</td>' +
+                    '<td>' + visitorList[i].name + '</td>' +
+                    '<td>' + visitorList[i].company + '</td>' +
+                    '<td>' + visitorList[i].purpose + '</td>' +
+                    '<td>' + visitorList[i].date + '</td>' +
+                    '<td>' + visitorList[i].checkIn + '</td>' +
+                    '<td>' + visitorList[i].checkOut + '</td></tr>');
+            }
+            $("#reportModal").modal('show');
+        },
+        error: function (err) {
+            alert(err.responseText)
+        }
+    });
 }

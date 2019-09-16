@@ -460,7 +460,6 @@ public class ApplicationController {
     @RequestMapping(value = "/guard/updateVisitorPassId", method = RequestMethod.POST)
     public ResponseEntity<?> updateVisitorPassId(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info(request.get("passId"));
             visitorService.updateVisitorPassId(request.get("passId"), Long.parseLong(request.get("visitorId")));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -474,7 +473,6 @@ public class ApplicationController {
             java.sql.Date from = (request.get("fromDate"));
             java.sql.Date to = (request.get("toDate"));
             List<Visitor> visitorList = visitorService.getVisitorDetailsByDate(from,to);
-            LOGGER.info("visitor details form to {}",visitorList);
             return new ResponseEntity<>(visitorList,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -484,12 +482,22 @@ public class ApplicationController {
     @RequestMapping(value = "/guard/updateVehicleNumber", method = RequestMethod.POST)
     public ResponseEntity<?> updateVehicleNumber(@RequestBody Map<String, String> request) {
         try {
-            LOGGER.info(request);
             vehicleService.updateVehicleNumber(Integer.parseInt(request.get("vehicleId")),request.get("vehicleNumber"));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            LOGGER.info("Error Occurred while updating vehicle details");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(value = "/admin/generateReportAsUserWise", method = RequestMethod.POST)
+    public ResponseEntity<?> generateReportByUserName(@RequestBody Map<String,String> request) {
+        try {
+            String username = (request.get("userName"));
+            List<Visitor> visitorList = visitorService.getVisitorDetailsByDate(username);
+            return new ResponseEntity<>(visitorList,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
