@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +79,13 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     public List<Visitor> getVisitorDetailsByDate(java.sql.Date fromDate, java.sql.Date toDate){
-       return visitorRepository.getVisitorDetailsByDate(fromDate,toDate);
+        List<Visitor> returnVisitorList = new ArrayList<>();
+        List<Visitor> visitorList = visitorRepository.getVisitorDetailsByDate(fromDate,toDate);
+        for(Visitor visitor : visitorList){
+            if(visitor.getCheckIn() !=null && visitor.getCheckOut() !=null){
+                returnVisitorList.add(visitor);
+            }
+        }
+       return returnVisitorList;
     }
 }

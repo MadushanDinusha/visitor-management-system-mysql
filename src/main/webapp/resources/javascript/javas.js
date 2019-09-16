@@ -897,23 +897,23 @@ function getVehiclesDetails(groupId) {
 
 function updateVehicleDetails(id, index) {
     $("#updateVehicleDetailsModal").modal("show");
-        var vehicleNumber = $("#" + '' + index + '' + "vehicle").val();
-        $.ajax({
-            url: "updateVehicleNumber",
-            type: "post",
-            dataType: 'text',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "vehicleId": id,
-                "vehicleNumber": vehicleNumber
-            }),
-            success: function (data) {
-                $("#successModalForUpdatingVehicleNumber").modal("show");
-            },
-            error: function (err) {
-                alert(err.responseText);
-            }
-        });
+    var vehicleNumber = $("#" + '' + index + '' + "vehicle").val();
+    $.ajax({
+        url: "updateVehicleNumber",
+        type: "post",
+        dataType: 'text',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "vehicleId": id,
+            "vehicleNumber": vehicleNumber
+        }),
+        success: function (data) {
+            $("#successModalForUpdatingVehicleNumber").modal("show");
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
 }
 
 function sendMail() {
@@ -934,7 +934,7 @@ function sendMail() {
 function getVisitorReports() {
     $.ajax({
         url: 'generateReport',
-        dataType: 'text',
+        dataType: 'json',
         contentType: 'application/json',
         type: "post",
         processData: false,
@@ -942,7 +942,21 @@ function getVisitorReports() {
             "fromDate": $("#fromDate").val(),
             "toDate": $("#toDate").val()
         }),
-        success: function (data) {
+        success: function (visitorList) {
+            var fromDate = $("#fromDate").val()
+            var toDate = $("#toDate").val()
+            $("#fromToDate").html('From ' + fromDate + ' To ' + toDate);
+            for (var i = 0; i < visitorList.length; i++) {
+                $("#visitorReportTableBody").append('<tr>' +
+                    '<td>' + visitorList[i].nic + '</td>' +
+                    '<td>' + visitorList[i].name + '</td>' +
+                    '<td>' + visitorList[i].company + '</td>' +
+                    '<td>' + visitorList[i].purpose + '</td>' +
+                    '<td>' + visitorList[i].date + '</td>' +
+                    '<td>' + visitorList[i].checkIn + '</td>' +
+                    '<td>' + visitorList[i].checkOut + '</td></tr>');
+            }
+            $("#reportModal").modal('show');
         },
         error: function (err) {
             alert(err.responseText)
@@ -993,9 +1007,9 @@ function getPassIdCheckInModal(index, visitorId) {
     var d = new Date(),
         h = d.getHours(),
         m = d.getMinutes();
-    if(h < 10) h = '0' + h;
-    if(m < 10) m = '0' + m;
-    $('#checkInInput').val( h + ':' + m);
+    if (h < 10) h = '0' + h;
+    if (m < 10) m = '0' + m;
+    $('#checkInInput').val(h + ':' + m);
     $("#passIdCheckInModal").modal("show");
     $("#updatePassIdCheckIn").on('click', function () {
         var passId = $("#passIdInput").val();
@@ -1016,8 +1030,8 @@ function getCheckOutModal(index, visitorId) {
     var d = new Date(),
         h = d.getHours(),
         m = d.getMinutes();
-    if(h < 10) h = '0' + h;
-    if(m < 10) m = '0' + m;
+    if (h < 10) h = '0' + h;
+    if (m < 10) m = '0' + m;
     $('#checkOutInput').val(h + ':' + m);
     $("#checkoutModal").modal("show");
     $("#updateCheckOut").on('click', function () {
@@ -1031,4 +1045,23 @@ function getCheckOutModal(index, visitorId) {
             updateVisitorCheckOut(index, visitorId, checkOut);
         });
     });
+}
+
+function createPDF() {
+    var sTable = document.getElementById('tab').innerHTML;
+
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 17px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "</style>";
+    var win = window.open('', '', 'height=700,width=700');
+    win.document.write('<html><head>');
+    win.document.write(style);
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(sTable);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
 }
