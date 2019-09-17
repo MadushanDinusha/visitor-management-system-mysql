@@ -80,7 +80,7 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-    <a href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">
+    <a href="<c:out value="${pageContext.request.contextPath}"/>/userHome/home">
         <div class="float-left" id="first">
             <img class="vsm" src="<c:url value="/resources/images/visitor.png"/>">
             <span>VMS</span>

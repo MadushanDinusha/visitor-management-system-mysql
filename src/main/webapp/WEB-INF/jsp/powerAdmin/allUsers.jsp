@@ -159,8 +159,7 @@
                     <a style="color:black" class="dropdown-item"
                        href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
                             class="fa fa-id-badge"></i> Accounts</a>
-                    <a style="color:black" class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Reports</a>
-                </div>
+                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i class="fa fa-tasks"></i> Reports</a>                </div>
             </li>
         </ul>
     </div>
@@ -259,6 +258,7 @@
                                 <div class="input-group">
                                     <p style="width: 100px">Role :</p>
                                     <select class="mdb-select md-form" id="role">
+                                        <option value="POWER_ADMIN">POWER ADMIN</option>
                                         <option value="ADMIN">ADMIN</option>
                                         <option value="USER">USER</option>
                                         <option value="GUARD">GUARD</option>

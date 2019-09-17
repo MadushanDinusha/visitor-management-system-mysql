@@ -66,9 +66,9 @@ public class ApplicationController {
         return "user/visitorRequest";
     }
 
-    @GetMapping("/user/visitorHome")
+    @GetMapping("/userHome/home")
     public String getVisitorHome() {
-        return "/user/visitorHome";
+        return "/userHome/home";
     }
 
     @GetMapping("/guard/parking")
@@ -81,9 +81,9 @@ public class ApplicationController {
         return "/admin/adminHome";
     }
 
-    @GetMapping("/admin/allUsers")
+    @GetMapping("/powerAdmin/allUsers")
     public String getUsers() {
-        return "/admin/allUsers";
+        return "/powerAdmin/allUsers";
     }
 
     @GetMapping("/admin/registration")
@@ -136,7 +136,7 @@ public class ApplicationController {
         return "/user/userRequests";
     }
 
-    @RequestMapping(value = {"/user/getUserRole", "/admin/getUserRole"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/getUserRole","/userHome/getUserRole", "/admin/getUserRole","/powerAdmin/getUserRole"}, method = RequestMethod.GET)
     public ResponseEntity<?> getUserRole() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -147,7 +147,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = {"/admin/newRequest/{group_id}", "/user/newRequest/{group_id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin/newRequest/{group_id}", "/userHome/newRequest/{group_id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Visitor>> getRequests(@PathVariable("group_id") String group_id) {
         try {
@@ -158,7 +158,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/admin/getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/admin/getAllUsers","/powerAdmin/getAllUsers"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getGroupList() {
         try {
@@ -169,7 +169,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = {"/admin/newRequest", "/user/newRequest"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/admin/newRequest", "/userHome/newRequest","/user/newRequest","/powerAdmin/newRequest"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getRequests() {
         try {
@@ -193,7 +193,7 @@ public class ApplicationController {
         return models;
     }
 
-    @RequestMapping(value = {"/user/allRequests", "/admin/allRequests"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/userHome/allRequests", "/admin/allRequests","/user/allRequests","/powerAdmin/allRequests"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<?>> getAllRequests() {
         try {
@@ -207,7 +207,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/admin/getUserDetails/{userName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/powerAdmin/getUserDetails/{userName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> getUserDetails(@PathVariable("userName") String userName) {
         try {
@@ -382,7 +382,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/admin/getUserDetails", method = RequestMethod.POST)
+    @RequestMapping(value = "/powerAdmin/getUserDetails", method = RequestMethod.POST)
     public ResponseEntity<?> getUserByUserId(@RequestBody Map<String, String> request) {
         try {
             User user = userService.getUsersByUsername(request.get("userName"));
@@ -392,7 +392,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/user/getUserName", method = RequestMethod.GET)
+    @RequestMapping(value = "/userHome/getUserName", method = RequestMethod.GET)
     public ResponseEntity<?> getUserName() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

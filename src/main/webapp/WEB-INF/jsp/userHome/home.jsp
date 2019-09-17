@@ -59,7 +59,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorHome">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/userHome/home">Home <span><i class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
@@ -88,7 +88,7 @@
                        href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
                             class="fa fa-edit"></i> Create Account</a>
                     <a style="color:black" class="dropdown-item"
-                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/allUsers"><i
+                       href="<c:out value="${pageContext.request.contextPath}"/>/powerAdmin/allUsers"><i
                             class="fa fa-id-badge"></i> Accounts</a>
                     <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i class="fa fa-tasks"></i> Reports</a>
                 </div>
