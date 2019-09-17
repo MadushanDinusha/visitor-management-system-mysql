@@ -298,11 +298,11 @@ function getAllRequest() {
             var groupIds = [];
             var newApprovalRequestCount = 0;
             for (var i = 0; i < numberOfRequests; i++) {
-                if (!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && userRole === "ADMIN") {
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && (userRole === "ADMIN"||userRole === "POWER_ADMIN")) {
                     newApprovalRequestCount++;
                     document.getElementById("newRequestForAdmin").innerHTML = newApprovalRequestCount.toString();
                 }
-                if (userRole != "ADMIN") {
+                if (userRole === "USER" || userRole === "GUARD") {
                     document.getElementById("newRequestForAdmin").style.display = "none";
                 }
                 if (!groupIds.includes(requestList[i].group_id) && requestList[i].state === "Pending") {
@@ -704,24 +704,6 @@ function changePassword() {
     }
 }
 
-function updateUserRole() {
-    $.ajax({
-        url: "updateRole",
-        type: "post",
-        dataType: 'text',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "ba": "aa"
-        }),
-        success: function (data) {
-            alert("successfully changed");
-        },
-        error: function (err) {
-            alert(err.responseText);
-        }
-    })
-}
-
 function getUserByUserName(userName) {
     $.ajax({
         url: "getUserDetails",
@@ -747,7 +729,6 @@ function getUserByUserName(userName) {
 
 function editUserDetails() {
     var changePw = $("#changePw").val();
-    alert(changePw);
     if (changePw === null || changePw === "" || changePw === undefined) {
         $.ajax({
             url: "updateUserDetails",

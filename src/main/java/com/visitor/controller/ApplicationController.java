@@ -147,7 +147,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = {"/admin/newRequest/{group_id}", "/userHome/newRequest/{group_id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin/newRequest/{group_id}", "/user/newRequest/{group_id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Visitor>> getRequests(@PathVariable("group_id") String group_id) {
         try {
@@ -335,7 +335,7 @@ public class ApplicationController {
     }
 
 
-    @RequestMapping(value = "/admin/deleteUser", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/powerAdmin/deleteUser", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {
         try {
@@ -357,7 +357,7 @@ public class ApplicationController {
 
     }
 
-    @RequestMapping(value = {"/admin/updateUserDetails"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/powerAdmin/updateUserDetails"}, method = RequestMethod.POST)
     public ResponseEntity<?> updateRoleByUserId(@RequestBody Map<String, String> request) {
         try {
             String userName = request.get("userName");
@@ -366,10 +366,8 @@ public class ApplicationController {
             String role = request.get("role");
             String department = request.get("department");
             if (request.get("password") == null || request.get("password").equals("")){
-                LOGGER.info("inside if");
                 userService.updateUser(userName, email, hodMail, department);
             }else {
-                LOGGER.info("else {}",request.get("password"));
                 userService.updateUser(userName, email, hodMail, department);
                 userService.updatePassword(userName,request.get("password"));
             }
