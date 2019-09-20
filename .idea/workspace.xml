@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/ServiceStatusInquiryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/ServiceStatusInquiryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor-management-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/visitor-management-system.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +51,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\userHome" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\home" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\powerAdmin" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\assembly" />
       <recent name="D:\PROJECT\visitor-management-system-mysql\src\main\webapp\resources\images" />
     </key>
   </component>
@@ -66,6 +72,26 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="ServiceStatusInquiryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.visitor.ServiceStatusInquiryApplication" />
+      <module name="visitor-management-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.visitor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServiceStatusInquiryApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -163,6 +189,11 @@
       <workItem from="1568738448830" duration="803000" />
       <workItem from="1568741164482" duration="1760000" />
       <workItem from="1568743001186" duration="1769000" />
+      <workItem from="1568744958625" duration="267000" />
+      <workItem from="1568891573939" duration="975000" />
+      <workItem from="1568913898732" duration="55000" />
+      <workItem from="1568966585913" duration="1313000" />
+      <workItem from="1568967940557" duration="681000" />
     </task>
     <servers />
   </component>

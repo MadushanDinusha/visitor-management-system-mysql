@@ -150,6 +150,29 @@
         </div>
     </div>
 </div>
+<%--Comment Modal--%>
+<div class="modal fade" id="commentModal" role="dialog">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Message</h3>
+                    <div class="card-body">
+                        <div class="table-editable">
+                            <hr>
+                            <span id="comment" style="color: red"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <%-- Modal--%>
 <div class="modal fade" id="myModals" role="dialog">
     <div class="modal-dialog modal-lg">

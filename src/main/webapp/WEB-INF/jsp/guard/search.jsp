@@ -147,6 +147,29 @@
         </div>
     </div>
 </div>
+<%--No Vehicles Modal--%>
+<div class="modal fade" id="noVehiclesModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Vehicle Details</h3>
+                    <div class="card-body">
+                        <div class="table-editable">
+                            <p class="text-center">No Vehicles!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <%--Modal PassId Checkin--%>
 <div class="modal fade" id="passIdCheckInModal" role="dialog">
     <div class="modal-dialog modal-lg" style="width: 1200px">
@@ -244,7 +267,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="card-body">
-                        <h5 class="modal-title">Are you sure</h5>
+                        <h5 class="text-center modal-title">Are you sure</h5>
                     </div>
                 </div>
             </div>
@@ -266,7 +289,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="card-body">
-                        <h5 class="modal-title">Are you sure</h5>
+                        <h5 class="text-center modal-title">Are you sure</h5>
                     </div>
                 </div>
             </div>
@@ -287,7 +310,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i>  SuccessFully Updated
+                <i class="text-center fa fa-check-circle" style="color:green;font-size: 30px"></i>  SuccessFully Updated
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>

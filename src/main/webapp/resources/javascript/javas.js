@@ -436,7 +436,7 @@ function getAllRequestForUser() {
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
                             '<td>' + date.toString().substring(0, index) + '</td>' +
-                            '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
+                            '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\''+requestList[i].comment+'\')">info</a></td></tr>');
                     }
                 }
                 if ($("#pending").prop("checked") == true) {
@@ -472,7 +472,7 @@ function getAllRequestForUser() {
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
                                 '<td>' + date.toString().substring(0, index) + '</td>' +
-                                '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' -<span style="color: red;">' + requestList[i].comment + '</span></td></tr>');
+                                '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\''+requestList[i].comment+'\')">info</a></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
@@ -490,6 +490,11 @@ function getAllRequestForUser() {
             alert("er" + err.responseText);
         }
     });
+}
+
+function getCommentModal(comment) {
+    $("#comment").html(comment);
+    $("#commentModal").modal('show');
 }
 
 function approve() {
@@ -863,11 +868,15 @@ function getVehiclesDetails(groupId) {
         type: "get",
         processData: false,
         success: function (vehicleList) {
-            $("#vehicleTable").html("");
-            for (var i = 0; i < vehicleList.length; i++) {
-                $("#vehicleTable").append('<tr><td id="' + i + '"><input type="text" id="' + i + 'vehicle" class="form-control" value="' + vehicleList[i].vehicleNumber + '"></td>' +
-                    '<td><a class="btn btn-outline-info" onclick="updateVehicleDetails(\'' + vehicleList[i].id + '\',\'' + i + '\')">Update</a></td></tr>');
-                $("#vehicleDetailsModal").modal('show');
+            if(vehicleList[0] == null || vehicleList[0] ===""){
+                $("#noVehiclesModal").modal('show')
+            }else {
+                $("#vehicleTable").html("");
+                for (var i = 0; i < vehicleList.length; i++) {
+                    $("#vehicleTable").append('<tr><td id="' + i + '"><input type="text" id="' + i + 'vehicle" class="form-control" value="' + vehicleList[i].vehicleNumber + '"></td>' +
+                        '<td><a class="btn btn-outline-info" onclick="updateVehicleDetails(\'' + vehicleList[i].id + '\',\'' + i + '\')">Update</a></td></tr>');
+                    $("#vehicleDetailsModal").modal('show');
+                }
             }
         },
         error: function (err) {
