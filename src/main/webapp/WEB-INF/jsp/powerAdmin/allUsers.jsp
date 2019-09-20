@@ -310,7 +310,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <i class="fa fa-check-circle" style="color:green;font-size: 30px"></i> Successfully Updated
+                <i class="text-center fa fa-check-circle" style="color:green;font-size: 30px"></i> Successfully Updated
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>

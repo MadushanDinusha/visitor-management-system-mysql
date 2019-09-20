@@ -207,7 +207,7 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/powerAdmin/getUserDetails/{userName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/powerAdmin/getUserDetails/{userName}","/admin/getUserDetails/{userName}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> getUserDetails(@PathVariable("userName") String userName) {
         try {

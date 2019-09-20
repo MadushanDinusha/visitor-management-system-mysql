@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="34865d70-b9bc-4320-91d1-12156864155a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/ServiceStatusInquiryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/ServiceStatusInquiryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/guard/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/visitor/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/getRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/powerAdmin/allUsers.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/powerAdmin/allUsers.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user/userRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/javascript/javas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor-management-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/visitor-management-system.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,15 +48,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\assembly" />
+      <recent name="D:\PROJECT\visitor-management-system-mysql\src\main\webapp\resources\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\userHome" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\home" />
       <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\webapp\WEB-INF\jsp\powerAdmin" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\Document-processing-status-app-master\visitor-management-system\src\main\assembly" />
-      <recent name="D:\PROJECT\visitor-management-system-mysql\src\main\webapp\resources\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -193,7 +191,9 @@
       <workItem from="1568891573939" duration="975000" />
       <workItem from="1568913898732" duration="55000" />
       <workItem from="1568966585913" duration="1313000" />
-      <workItem from="1568967940557" duration="681000" />
+      <workItem from="1568967940557" duration="1312000" />
+      <workItem from="1568969307610" duration="1793000" />
+      <workItem from="1568971251499" duration="515000" />
     </task>
     <servers />
   </component>

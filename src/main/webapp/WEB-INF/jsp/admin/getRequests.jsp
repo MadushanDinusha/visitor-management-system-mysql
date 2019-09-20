@@ -170,7 +170,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="card-body">
-                        <h5 class="modal-title" id="myModalLabels">Do you want to Modify</h5>
+                        <h5 class="text-center modal-title" id="myModalLabels">Do you want to Modify</h5>
                         <b><p id="requests"></p></b>
                         Comment : <input type="text" id="message">
                     </div>

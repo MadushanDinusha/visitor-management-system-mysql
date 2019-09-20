@@ -29,18 +29,22 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/userHome/home">Home <span><i class="fa fa-home"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/userHome/home">Home <span><i
+                        class="fa fa-home"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests <span><i class="fa fa-user-plus"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/visitorRequest">Requests
+                    <span><i class="fa fa-user-plus"></i></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i class="fa fa-legal"></i>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/admin/getRequests">Approval<span> <i
+                        class="fa fa-legal"></i>
                 &nbsp;<span class="badge badge-light" id="newRequestForAdmin"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/user/userRequests">Status
-                    <span> <i class="fa fa-bell"></i>&nbsp;<span class="badge badge-light" id="newRequestForUser"></span></span></a>
+                    <span> <i class="fa fa-bell"></i>&nbsp;<span class="badge badge-light"
+                                                                 id="newRequestForUser"></span></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/guard/search">Search
@@ -52,16 +56,23 @@
                     Settings <span><i class="fa fa-cog"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i class="fa fa-edit"></i> Create Account</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/powerAdmin/allUsers"><i class="fa fa-id-badge"></i> Accounts</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i class="fa fa-tasks"></i> Reports</a>                </div>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/registration"><i
+                            class="fa fa-edit"></i> Create Account</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/powerAdmin/allUsers"><i
+                            class="fa fa-id-badge"></i> Accounts</a>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i
+                            class="fa fa-tasks"></i> Reports</a></div>
             </li>
         </ul>
     </div>
     <div class="navbar-collapse collapse w-1 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i class="fa fa-power-off"></i></span></a>
+                <a class="nav-link" href="<c:out value="${pageContext.request.contextPath}"/>/logout">Sign Out<span> <i
+                        class="fa fa-power-off"></i></span></a>
             </li>
 
         </ul>
@@ -98,7 +109,7 @@
             </div>
         </div>
         <div id="tables1" class="table-editable">
-        <table class="table table-hover">
+            <table class="table table-hover">
                 <thead>
                 <th>Your Request</th>
                 <th></th>
@@ -113,7 +124,7 @@
 </div>
 <%-- Modal--%>
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg" >
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -152,7 +163,7 @@
 </div>
 <%--Comment Modal--%>
 <div class="modal fade" id="commentModal" role="dialog">
-    <div class="modal-dialog modal-lg" >
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -164,11 +175,12 @@
                         <div class="table-editable">
                             <hr>
                             <span id="comment" style="color: red"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -176,7 +188,7 @@
 <%-- Modal--%>
 <div class="modal fade" id="myModals" role="dialog">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content " style="width:1300px;margin-left:-25%" >
+        <div class="modal-content " style="width:1300px;margin-left:-25%">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -185,8 +197,10 @@
                     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Modify details</h3>
                     <div class="card-body">
                         <div id="tabless" class="table-editable -lg">
-                            <span  style="display: none" id="requestedUser"></span>
-                            <table id="modifyTable" class="table table-bordered table-responsive-md table-striped text-center" style="margin-left: -4%">
+                            <span style="display: none" id="requestedUser"></span>
+                            <table id="modifyTable"
+                                   class="table table-bordered table-responsive-md table-striped text-center"
+                                   style="margin-left: -4%">
                                 <thead>
                                 <th>Nic</th>
                                 <th>Name</th>
@@ -218,7 +232,7 @@
         getUserRoll();
         getAllRequest();
         getAllRequestForUser();
-        $('#approve').click(function(){
+        $('#approve').click(function () {
             getAllRequestForUser();
         });
     });
