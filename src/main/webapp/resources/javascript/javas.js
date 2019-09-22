@@ -876,8 +876,8 @@ function getVehiclesDetails(groupId) {
                 for (var i = 0; i < vehicleList.length; i++) {
                     $("#vehicleTable").append('<tr><td id="' + i + '"><input type="text" id="' + i + 'vehicle" class="form-control" value="' + vehicleList[i].vehicleNumber + '"></td>' +
                         '<td><a class="btn btn-outline-info" onclick="updateVehicleDetails(\'' + vehicleList[i].id + '\',\'' + i + '\')">Update</a></td></tr>');
-                    $("#vehicleDetailsModal").modal('show');
                 }
+                $("#vehicleDetailsModal").modal('show');
             }
         },
         error: function (err) {
@@ -887,7 +887,6 @@ function getVehiclesDetails(groupId) {
 }
 
 function updateVehicleDetails(id, index) {
-    $("#updateVehicleDetailsModal").modal("show");
     var vehicleNumber = $("#" + '' + index + '' + "vehicle").val();
     $.ajax({
         url: "updateVehicleNumber",
@@ -900,6 +899,7 @@ function updateVehicleDetails(id, index) {
         }),
         success: function (data) {
             $("#successModalForUpdatingVehicleNumber").modal("show");
+            $("#vehicleDetailsModal").modal("hide");
         },
         error: function (err) {
             alert(err.responseText);
@@ -1140,11 +1140,6 @@ function export_table_to_csv(html, filename) {
     }
     download_csv(csv.join("\n"), filename);
 }
-
-$("#csvBtn").on("click", function () {
-    var html = document.querySelector("table").outerHTML;
-    export_table_to_csv(html, "table.csv");
-});
 
 function downloadAs() {
     var selectBox = document.getElementById("saveAs");
