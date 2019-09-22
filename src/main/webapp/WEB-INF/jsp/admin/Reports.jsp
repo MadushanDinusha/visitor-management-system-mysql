@@ -60,7 +60,9 @@
                     <a style="color:black" class="dropdown-item"
                        href="<c:out value="${pageContext.request.contextPath}"/>/powerAdmin/allUsers"><i
                             class="fa fa-id-badge"></i> Accounts</a>
-                    <a style="color:black" class="dropdown-item" href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i class="fa fa-tasks"></i> Reports</a>                </div>
+                    <a style="color:black" class="dropdown-item"
+                       href="<c:out value="${pageContext.request.contextPath}"/>/admin/Reports"><i
+                            class="fa fa-tasks"></i> Reports</a></div>
             </li>
         </ul>
     </div>
@@ -111,6 +113,7 @@
                                 <th>Date</th>
                                 <th>Check-in-time</th>
                                 <th>Check-out-time</th>
+                                <th>Requested Emp</th>
                                 </thead>
                                 <tbody id="visitorReportTableBody">
                                 </tbody>
@@ -122,13 +125,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a class="btn btn-outline-success" onclick="createPDF()" id="pdfBtn">Save</a>
+                <select class="form-control text-right col-sm-3" id="saveAs" onchange="downloadAs()">
+                    <option selected="selected" disabled="disabled">Save as</option>
+                    <option value="PDF">PDF</option>
+                    <option value="Excel">Excel</option>
+                    <option value="CSV">CSV</option>
+                </select>
             </div>
         </div>
     </div>
 </div>
 </body>
 <script>
-
+$()
 </script>
 </html>

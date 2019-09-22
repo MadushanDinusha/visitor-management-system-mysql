@@ -298,7 +298,7 @@ function getAllRequest() {
             var groupIds = [];
             var newApprovalRequestCount = 0;
             for (var i = 0; i < numberOfRequests; i++) {
-                if (!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && (userRole === "ADMIN"||userRole === "POWER_ADMIN")) {
+                if (!groupIds.includes(requestList[i].group_id) && requestList[i].adminState === "UnRead" && (userRole === "ADMIN" || userRole === "POWER_ADMIN")) {
                     newApprovalRequestCount++;
                     document.getElementById("newRequestForAdmin").innerHTML = newApprovalRequestCount.toString();
                 }
@@ -436,7 +436,7 @@ function getAllRequestForUser() {
                             '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                             'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
                             '<td>' + date.toString().substring(0, index) + '</td>' +
-                            '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\''+requestList[i].comment+'\')">info</a></td></tr>');
+                            '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\'' + requestList[i].comment + '\')">info</a></td></tr>');
                     }
                 }
                 if ($("#pending").prop("checked") == true) {
@@ -472,7 +472,7 @@ function getAllRequestForUser() {
                                 '<a class="btn btn-outline-info" data-toggle="modal" data-target="#myModal" ' +
                                 'onclick="getRequest(\'' + requestList[i].group_id + '\')">' + requestList[i].group_id + '</a><a onclick="modifyRequest(\'' + requestList[i].group_id + '\')" style="margin-left: 2%"  class="btn btn-outline-info">Edit</a></td>' +
                                 '<td>' + date.toString().substring(0, index) + '</td>' +
-                                '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\''+requestList[i].comment+'\')">info</a></td></tr>');
+                                '<td><i class="fa fa-edit " style="font-size:25px;color:blue"></i></td><td>' + requestList[i].state + ' &nbsp; <a class="btn btn-outline-info" onclick="getCommentModal(\'' + requestList[i].comment + '\')">info</a></td></tr>');
                         }
                         if (requestList[i].state === "Pending") {
                             $("#userTable").append('<tr><td style="text-align: left">' +
@@ -616,6 +616,7 @@ function showUserDetails() {
         contentType: 'application/json',
         processData: false,
         success: function (data) {
+            $("#userTable").html("");
             var userDetails = data;
             $("#userTable").append('<tr><td>' + userDetails.username + '</td><td><a style="color: black" href="mailto:' + userDetails.email + '">' + userDetails.email + '</a></td><td>' + userDetails.hodMail + '</td>' +
                 '<td>' + userDetails.roles[0].role + '</td><td>' + userDetails.department + '</td></tr>')
@@ -868,9 +869,9 @@ function getVehiclesDetails(groupId) {
         type: "get",
         processData: false,
         success: function (vehicleList) {
-            if(vehicleList[0] == null || vehicleList[0] ===""){
+            if (vehicleList[0] == null || vehicleList[0] === "") {
                 $("#noVehiclesModal").modal('show')
-            }else {
+            } else {
                 $("#vehicleTable").html("");
                 for (var i = 0; i < vehicleList.length; i++) {
                     $("#vehicleTable").append('<tr><td id="' + i + '"><input type="text" id="' + i + 'vehicle" class="form-control" value="' + vehicleList[i].vehicleNumber + '"></td>' +
@@ -945,7 +946,8 @@ function getVisitorReports() {
                     '<td>' + visitorList[i].purpose + '</td>' +
                     '<td>' + visitorList[i].date + '</td>' +
                     '<td>' + visitorList[i].checkIn + '</td>' +
-                    '<td>' + visitorList[i].checkOut + '</td></tr>');
+                    '<td>' + visitorList[i].checkOut + '</td>' +
+                    '<td>' + visitorList[i].userName + '</td></tr>');
             }
             $("#reportModal").modal('show');
         },
@@ -1071,7 +1073,7 @@ function getVisitorReportsByUserName() {
         success: function (visitorList) {
             $("#visitorReportTableBody").html("");
             var userName = $("#userNameForReport").val();
-            $("#fromToDate").html('User Name - '+userName);
+            $("#fromToDate").html('User Name - ' + userName);
             for (var i = 0; i < visitorList.length; i++) {
                 $("#visitorReportTableBody").append('<tr>' +
                     '<td>' + visitorList[i].nic + '</td>' +
@@ -1088,4 +1090,69 @@ function getVisitorReportsByUserName() {
             alert(err.responseText)
         }
     });
+}
+
+function exportToExcel(tableID, filename){
+    var downloadurl;
+    var dataFileType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
+
+    filename = filename?filename+'.xls':'export_excel_data.xls';
+    downloadurl = document.createElement("a");
+    document.body.appendChild(downloadurl);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTMLData], {
+            type: dataFileType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
+        downloadurl.download = filename;
+        downloadurl.click();
+    }
+}
+
+function download_csv(csv, filename) {
+    var csvFile;
+    var downloadLink;
+    csvFile = new Blob([csv], {type: "text/csv"});
+    downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+}
+
+function export_table_to_csv(html, filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+
+        for (var j = 0; j < cols.length; j++)
+            row.push(cols[j].innerText);
+        csv.push(row.join(","));
+    }
+    download_csv(csv.join("\n"), filename);
+}
+
+$("#csvBtn").on("click", function () {
+    var html = document.querySelector("table").outerHTML;
+    export_table_to_csv(html, "table.csv");
+});
+
+function downloadAs() {
+    var selectBox = document.getElementById("saveAs");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    if(selectedValue ==="PDF"){
+        createPDF()
+    }else if(selectedValue ==="Excel"){
+        exportToExcel('visitorReportTable','visitor-report')
+    }else if(selectedValue ==="CSV"){
+        export_table_to_csv('visitorReportTable','visitor-report')
+    }
 }
