@@ -125,7 +125,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <select class="form-control text-right col-sm-3" id="saveAs" onchange="downloadAs()">
+                <select class="form-control text-right col-sm-1" id="saveAs" onchange="downloadAs()">
                     <option selected="selected" disabled="disabled">Save as</option>
                     <option value="PDF">PDF</option>
                     <option value="Excel">Excel</option>

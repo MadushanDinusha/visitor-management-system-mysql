@@ -1082,7 +1082,8 @@ function getVisitorReportsByUserName() {
                     '<td>' + visitorList[i].purpose + '</td>' +
                     '<td>' + visitorList[i].date + '</td>' +
                     '<td>' + visitorList[i].checkIn + '</td>' +
-                    '<td>' + visitorList[i].checkOut + '</td></tr>');
+                    '<td>' + visitorList[i].checkOut + '</td>' +
+                    '<td>' + visitorList[i].userName + '</td></tr>');
             }
             $("#reportModal").modal('show');
         },
@@ -1092,22 +1093,22 @@ function getVisitorReportsByUserName() {
     });
 }
 
-function exportToExcel(tableID, filename){
+function exportToExcel(tableID, filename) {
     var downloadurl;
     var dataFileType = 'application/vnd.ms-excel';
     var tableSelect = document.getElementById(tableID);
     var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
 
-    filename = filename?filename+'.xls':'export_excel_data.xls';
+    filename = filename ? filename + '.xls' : 'export_excel_data.xls';
     downloadurl = document.createElement("a");
     document.body.appendChild(downloadurl);
 
-    if(navigator.msSaveOrOpenBlob){
+    if (navigator.msSaveOrOpenBlob) {
         var blob = new Blob(['\ufeff', tableHTMLData], {
             type: dataFileType
         });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
+        navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
         downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
         downloadurl.download = filename;
         downloadurl.click();
@@ -1148,11 +1149,11 @@ $("#csvBtn").on("click", function () {
 function downloadAs() {
     var selectBox = document.getElementById("saveAs");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    if(selectedValue ==="PDF"){
+    if (selectedValue === "PDF") {
         createPDF()
-    }else if(selectedValue ==="Excel"){
-        exportToExcel('visitorReportTable','visitor-report')
-    }else if(selectedValue ==="CSV"){
-        export_table_to_csv('visitorReportTable','visitor-report')
+    } else if (selectedValue === "Excel") {
+        exportToExcel('visitorReportTable', 'visitor-report')
+    } else if (selectedValue === "CSV") {
+        export_table_to_csv('visitorReportTable', 'visitor-report')
     }
 }
